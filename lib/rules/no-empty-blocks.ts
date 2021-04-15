@@ -5,6 +5,7 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
 
     meta: {
@@ -98,6 +99,7 @@ module.exports = {
             }
         }
 
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         function inspectConstructorDeclaration(emitted) {
             const { node } = emitted;
 
@@ -105,6 +107,7 @@ module.exports = {
                 // Because parent of a node is not accessible during exit phase,
                 // cache the parents of all constructors during entry so they
                 // can be used during exit.
+                // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 enclosingContractsOfConstructors[node.start] = context.getSourceCode().getParent(node);
                 return;
             }
@@ -120,6 +123,7 @@ module.exports = {
             // populated.
             const enclosingContract = enclosingContractsOfConstructors[node.start];
 
+            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             // If node.modifiers is null, it means no modifiers exist for this
             // constructor and it should therefore be reported.
             for (let i = 0; i < (node.modifiers || []).length; i++) {
@@ -138,6 +142,7 @@ module.exports = {
         }
 
 
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         let constructorsToCheckForBaseCall = [], enclosingContractsOfConstructors = {};
         const similarNodeTypes = ["ContractStatement", "LibraryStatement", "InterfaceStatement"];
 
@@ -150,6 +155,7 @@ module.exports = {
             response[nodeName] = inspectCLI;
         });
 
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         return response;
 
     }

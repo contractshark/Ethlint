@@ -5,10 +5,13 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'RuleContex... Remove this comment to see the full error message
 let RuleContext = require("../../lib/rule-context"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     Solium = require("../../lib/solium"),
     _ = require("lodash");
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 /* eslint-disable no-unused-vars */
 
 describe("Testing RuleContext object", function() {
@@ -31,9 +34,12 @@ describe("Testing RuleContext object", function() {
         schema: []
     };
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     let sourceCode = "contract Visual {\n\tfunction foobar () {}\n}";
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should create a RuleContext instance and expose an API when valid arguments are passed", function(done) {
+        // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
         let rcObject = new RuleContext("foo", ruleDesc, meta, Solium);
 
         rcObject.should.be.type("object");
@@ -48,12 +54,14 @@ describe("Testing RuleContext object", function() {
 
         //read-only properties
         rcObject.should.have.ownProperty("name");
+        // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
         rcObject.name.should.be.type("string");
         Object.getOwnPropertyDescriptor(rcObject, "name").writable.should.equal(false);	//check for read-only
 
         rcObject.should.have.ownProperty("meta");
         rcObject.meta.should.be.type("object");
         _.isEqual(rcObject.meta, ruleDesc).should.equal(true);
+        // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
         Object.getOwnPropertyDescriptor(rcObject, "meta").writable.should.equal(false);	//check for read-only
 
         rcObject.should.have.ownProperty("options");
@@ -64,12 +72,15 @@ describe("Testing RuleContext object", function() {
         rcObject.options [2].modifies.should.equal(true);
 
         done();
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     });
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should behave as expected upon calling getSourceCode ()", function(done) {
         let rcObject, scObject;
 
         Solium.lint(sourceCode, { rules: {} });
+        // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
         rcObject = new RuleContext("foo", ruleDesc, meta, Solium);
         scObject = rcObject.getSourceCode();
 
@@ -80,9 +91,12 @@ describe("Testing RuleContext object", function() {
 
         Solium.reset();
         done();
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     });
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should handle invalid argument(s) passed to report()", function(done) {
+        // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
         let rcObject = new RuleContext("foo", ruleDesc, meta, Solium);
 
         rcObject.report.bind(rcObject).should.throw();
@@ -132,6 +146,7 @@ describe("Testing RuleContext object", function() {
         // A minimal valid object should not throw
         rcObject.report.bind(
             rcObject,
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'fixer' implicitly has an 'any' type.
             { message: "hello", node: sampleNode }
         ).should.not.throw();
 
@@ -139,10 +154,13 @@ describe("Testing RuleContext object", function() {
         rcObject.report.bind(
             rcObject,
             {
+                // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
                 message: "hello",
                 node: sampleNode,
                 location: {
+                    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
                     line: 7,
+                    // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
                     column: 56
                 },
                 fix(fixer) { return null; }

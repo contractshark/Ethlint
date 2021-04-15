@@ -10,7 +10,9 @@
  * Merge all fixer packets into 1 packet and return it.
  * @params {(Array|Object)} fixesArrayOrObject Fixer packet(s) to be merged into a single fixer packet.
  * @params {String} sourceCode Source code.
+ // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'fixesArrayOrObject' implicitly has an '... Remove this comment to see the full error message
 module.exports = function(fixesArrayOrObject, sourceCode) {
     // If argument is already a single fixes packet, return.
     if (!Array.isArray(fixesArrayOrObject)) {

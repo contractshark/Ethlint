@@ -5,9 +5,12 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 const Solium = require("../../../../lib/solium"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toContract... Remove this comment to see the full error message
     { toContract } = require("../../../utils/wrappers");
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 const userConfig = {
     "rules": {
         "function-order": "error"
@@ -15,8 +18,10 @@ const userConfig = {
 };
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] function-order: Acceptances", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept functions ordered correctly inside a contract", done => {
         let codes = [`
 			contract Foo {
@@ -145,6 +150,7 @@ describe("[RULE] function-order: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept valid config options", done => {
         const config = { rules: {} }, code = "contract Foo {}";
         const testOptions = [
@@ -160,6 +166,7 @@ describe("[RULE] function-order: Acceptances", function() {
         ];
 
         testOptions.forEach(opt => {
+            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             config.rules["function-order"] = ["error", opt];
             Solium.lint.bind(Solium, code, config).should.not.throw();
         });
@@ -167,6 +174,7 @@ describe("[RULE] function-order: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should ignore functions as specified in configuration", done => {
         const config = {
             rules: {
@@ -208,6 +216,7 @@ describe("[RULE] function-order: Acceptances", function() {
         ];
 
         cases.forEach(tc => {
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'ignore' does not exist on type 'string |... Remove this comment to see the full error message
             config.rules["function-order"][1].ignore = tc[0];
             const errors = Solium.lint(toContract(tc[1]), config);
             errors.should.be.Array();
@@ -220,8 +229,10 @@ describe("[RULE] function-order: Acceptances", function() {
 });
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] function-order: Rejections", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject functions ordered incorrectly inside a contract", done => {
         let code = `
 			contract Foo {
@@ -277,6 +288,7 @@ describe("[RULE] function-order: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject invalid config options", done => {
         const config = { rules: {} }, code = "contract Foo {}";
         const testOptions = [
@@ -291,6 +303,7 @@ describe("[RULE] function-order: Rejections", function() {
         ];
 
         testOptions.forEach(opt => {
+            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             config.rules["function-order"] = ["error", opt];
             Solium.lint.bind(Solium, code, config).should.throw();
         });

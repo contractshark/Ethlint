@@ -5,7 +5,9 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'astUtils'.
 const astUtils = require("./ast-utils");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'INHERITABL... Remove this comment to see the full error message
 const INHERITABLE_METHODS = [
     "isASTNode",
     "getParent",
@@ -29,6 +31,7 @@ const INHERITABLE_METHODS = [
  * @param {String} sourceCodeText source code being linted
  * @param {ASTNode[]} comments List of objects representing comments throughout the source code
  */
+// @ts-expect-error ts-migrate(2300) FIXME: Duplicate identifier 'this'.
 function SourceCode(sourceCodeText, comments) {
     this.text = sourceCodeText;
     this.commentObjects = comments;
@@ -45,7 +48,9 @@ SourceCode.prototype = {
 	 * @param {int} afterCount Include afterCount number of characters following the node's code
 	 * @returns {String} sourceCodeText source code of the specified node plus extra characters specified by beforeCount & afterCount
 	 */
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
     getText: function(node, beforeCount, afterCount) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'beforeCount' implicitly has an 'any' ty... Remove this comment to see the full error message
         let sourceCodeText = this.text;
 
         if (node) {
@@ -65,6 +70,7 @@ SourceCode.prototype = {
     },
 
     getNextChar: function(node) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
         if (node && astUtils.isASTNode(node)) {
             //return null if node is the last node,i.e., no characters after this node's code
             return this.text [node.end] || null;
@@ -74,6 +80,7 @@ SourceCode.prototype = {
     },
 
     getPrevChar: function(node) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
         if (node && astUtils.isASTNode(node)) {
             //return null if node.start is 0, i.e., node's code is the first thing in the source code text
             return this.text [node.start - 1] || null;
@@ -83,6 +90,7 @@ SourceCode.prototype = {
     },
 
     getNextChars: function(node, charCount) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
         if (node && astUtils.isASTNode(node)) {
             return this.text.slice(
                 node.end, node.end + (Math.abs(charCount) || 0)
@@ -93,6 +101,7 @@ SourceCode.prototype = {
     },
 
     getPrevChars: function(node, charCount) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
         if (node && astUtils.isASTNode(node)) {
             return this.text.slice(
                 Math.max(0, node.start - (Math.abs(charCount) || 0)),
@@ -110,7 +119,9 @@ SourceCode.prototype = {
 	 * @returns {String} charsBetweenNodes The entire string netween the 2 nodes
 	 */
     getStringBetweenNodes: function(prevNode, currentNode) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevNode' implicitly has an 'any' type.
         if (
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'currentNode' implicitly has an 'any' ty... Remove this comment to see the full error message
             prevNode && astUtils.isASTNode(prevNode) &&
 			currentNode && astUtils.isASTNode(currentNode) &&
 			prevNode.start <= currentNode.start
@@ -143,11 +154,13 @@ SourceCode.prototype = {
      * @returns {String} code Source code text on the specified line
      */
     getTextOnLine: function(lineNumber) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'lineNumber' implicitly has an 'any' typ... Remove this comment to see the full error message
         // Call getLines() just to ensure that this.sourceCodeTextLines property is set
         this.getLines();
 
         if (
             lineNumber && typeof lineNumber === "number" &&
+// @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
 			parseInt(lineNumber) === lineNumber &&	//ensure that argument is an INTEGER
 			lineNumber >= 1 && lineNumber <= this.sourceCodeTextLines.length
         ) {
@@ -173,3 +186,4 @@ INHERITABLE_METHODS.forEach(function(methodName) {
 
 
 module.exports = SourceCode;
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message

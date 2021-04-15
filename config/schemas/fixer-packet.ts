@@ -15,6 +15,7 @@
 ]
 */
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Ajv'.
 let Ajv = require("ajv"), validator = new Ajv({ allErrors: true });
 
 let singleFixerPacket = {
@@ -41,6 +42,7 @@ let singleFixerPacket = {
     additionalProperties: false
 };
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Schema'.
 let Schema = {
     oneOf: [
         {
@@ -54,6 +56,7 @@ let Schema = {
 };
 
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
     Schema: Schema,
     validationFunc: validator.compile(Schema)

@@ -5,10 +5,13 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'ruleLoader... Remove this comment to see the full error message
 let ruleLoader = require("../../../lib/utils/rule-loader");
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("Test rule-loader functions", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should expose a set of functions", function(done) {
         ruleLoader.should.be.size(4);	// including "constants" property
 
@@ -24,6 +27,7 @@ describe("Test rule-loader functions", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should expose a set of constants", function(done) {
         ruleLoader.should.have.ownProperty("constants");
         ruleLoader.constants.should.be.type("object");
@@ -51,6 +55,7 @@ describe("Test rule-loader functions", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should handle invalid input given to resolveUpstream()", function(done) {
         ruleLoader.resolveUpstream.bind(ruleLoader).should.throw();
         ruleLoader.resolveUpstream.bind(ruleLoader, undefined).should.throw();
@@ -86,6 +91,7 @@ describe("Test rule-loader functions", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should return expected result when valid upstream value is passed", function(done) {
         let result = ruleLoader.resolveUpstream(ruleLoader.constants.SOLIUM_RULESET_ALL);
         result.should.be.type("object");
@@ -97,7 +103,9 @@ describe("Test rule-loader functions", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should return rule config when a valid plugin is passed to resolvePluginConfig()", function(done) {
+        // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
         let testPlugin = require("solium-plugin-test"),
             config = ruleLoader.resolvePluginConfig("test", testPlugin);
 
@@ -113,12 +121,14 @@ describe("Test rule-loader functions", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should throw when non-existent rule names are given to load()", function(done) {
         ruleLoader.load.bind(ruleLoader, ["nihi2yo87isuhlush"]).should.throw();
 
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should return empty object when empty list is given to load()", function(done) {
         let result = ruleLoader.load([]);
 
@@ -126,8 +136,10 @@ describe("Test rule-loader functions", function() {
         Object.keys(result).length.should.equal(0);
 
         done();
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'number'.
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should load rules from plugins if they're installed", function(done) {
         ruleLoader.load.bind(ruleLoader, ["non-existent-plugin/foo"]).should.throw();
 
@@ -141,6 +153,7 @@ describe("Test rule-loader functions", function() {
         (result ["test/baz"] === undefined).should.be.true();
 
         done();
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'boolean'... Remove this comment to see the full error message
     });
 
 });

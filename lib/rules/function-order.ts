@@ -83,6 +83,7 @@ module.exports = {
     meta: {
 
         docs: {
+            // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
             recommended: true,
             type: "warning",
             description: "Ensure that functions in a contract are ordered according to their visibility"
@@ -139,6 +140,7 @@ module.exports = {
             body.filter(child => {
                 return ["FunctionDeclaration", "ConstructorDeclaration"].includes(child.type);
             }).forEach(funcNode => {
+                // @ts-expect-error ts-migrate(2550) FIXME: Property 'includes' does not exist on type 'string... Remove this comment to see the full error message
                 // Return if the function is ignored or in the correct order.
                 if (
                     (context.options && isIgnored(funcNode, node, context.options[0].ignore)) ||

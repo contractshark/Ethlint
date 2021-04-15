@@ -5,25 +5,37 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'fs'.
 let fs = require("fs"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     path = require("path"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     util = require("util"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     jsUtils = require("./utils/js-utils"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     ruleLoader = require("./utils/rule-loader"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'rules'.
     soliumRules = require("../config/solium").rules,	//list of all rules available inside solium
     rules = {};
+// @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'JS_EXT'.
 let RULES_DIR = path.join(__dirname, ruleLoader.constants.SOLIUM_CORE_RULES_DIRNAME),
     JS_EXT = ".js";
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
 // Utilities for getRuleSeverity()
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'SchemaVali... Remove this comment to see the full error message
 let configSchema = require("../config/schemas/config"),
     SchemaValidator = new require("ajv")({ allErrors: true }),
     severityValueSchemas = configSchema.properties.rules.patternProperties ["^.+$"].oneOf;
 
 let isValidSeverityString = SchemaValidator.compile(severityValueSchemas [0]),
     isValidSeverityInt = SchemaValidator.compile(severityValueSchemas [1]),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'isAValidPl... Remove this comment to see the full error message
     isValidSeverityArray = SchemaValidator.compile(severityValueSchemas [2]),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
     isAValidPlugin = require("../config/schemas/plugin").validationFunc;
 
 module.exports = {
@@ -43,6 +55,7 @@ module.exports = {
 	 * @param {String} customRulesFilePath The file from where definitions of user-defined rules are loaded
 	 * @returns {Object} userRules Definitions of all user-requested rules. Throws error if a rule in userRules is not amongst available rules
 	 */
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'userRules' implicitly has an 'any' type... Remove this comment to see the full error message
     loadUsingDeprecatedConfigFormat: function(userRules, customRulesFilePath, noReset) {
         let ruleFiles, idCounter = 1;
 
@@ -58,11 +71,14 @@ module.exports = {
 
         !noReset && this.reset();
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'filename' implicitly has an 'any' type.
         ruleFiles.forEach(function(filename) {
             let ruleName = filename.slice(0, -JS_EXT.length),
                 absoluteRuleFilePath = path.join(RULES_DIR, filename);
 
+            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             if (path.extname(filename) === JS_EXT && userRules [ruleName]) {
+                // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
                 try {
                     rules [ruleName] = require(absoluteRuleFilePath);
                 } catch (e) {
@@ -82,6 +98,7 @@ module.exports = {
             } else if (soliumRules [key] && soliumRules [key].enabled) {
 
                 userRules [key] = soliumRules [key];
+                // @ts-expect-error ts-migrate(2550) FIXME: Property 'assign' does not exist on type 'ObjectCo... Remove this comment to see the full error message
                 Object.assign(userRules [key], {
                     id: idCounter++,
                     custom: false
@@ -107,7 +124,9 @@ module.exports = {
 	 * @param {Boolean} noReset Determines whether to re-initilize internal variables or not. If this param has a false-equivalent value, data is reset.
 	 * @returns {Object} userRules Definitions of all user-requested rules. Throws error if a rule in userRules is not amongst available rules
 	 */
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'config' implicitly has an 'any' type.
     load: function(config, noReset) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'noReset' implicitly has an 'any' type.
         let ruleDescriptions = {}, ruleConfigs = {}, getRuleSeverity = this.getRuleSeverity;
 
         !noReset && this.reset();
@@ -115,13 +134,16 @@ module.exports = {
         // If plugins are passed, ensure all of them are installed in the same scope as Solium.
         // If not, provide appropriate error messages, instructions & doc links.
         if (config.plugins && config.plugins.length) {
+            // @ts-expect-error ts-migrate(1250) FIXME: Function declarations are not allowed inside block... Remove this comment to see the full error message
             // eslint-disable-next-line no-inner-declarations
             function validatePlugin(pName) {
+                // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'pName' implicitly has an 'any' type.
                 // User must only provide the plugin name, not the solium plugin prefix string
                 let plugin, pNameWithoutPrefix = pName;
                 pName = ruleLoader.constants.SOLIUM_PLUGIN_PREFIX + pName;
 
                 try {
+                    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
                     plugin = require(pName);
                 } catch (e) {
                     if (e.code === "MODULE_NOT_FOUND") {
@@ -149,6 +171,7 @@ module.exports = {
                     );
                 }
 
+                // @ts-expect-error ts-migrate(2550) FIXME: Property 'assign' does not exist on type 'ObjectCo... Remove this comment to see the full error message
                 // Finally, load plugin's default rule configuration into ruleConfigs
                 Object.assign(ruleConfigs, ruleLoader.resolvePluginConfig(pNameWithoutPrefix, plugin));
             }
@@ -157,6 +180,7 @@ module.exports = {
         }
 
         if (config.extends) {
+            // @ts-expect-error ts-migrate(2550) FIXME: Property 'assign' does not exist on type 'ObjectCo... Remove this comment to see the full error message
             try {
                 Object.assign(ruleConfigs, ruleLoader.resolveUpstream(config.extends));
             } catch (e) {
@@ -168,16 +192,20 @@ module.exports = {
 
         // If both extends & rules attributes exist, the rules imported from "rules" attr will override any rules
         // imported from "extends" in case of a name clash.
+        // @ts-expect-error ts-migrate(2550) FIXME: Property 'assign' does not exist on type 'ObjectCo... Remove this comment to see the full error message
         if (config.rules && Object.keys(config.rules).length) {
             Object.assign(ruleConfigs, config.rules);
         }
 
         // Remove all rules that are disabled.
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         Object.keys(ruleConfigs).forEach(function(name) {
+            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             getRuleSeverity(ruleConfigs [name]) < 1 && delete ruleConfigs [name];
         });
 
 
+        // @ts-expect-error ts-migrate(2550) FIXME: Property 'assign' does not exist on type 'ObjectCo... Remove this comment to see the full error message
         // Load all enabled rules.
         try {
             Object.assign(rules, ruleLoader.load(Object.keys(ruleConfigs)));
@@ -186,20 +214,27 @@ module.exports = {
         }
 
         // Use rule definitions & configs to generate ruleDescriptions
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         Object.keys(rules).forEach(function(name) {
             if (rules [name] === undefined) {
                 // If undefined, it means we didn't require() any rule by this name, ie, none exists
                 throw new Error(`"${name}" - No such rule exists.`);
+            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             }
 
             let desc = {
+                // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 description: rules [name].meta.docs.description,
+                // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 recommended: rules [name].meta.docs.recommended,
                 type: (getRuleSeverity(ruleConfigs [name]) === 1) ? "warning" : "error"
             };
 
+            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             // Only set "options" attribute if the rule config is an array of length is at least 2.
+            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             if (Array.isArray(ruleConfigs [name]) && ruleConfigs [name].length > 1) {
+                // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 desc.options = ruleConfigs [name].slice(1);
             }
 
@@ -211,9 +246,11 @@ module.exports = {
 
     /**
 	 * context object Constructor to set read-only properties and provide additional functionality to the rules using it
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'name' implicitly has an 'any' type.
 	 * @returns {Object} rule Rule object containing function to execute rule, exported by the rule's file
 	 */
     get: function(name) {
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         if (name && typeof name === "string") {
             return rules [name];
         } else {
@@ -225,12 +262,15 @@ module.exports = {
 	 * Get severity value for a rule from its given configuration description.
 	 * @param {Integer|String|Array} ruleConfig configuration for the rule (picked up from soliumrc)
 	 * @returns {Integer} severity Either 0 (rule turned off), 1 (warning) or 2 (error).
+// @ts-expect-error ts-migrate(7023) FIXME: 'getRuleSeverity' implicitly has return type 'any'... Remove this comment to see the full error message
 	 */
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'ruleConfig' implicitly has an 'any' typ... Remove this comment to see the full error message
     getRuleSeverity: function getRuleSeverity(ruleConfig) {
         if (isValidSeverityInt(ruleConfig)) {
             return ruleConfig;
         }
 
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         if (isValidSeverityString(ruleConfig)) {
             return ({
                 "off": 0, "warning": 1, "error": 2

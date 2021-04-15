@@ -5,7 +5,9 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
 let rf = require("../../../lib/autofix/rule-fixer");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'RuleFixer'... Remove this comment to see the full error message
 let RuleFixer, sampleRange = [5, 19];
 
 // gets updated when a function is added/deleted in rulefixer API
@@ -17,14 +19,18 @@ let listOfFunctions = [
 let node = {
     type: "Literal",
     start: 19,
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     end: 32
 };
 
 describe("Test the rule-fixer API", function() {
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should expose a constructor that creates a RuleFixer Object", function(done) {
         rf.should.be.type("function");
 
+        // @ts-expect-error ts-migrate(2588) FIXME: Cannot assign to 'RuleFixer' because it is a const... Remove this comment to see the full error message
         RuleFixer = new rf("code");
 
         RuleFixer.should.be.type("object");
@@ -40,6 +46,7 @@ describe("Test the rule-fixer API", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should handle all valid inputs for all the functions", function(done) {
         let result, sampleText = "hello";
 
@@ -134,11 +141,13 @@ describe("Test the rule-fixer API", function() {
         result.range.length.should.equal(2);
         result.range [0].should.equal(sampleRange [0]);
         result.range [1].should.equal(sampleRange [1]);
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         result.text.should.equal(sampleText);
 
         done();
     });
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should handle all invalid inputs for all the functions", function(done) {
         RuleFixer.insertTextAfter.bind(RuleFixer, undefined, "hello").should.throw();
         RuleFixer.insertTextAfter.bind(RuleFixer, null, "hello").should.throw();

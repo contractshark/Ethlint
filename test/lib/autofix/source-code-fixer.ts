@@ -5,11 +5,14 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
 let scf = require("../../../lib/autofix/source-code-fixer");
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 // No need to check for fuzzy values in this module since it is only used internally, ensuring expected arguments
 describe("Test the source-code-fixer API", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should expose a set of functions", function(done) {
         scf.should.be.type("object");
         scf.should.have.ownProperty("applyFixes");
@@ -17,6 +20,7 @@ describe("Test the source-code-fixer API", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should not alter the errorMessages array when passed to applyFixes()", function(done) {
         let msgsNoFixes = [{
             ruleName: "abc",
@@ -40,59 +44,92 @@ describe("Test the source-code-fixer API", function() {
         scf.applyFixes("", msgsNoFixes);
 
         msgsNoFixes.should.be.Array();
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsNoFixes.should.have.size(1);
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsNoFixes [0].should.be.type("object");
         msgsNoFixes [0].should.have.size(6);
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsNoFixes [0].should.have.ownProperty("ruleName");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsNoFixes [0].ruleName.should.equal("abc");
         msgsNoFixes [0].should.have.ownProperty("type");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'string'.
         msgsNoFixes [0].type.should.equal("error");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsNoFixes [0].should.have.ownProperty("node");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'string'.
         msgsNoFixes [0].node.should.be.type("object");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsNoFixes [0].should.have.ownProperty("line");
         msgsNoFixes [0].line.should.equal(1);
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ type: ... Remove this comment to see the full error message
         msgsNoFixes [0].should.have.ownProperty("column");
         msgsNoFixes [0].column.should.equal(4);
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'number'.
         msgsNoFixes [0].should.have.ownProperty("message");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsNoFixes [0].message.should.equal("def");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'number'.
         msgsNoFixes [0].should.not.have.ownProperty("fix");
 
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         scf.applyFixes("abcd", msgsWithFixes);
 
         msgsWithFixes.should.be.Array();
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'string'.
         msgsWithFixes.should.have.size(1);
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsWithFixes [0].should.be.type("object");
         msgsWithFixes [0].should.have.size(7);
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsWithFixes [0].should.have.ownProperty("ruleName");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsWithFixes [0].ruleName.should.equal("abc");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsWithFixes [0].should.have.ownProperty("type");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsWithFixes [0].type.should.equal("error");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsWithFixes [0].should.have.ownProperty("node");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'string'.
         msgsWithFixes [0].node.should.be.type("object");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsWithFixes [0].should.have.ownProperty("line");
         msgsWithFixes [0].line.should.equal(1);
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'string'.
         msgsWithFixes [0].should.have.ownProperty("column");
         msgsWithFixes [0].column.should.equal(4);
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ type: ... Remove this comment to see the full error message
         msgsWithFixes [0].should.have.ownProperty("message");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsWithFixes [0].message.should.equal("def");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'number'.
         msgsWithFixes [0].should.have.ownProperty("fix");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
         msgsWithFixes [0].fix.should.be.type("object");
 
         done();
     });
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'number'.
     it("should return source code as-it-is if there are no fixes to apply", function(done) {
         let msgsNoFixes = [{
             ruleName: "abc",
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'string'.
             message: "def",
             type: "error",
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ ruleNa... Remove this comment to see the full error message
             line: 1,
             column: 4,
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '{ range:... Remove this comment to see the full error message
             node: { type: "Literal", start: 1, end: 9 }
         }];
 
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         let sourceCode = "abcd123@@@***&^###;;{}[]";
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let result = scf.applyFixes(sourceCode, []);
 
         result.should.be.type("object");
@@ -129,8 +166,10 @@ describe("Test the source-code-fixer API", function() {
                 ruleName: "a",
                 message: "def",
                 type: "error",
+                // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
                 line: 1,
                 column: 4,
+                // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
                 node: { type: "Literal", start: 1, end: 9 }
             },
             {
@@ -193,8 +232,10 @@ describe("Test the source-code-fixer API", function() {
                 type: "error",
                 line: 1,
                 column: 4,
+                // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
                 node: { type: "Literal", start: 1, end: 9 },
                 fix: { range: [5, 10], text: "^_^" }	// shouldn't get applied
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
             },
             {
                 ruleName: "b",
@@ -232,8 +273,10 @@ describe("Test the source-code-fixer API", function() {
     it("should throw when a fix reported by a rule contains overlapping fixer objects", function(done) {
         // This is different from the overlapping being tested above. Here, we want to ensure that
         // if rule ABC reports a fix inside an error object, and if that fix is an array of fixer packets,
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         // those packets must not have overlapping ranges.
         scf.applyFixes.bind(scf,
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
             [{ range: [2, 5], text: "" }, { range: [4, 8], text: "%%%" }], "abcdefghijk"
         ).should.throw();
 

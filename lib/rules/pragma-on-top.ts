@@ -5,8 +5,10 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'EOL'.
 const { EOL } = require("os");
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
 
     meta: {
@@ -34,6 +36,7 @@ module.exports = {
 		 * the entire file. If there is one (but not on top of file), it gets reported by inspectPragmaStatement().
 		 * NOTE: A Pragma dir must exist at absolute top, even before pragma experimental.
 		 */
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectProgram(emitted) {
             let node = emitted.node, body = node.body;
 
@@ -48,6 +51,7 @@ module.exports = {
         }
 
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectPragmaStatement(emitted) {
             let node = emitted.node,
                 sourceCode = context.getSourceCode(), pragmaParent = sourceCode.getParent(node);
@@ -62,6 +66,7 @@ module.exports = {
             context.report({
                 node: node,
                 message: `"${pragmaCode}" should be at the top of the file.`,
+                // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'fixer' implicitly has an 'any' type.
                 fix: function(fixer) {
                     return [fixer.remove(node),
                         fixer.insertTextBefore(pragmaParent.body [0], `${pragmaCode}${EOL}`)];
@@ -73,6 +78,7 @@ module.exports = {
 
 
         // Experimental pragmas, if they exist, must be above everything EXCEPT pragma solidity & other experimental pragmas.
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectExperimentalPragmaStatement(emitted) {
             if (emitted.exit) {
                 return;
@@ -94,6 +100,7 @@ module.exports = {
                 if (nodesAllowedAbove.indexOf(childNode.type) < 0) {
                     const errObject = {
                         node,
+                        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'fixer' implicitly has an 'any' type.
                         fix(fixer) {
                             return [fixer.remove(node),
                                 fixer.insertTextBefore(childNode, `${pragmaCode}${EOL}`)];

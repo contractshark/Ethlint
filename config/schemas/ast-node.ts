@@ -20,6 +20,7 @@
 let array = { type: "array" }, number = { type: "number" }, bool = { type: "boolean" },
     string = { type: "string" }, object = { type: "object" }, attrNull = { type: "null" };
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Schema'.
 let Schema = {
 
     type: "object",
@@ -42,4 +43,5 @@ let Schema = {
 };
 
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = Schema;

@@ -5,10 +5,13 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'configInsp... Remove this comment to see the full error message
 let configInspector = require("../../../lib/utils/config-inspector");
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("Test config-inspector functions", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should have a set of functions exposed as API", function(done) {
         configInspector.should.be.size(3);
 
@@ -24,6 +27,7 @@ describe("Test config-inspector functions", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("isValid() should correctly classify invalid config objects", function(done) {
         configInspector.isValid().should.equal(false);
         configInspector.isValid(undefined).should.equal(false);
@@ -104,6 +108,7 @@ describe("Test config-inspector functions", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("isValid() should correctly classify valid config objects", function(done) {
         configInspector.isValid({ rules: { a: [1] } }).should.equal(true);
         configInspector.isValid({ extends: "blahblah" }).should.equal(true);
@@ -140,6 +145,7 @@ describe("Test config-inspector functions", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("isFormatDeprecated() should correctly classify a deprecated config format", function(done) {
         configInspector.isFormatDeprecated({ rules: { a: true } }).should.equal(true);
         configInspector.isFormatDeprecated({ rules: { a: false } }).should.equal(true);
@@ -156,6 +162,7 @@ describe("Test config-inspector functions", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("isFormatDeprecated() should correctly classify a non-deprecated config format", function(done) {
         configInspector.isFormatDeprecated({ rules: {} }).should.equal(false);
         configInspector.isFormatDeprecated({ rules: {}, options: {} }).should.equal(false);
@@ -174,6 +181,7 @@ describe("Test config-inspector functions", function() {
 
     // No need for extensive testing of "rules" attribute since its schema is imported from config,
     // which is extensively tested.
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("isAValidSharableConfig() should correctly classify a valid sharable config", function(done) {
         configInspector.isAValidSharableConfig({ rules: {} }).should.equal(true);
         configInspector.isAValidSharableConfig({ rules: { quotes: [1] } }).should.equal(true);
@@ -184,6 +192,7 @@ describe("Test config-inspector functions", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("isAValidSharableConfig() should correctly classify an invalid sharable config", function(done) {
         configInspector.isAValidSharableConfig(null).should.equal(false);
         configInspector.isAValidSharableConfig.errors.should.have.size(1);

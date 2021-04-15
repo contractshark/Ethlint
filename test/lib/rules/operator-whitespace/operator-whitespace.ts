@@ -5,10 +5,14 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 let Solium = require("../../../../lib/solium");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'wrappers'.
 let wrappers = require("../../../utils/wrappers");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toFunction... Remove this comment to see the full error message
 let toFunction = wrappers.toFunction;
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 let userConfig = {
     "custom-rules-filename": null,
     "rules": {
@@ -16,8 +20,10 @@ let userConfig = {
     }
 };
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] operator-whitespace: Acceptances", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept BinaryExpressions having no extraneous whitespace or comments with the operator", function(done) {
         let code = [
             "x [10]+y.foo;",
@@ -57,6 +63,7 @@ describe("[RULE] operator-whitespace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept multi-line Binary Expression whose operator resides on the line where left side expression ends AND whose right side expression begins 1 line below the line where left expression ends.", function(done) {
         let errors, code = [
             "if (foobarMotherfuckers (price, 100) &&\n\t++crazyCounter) {\n}",
@@ -88,6 +95,7 @@ describe("[RULE] operator-whitespace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept SequenceExpression & tuple nodes with no extraneous whitespace", function(done) {
         const code = [
             "var (a, b) = (10, foo(90, \"hello\"));",
@@ -147,8 +155,10 @@ describe("[RULE] operator-whitespace: Acceptances", function() {
 });
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] operator-whitespace: Rejections", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject BinaryExpressions with extraneous whitespace or comments next to operators", function(done) {
         let code = [
             "x [10]  +y.foo;",
@@ -260,7 +270,9 @@ describe("[RULE] operator-whitespace: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject multi-line Binary Expression whose operator is not on the line where left side of the exp. ends.", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let code = [
             "if (foobarMotherfuckers (price, 100)\n&&\t++crazyCounter) {\n}",
             "if (foobarMotherfuckers (price, 100)\t\n&&++crazyCounter) {\n}"
@@ -283,7 +295,9 @@ describe("[RULE] operator-whitespace: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject multi-line Binary Expression whose right side doesn't fall exactly 1 line below the ending line of left side of the expr.", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let code = [
             "if (foobarMotherfuckers (price, 100)&&\n\n\t++crazyCounter) {\n}",
             "if (foobarMotherfuckers (price, 100)  &&\t\n\n\n\n++crazyCounter) {\n}"
@@ -300,7 +314,9 @@ describe("[RULE] operator-whitespace: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject SequenceExpression nodes with extraneous whitespace", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         const single = [
             "(a, b)\n  = (10, foo(90, \"hello\"));",
             "(a) =         10;",

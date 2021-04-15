@@ -5,6 +5,7 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
 
     meta: {
@@ -106,6 +107,7 @@ module.exports = {
         };
 
         similarNodes.forEach(function(nodeName) {
+            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             response [nodeName] = inspectFuncOrModif;
         });
 

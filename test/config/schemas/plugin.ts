@@ -5,10 +5,12 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
 let pluginSchema = require("../../../config/schemas/plugin.js"), isAValidPlugin = pluginSchema.validationFunc;
 
 /* eslint-disable no-unused-vars */
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("Checking Plugin Schema", function() {
 
     let sampleRule = {
@@ -27,6 +29,7 @@ describe("Checking Plugin Schema", function() {
     };
 
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should expose a set of functions", function(done) {
         pluginSchema.should.be.type("object");
         pluginSchema.should.be.size(2);
@@ -40,6 +43,7 @@ describe("Checking Plugin Schema", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept valid plugin objects", function(done) {
 
         let plugin = {
@@ -56,6 +60,7 @@ describe("Checking Plugin Schema", function() {
 
         plugin = {
             "rules": {
+                // @ts-expect-error ts-migrate(2322) FIXME: Type '{ a: { meta: { docs: { recommended: boolean;... Remove this comment to see the full error message
                 "a": sampleRule,
                 "b": sampleRule
             },
@@ -68,6 +73,7 @@ describe("Checking Plugin Schema", function() {
 
         plugin = {
             "rules": {},
+            // @ts-expect-error ts-migrate(2739) FIXME: Type '{}' is missing the following properties from... Remove this comment to see the full error message
             "meta": {
                 "description": "c"
             }
@@ -78,12 +84,14 @@ describe("Checking Plugin Schema", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject invalid plugin objects", function(done) {
         let invalidPlugins = [-1, 0, 1, 89.189, "hello world", null, function(){}, undefined, [], true, false];
 
         // no 'rules'
         invalidPlugins.push({
             "meta": {
+                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ meta: { description: string; }... Remove this comment to see the full error message
                 "description": "This is my badass plugin"
             }
         });
@@ -91,6 +99,7 @@ describe("Checking Plugin Schema", function() {
         // no "meta"
         invalidPlugins.push({
             "rules": {
+                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ rules: { "sample-rule-1": { me... Remove this comment to see the full error message
                 "sample-rule-1": sampleRule,
                 "sample-rule-2": sampleRule
             }
@@ -98,6 +107,7 @@ describe("Checking Plugin Schema", function() {
 
         // invalid rule
         invalidPlugins.push({
+            // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ rules: string; meta: { descrip... Remove this comment to see the full error message
             "rules": "hello world",
             "meta": {
                 "description": "This is my badass plugin"
@@ -107,6 +117,7 @@ describe("Checking Plugin Schema", function() {
         // invalid meta
         invalidPlugins.push({
             "rules": {
+                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ rules: { "sample-rule-1": { me... Remove this comment to see the full error message
                 "sample-rule-1": sampleRule
             },
             "meta": []
@@ -115,6 +126,7 @@ describe("Checking Plugin Schema", function() {
         // invalid rule name
         invalidPlugins.push({
             "rules": {
+                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ rules: { "": { meta: { docs: {... Remove this comment to see the full error message
                 "": sampleRule
             },
             "meta": {
@@ -125,6 +137,7 @@ describe("Checking Plugin Schema", function() {
         // invalid rule definition
         invalidPlugins.push({
             "rules": {
+                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ rules: { "sample-rule-1": null... Remove this comment to see the full error message
                 "sample-rule-1": null
             },
             "meta": {
@@ -135,6 +148,7 @@ describe("Checking Plugin Schema", function() {
         // no meta.description
         invalidPlugins.push({
             "rules": {
+                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ rules: { "sample-rule-1": { me... Remove this comment to see the full error message
                 "sample-rule-1": sampleRule,
                 "sample-rule-2": sampleRule
             },
@@ -144,6 +158,7 @@ describe("Checking Plugin Schema", function() {
         // empty meta.description
         invalidPlugins.push({
             "rules": {
+                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ rules: { "sample-rule-1": { me... Remove this comment to see the full error message
                 "sample-rule-1": sampleRule,
                 "sample-rule-2": sampleRule
             },
@@ -155,6 +170,7 @@ describe("Checking Plugin Schema", function() {
         // invalid meta.description value
         invalidPlugins.push({
             "rules": {
+                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ rules: { "sample-rule-1": { me... Remove this comment to see the full error message
                 "sample-rule-1": sampleRule,
                 "sample-rule-2": sampleRule
             },
@@ -166,6 +182,7 @@ describe("Checking Plugin Schema", function() {
         // extra property
         invalidPlugins.push({
             "rules": {
+                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ rules: { "sample-rule-1": { me... Remove this comment to see the full error message
                 "sample-rule-1": sampleRule,
                 "sample-rule-2": sampleRule
             },
@@ -178,6 +195,7 @@ describe("Checking Plugin Schema", function() {
         // extra property in meta
         invalidPlugins.push({
             "rules": {
+                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ rules: { "sample-rule-1": { me... Remove this comment to see the full error message
                 "sample-rule-1": sampleRule,
                 "sample-rule-2": sampleRule
             },

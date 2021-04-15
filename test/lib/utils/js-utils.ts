@@ -5,10 +5,13 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'jsUtils'.
 let jsUtils = require("../../../lib/utils/js-utils");
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("Test jsUtils functions", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should have a set of functions exposed as API", function(done) {
         jsUtils.should.have.ownProperty("isStrictlyObject");
         jsUtils.isStrictlyObject.should.be.type("function");
@@ -16,6 +19,7 @@ describe("Test jsUtils functions", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("isStrictlyObject: should correctly classify whether argument is a non-array, non-null object", function(done) {
         let iso = jsUtils.isStrictlyObject;
 

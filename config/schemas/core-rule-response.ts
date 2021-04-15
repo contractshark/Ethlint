@@ -18,8 +18,10 @@
 }
 */
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'SchemaVali... Remove this comment to see the full error message
 let SchemaValidator = require("./core-rule").SchemaValidator;
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Schema'.
 let Schema = {
     type: "object",
 
@@ -33,4 +35,5 @@ let Schema = {
 };
 
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = { Schema: Schema, SchemaValidator: SchemaValidator };

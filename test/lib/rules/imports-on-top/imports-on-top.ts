@@ -5,9 +5,12 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 const Solium = require("../../../../lib/solium"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'fs'.
     fs = require("fs"), path = require("path"), { EOL } = require("os");
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 let userConfig = {
     "custom-rules-filename": null,
     "rules": {
@@ -16,9 +19,12 @@ let userConfig = {
 };
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] imports-on-top: Acceptances", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept if all import statements are on top of the file (but below the pragma directive)", function(done) {
+        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
         let code = fs.readFileSync(path.join(__dirname, "./accept/on-top.sol"), "utf8"),
             errors = Solium.lint(code, userConfig);
 
@@ -71,9 +77,12 @@ describe("[RULE] imports-on-top: Acceptances", function() {
 });
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] imports-on-top: Rejections", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject any import statement NOT on top of file", function(done) {
+        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
         let code = fs.readFileSync(path.join(__dirname, "./reject/intermingled.sol"), "utf8"),
             errors = Solium.lint(code, userConfig);
 
@@ -86,8 +95,10 @@ describe("[RULE] imports-on-top: Rejections", function() {
 
 });
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] imports-on-top: Fixes", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("Should do nothing if source code is empty or has no import-related issues", done => {
         // Absolutely empty string results in exception from Solium.lintAndFix()
         let codes = [
@@ -130,6 +141,7 @@ describe("[RULE] imports-on-top: Fixes", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should place import below pragma solidity", done => {
         const codes = [
             `
@@ -211,6 +223,7 @@ import "wow.sol";
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should place import below pragma experimental", done => {
         const codes = [
             `
@@ -369,6 +382,7 @@ import "wow.sol";
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should place import below existing import statement", done => {
         const codes = [
             `
@@ -527,6 +541,7 @@ import "wow.sol";
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should place import on top", done => {
         const codes = [
             `
@@ -586,7 +601,9 @@ contract foo {}
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("Should move the import statements below the last valid import node", function(done) {
+        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
         let code = fs.readFileSync(path.join(__dirname, "./fixes/only-one-error.sol"), "utf8");
         let { errorMessages: errors, fixedSourceCode } = Solium.lintAndFix(code, userConfig);
 
@@ -609,7 +626,9 @@ contract foo {}
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("Should move the import statements two lines below the pragma if no valid import exists", function(done) {
+        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
         let code = fs.readFileSync(path.join(__dirname, "./fixes/before-pragma.sol"), "utf8");
         let { errorMessages: errors, fixedSourceCode } = Solium.lintAndFix(code, userConfig);
 
@@ -629,7 +648,9 @@ contract foo {}
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("Should still fix the file correctly if there's only one invalid import statement", function(done) {
+        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
         let code = fs.readFileSync(path.join(__dirname, "./fixes/only-one-error.sol"), "utf8");
         let { errorMessages: errors, fixedSourceCode } = Solium.lintAndFix(code, userConfig);
 

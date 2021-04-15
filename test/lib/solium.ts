@@ -5,10 +5,14 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 let Solium = require("../../lib/solium"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     wrappers = require("../utils/wrappers"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     EventEmitter = require("events").EventEmitter;
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 /* eslint-disable no-unused-vars */
 
 describe("Checking Exported Solium API", function() {
@@ -19,9 +23,11 @@ describe("Checking Exported Solium API", function() {
             type: "error",
             description: "Ensure that all strings use only 1 style - either double quotes or single quotes."
         },
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         schema: []
     };
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should be an instance of EventEmitter & expose a set of functions", function(done) {
         Solium.should.be.type("object");
         Solium.should.be.instanceof(EventEmitter);
@@ -45,9 +51,11 @@ describe("Checking Exported Solium API", function() {
         Solium.should.have.ownProperty("version");
         Solium.version.should.be.type("string");
 
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         done();
     });
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should provide default dotfiles", done => {
         const defaultConfigs = Solium.getDefaultConfig();
 
@@ -57,9 +65,11 @@ describe("Checking Exported Solium API", function() {
         defaultConfigs[".soliumrc.json"].should.be.type("object");
         defaultConfigs[".soliumignore"].should.be.type("string");
 
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         done();
     });
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should throw in case of syntax error in code passed to lint()", done => {
         // syntax error is "fuction" instead of "function"
         const code = "contract Foo {\n\n\tfuction foobar() {\n\t\tbax();\n\t}\n\n}",
@@ -77,22 +87,26 @@ describe("Checking Exported Solium API", function() {
             e.name.should.equal("SyntaxError");
             e.location.start.line.should.equal(3);
             e.location.start.column.should.equal(16);
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         }
 
         Solium.reset();
         done();
     });
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should throw when reportInternal() is passed invalid issue object", done => {
         const invalidData = [undefined, , null, 1902, "hello world", [1, 2, 3], true, false, 9.28937];
 
         invalidData.forEach(data => {
+            // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
             Solium.reportInternal.bind(Solium, data).should.throw();
         });
 
         done();
     });
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should return a SourceCode instance upon calling Solium.getSourceCode ()", function(done) {
         let sourceCode = Solium.getSourceCode();
 
@@ -141,9 +155,11 @@ describe("Checking Exported Solium API", function() {
         sourceCode.should.have.property("getPrevChars");
         sourceCode.getPrevChars.should.be.type("function");
 
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         sourceCode.should.have.property("getComments");
         sourceCode.getComments.should.be.type("function");
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         done();
     });
 
@@ -164,9 +180,11 @@ describe("Checking Exported Solium API", function() {
         sourceCode.getComments().should.be.empty();
 
         //all event listeners should've been removed
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         Object.keys(Solium._events).length.should.equal(0);
 
         done();
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     });
 
     it("should handle invalid arguments when calling Solium.report()", function(done) {
@@ -211,6 +229,7 @@ describe("Checking Exported Solium API", function() {
             message: "H",
             ruleMeta: meta,
             type: "error",
+            // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
             ruleName: "lola"
         }).should.not.throw();
 
@@ -218,6 +237,7 @@ describe("Checking Exported Solium API", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should push a sample error object in messages upon calling Solium.report()", function(done) {
         let sampleErrorObject = {
             ruleName: "sample",
@@ -246,8 +266,10 @@ describe("Checking Exported Solium API", function() {
         err.node.end.should.equal(3);
         err.line.should.equal(1);
         err.column.should.equal(2);
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         err.message.should.equal("boo!");
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         Solium.reset();	//clear everything
 
         done();
@@ -264,10 +286,12 @@ describe("Checking Exported Solium API", function() {
 
         let minimalSourceCode = wrappers.toFunction("var foo = 100;");
         let errors = Solium.lint(minimalSourceCode, config);	// should not throw
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         errors.should.be.Array();
         errors.should.be.size(0);
 
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         Solium.reset();
         done();
     });
@@ -314,12 +338,14 @@ describe("Checking Exported Solium API", function() {
         Solium.lint.bind(Solium, minimalSourceCode, { plugins: ["1*&&67%``"], rules: {} }).should.throw();
 
         // Minimal valid arguments
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         Solium.lint.bind(Solium, minimalSourceCode, minimalConfig).should.not.throw();
         Solium.reset();
 
         done();
     });
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should return deprecation warnings when using old config format, \"custom-rules-filename\" is non-null & returnInternalIssues = true", function(done) {
         let config = {
             "custom-rules-filename": "./test/extras/custom-rules-file",
@@ -332,6 +358,7 @@ describe("Checking Exported Solium API", function() {
             }
         };
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'err' implicitly has an 'any' type.
         let errors = Solium.lint("contract Foo {}", config);
 
         errors.should.be.array;
@@ -345,9 +372,11 @@ describe("Checking Exported Solium API", function() {
             err.line.should.equal(-1);
             err.should.have.ownProperty("column");
             err.column.should.equal(-1);
+            // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
             err.should.have.ownProperty("message");
 
             err.message.should.be.type("string");
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         });
 
         Solium.reset();
@@ -377,11 +406,13 @@ describe("Checking Exported Solium API", function() {
         userConfig.rules.camelcase.should.equal(false);
         Object.keys(userConfig).length.should.equal(2);
 
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         Solium.reset();
 
         done();
     });
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should function as expected when valid arguments are provided", function(done) {
         let minimalConfig = { rules: {} },
             minimalSourceCode = wrappers.toFunction("var foo = 100;");
@@ -399,6 +430,7 @@ describe("Checking Exported Solium API", function() {
 
         Solium.on("VariableDeclaration", function() {
             --emissionCounter;
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
             !emissionCounter && testComplete();
         });
 
@@ -425,11 +457,14 @@ describe("Checking Exported Solium API", function() {
         });
 
         //without any rules applied
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         let errorObjects = Solium.lint(minimalSourceCode, minimalConfig, true);
         errorObjects.length.should.equal(0);
     });
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should function as expected even if a Buffer object is provided instead of String", function(done) {
+        // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'Buffer'. Do you need to install ... Remove this comment to see the full error message
         let minimalConfig = { rules: {} },
             minimalSourceCode = new Buffer(wrappers.toFunction("var foo = 100;"));
         let emissionCounter = 5;
@@ -446,6 +481,7 @@ describe("Checking Exported Solium API", function() {
 
         Solium.on("VariableDeclaration", function() {
             --emissionCounter;
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
             !emissionCounter && testComplete();
         });
 
@@ -472,10 +508,12 @@ describe("Checking Exported Solium API", function() {
         });
 
         //without any rules applied
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         let errorObjects = Solium.lint(minimalSourceCode, minimalConfig, true);
         errorObjects.length.should.equal(0);
     });
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should accept both deprecated and current config formats without any issue", function(done) {
         let deprecated = {
             "custom-rules-filename": null,
@@ -548,12 +586,14 @@ describe("Checking Exported Solium API", function() {
         Solium.lint.bind(Solium, minimalSourceCode, current3).should.not.throw();
         Solium.lint.bind(Solium, minimalSourceCode, current4).should.not.throw();
         Solium.lint.bind(Solium, minimalSourceCode, current5).should.not.throw();
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         Solium.lint.bind(Solium, minimalSourceCode, current6).should.not.throw();
 
         Solium.reset();
         done();
     });
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     // Testing entire fix mechanism
     it("should handle all valid inputs supplied to lintAndFix()", function(done) {
         // Since lintAndFix() internally first goes through lint(), we need not test the things
@@ -568,6 +608,7 @@ describe("Checking Exported Solium API", function() {
             }
         };
 
+        // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'Buffer'. Do you need to install ... Remove this comment to see the full error message
         fixResults.push(Solium.lintAndFix(code, config));
         fixResults.push(Solium.lintAndFix(Buffer(code), config));
 
@@ -585,6 +626,7 @@ describe("Checking Exported Solium API", function() {
             f.errorMessages.length.should.equal(0);
         });
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ quotes: string[]; }' is not assignable to ... Remove this comment to see the full error message
         // Should return fixed code now
         code = "contract Foo {string name = \"Dua\";}";
         config.rules = {
@@ -615,8 +657,10 @@ describe("Checking Exported Solium API", function() {
         fixResults.fixesApplied [0].fix.range.should.be.Array();
         fixResults.fixesApplied [0].fix.range.length.should.equal(2);
         fixResults.fixesApplied [0].fix.range [0].should.equal(28);
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         fixResults.fixesApplied [0].fix.range [1].should.equal(33);
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         Solium.reset();
         done();
     });
@@ -627,6 +671,7 @@ describe("Checking Exported Solium API", function() {
             type: "warning",
             message: "sample message",
             location: {
+                // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'fixer' implicitly has an 'any' type.
                 line: 10,
                 column: 17
             },
@@ -659,62 +704,80 @@ describe("Checking Exported Solium API", function() {
         errors [0].type.should.equal("warning");
         errors [0].internal.should.equal(true);
 
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         // Second item should be the error actually report()ed
         errors [1].should.be.type("object");
         ["ruleName", "type", "message"].forEach(function(key) {
             errors [1] [key].should.equal(error [key]);
         });
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type '(fixer: a... Remove this comment to see the full error message
         error.ruleMeta.fixable = "space";	// valid values for "fixable" are 'whitespace' or 'code'
         Solium.report.bind(Solium, error).should.throw();
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => never[]' is not assignable to ty... Remove this comment to see the full error message
         error.ruleMeta.fixable = "whitespace";
         error.fix = 10902.897;	// invalid value for "fix"
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => void' is not assignable to type ... Remove this comment to see the full error message
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) { return []; };
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => number' is not assignable to typ... Remove this comment to see the full error message
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) {};
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => {}' is not assignable to type '(... Remove this comment to see the full error message
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) { return 1908.287; };
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => string' is not assignable to typ... Remove this comment to see the full error message
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) { return {}; };
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => boolean' is not assignable to ty... Remove this comment to see the full error message
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) { return "hello world"; };
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => boolean' is not assignable to ty... Remove this comment to see the full error message
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) { return true; };
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => () => void' is not assignable to... Remove this comment to see the full error message
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) { return false; };
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => never[][]' is not assignable to ... Remove this comment to see the full error message
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) { return function(){}; };
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => {}[]' is not assignable to type ... Remove this comment to see the full error message
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) { return [[]]; };
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => number[]' is not assignable to t... Remove this comment to see the full error message
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) { return [{}]; };
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => string[]' is not assignable to t... Remove this comment to see the full error message
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) { return [907]; };
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => { text: string; }' is not assign... Remove this comment to see the full error message
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) { return ["humpty dumpty"]; };
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => { text: number; range: number[];... Remove this comment to see the full error message
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) { return { text: "" }; };
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) { return { text: 19082, range: [0, 0] }; };
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => { text: string; range: null; }' ... Remove this comment to see the full error message
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) { return { text: "", range: [-1, 0] }; };
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => { text: string; range: string; }... Remove this comment to see the full error message
         Solium.report.bind(Solium, error).should.throw();
 
         error.fix = function(f) { return { text: "", range: null }; };
@@ -736,7 +799,9 @@ describe("Checking Exported Solium API", function() {
         Solium.report.bind(Solium, error).should.throw();
 
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => null' is not assignable to type ... Remove this comment to see the full error message
         // When a rule's fix() doesn't want to apply any fixes (maybe under some conditions),
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(f: any) => { text: string; range: number[];... Remove this comment to see the full error message
         // it can return null. This should not throw and simply delete the fix (treat it like it didn't exist).
         error.fix = function(f) { return null; };
         Solium.report.bind(Solium, error).should.not.throw();
@@ -748,8 +813,10 @@ describe("Checking Exported Solium API", function() {
         Solium.report.bind(Solium, error).should.not.throw();
 
         error.fix = function(f) {
+            // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
             return { text: "    ", range: [90, 100] };
         };
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         Solium.report.bind(Solium, error).should.not.throw();
 
         Solium.reset();
@@ -760,6 +827,7 @@ describe("Checking Exported Solium API", function() {
         let config = {
             "plugins": ["security"]
         };
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'err' implicitly has an 'any' type.
         let code = "contract Foo { function bar() { address usr = tx.origin; } }";
 
         let errors = Solium.lint(code, config);
@@ -769,6 +837,7 @@ describe("Checking Exported Solium API", function() {
 
         errors.forEach(function(err) {
             err.should.be.type("object");
+            // @ts-expect-error ts-migrate(2322) FIXME: Type '{ rules: { "security/no-tx-origin": string; ... Remove this comment to see the full error message
             err.should.have.ownProperty("ruleName");
             err.ruleName.startsWith("security/").should.equal(true);
         });
@@ -785,6 +854,7 @@ describe("Checking Exported Solium API", function() {
         errors.should.be.Array();
         errors.should.have.size(1);
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ plugins: string[]; rules: { "security/enfo... Remove this comment to see the full error message
         errors [0].ruleName.should.equal("security/no-tx-origin");
         errors [0].type.should.equal("error");
 
@@ -796,9 +866,11 @@ describe("Checking Exported Solium API", function() {
             }
         };
 
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         errors = Solium.lint(code, config);
 
         errors.should.be.Array();
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         errors.should.have.size(1);
         errors [0].ruleName.should.equal("security/no-tx-origin");
 
@@ -807,6 +879,7 @@ describe("Checking Exported Solium API", function() {
 
     it("should work well with the solium:recommended ruleset", done => {
         Solium.lint.bind(
+            // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
             Solium,
             "contract Foo {}",
             { "extends": "solium:recommended" }
@@ -828,7 +901,9 @@ describe("Solium.lint() comment directives", () => {
      * - Line comments & Block Comments
      * - Only directive & Directive + list of rules (single, multiple) both core and security plugin's
      * - Directives at different positions of the program
+     // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
      * - Having/Not having extraneous whitespace (including \n in block comments)
+     // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
      * - Comments that seem like dirs but aren't due to minor changes (like char addition, etc)
      * - Non-Directive comments (should have no impact on linting therefore)
      */
@@ -873,8 +948,10 @@ describe("Solium.lint() comment directives", () => {
             }
         };
 
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         const errors = Solium.lint(code, config);
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         errors.should.be.Array();
         errors.should.have.size(10); // This no. can change if changes are made in any rules from solium:all ruleset
 
@@ -1393,8 +1470,10 @@ describe("Solium.lint() comment directives", () => {
                     returns (uint, uint)      { throw; }
             }
         `;
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         errors = Solium.lint(code, config);
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         errors.should.be.Array();
         errors.should.have.size(6); // can change if rules other than specified above are changed
         delete config.plugins;
@@ -1763,7 +1842,9 @@ describe("Solium.lint() comment directives", () => {
         code = `
             contract Foo {}
             contract f {
+                // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
                 function(){throw;}/*\t\n\tsolium-disable-line\nsecurity/no-throw\n,lbrace,\nindentation  */
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
             }
         `;
         errors = Solium.lint(code, config);
@@ -2184,6 +2265,7 @@ describe("Solium.lint() comment directives", () => {
         delete config.plugins;
 
 
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         code = "/* solium-disable-next-line no-empty-blocks */ /* solium-disable-next-line camelcase */"
             + "\ncontract foo {}";
         errors = Solium.lint(code, config);
@@ -2198,6 +2280,7 @@ describe("Solium.lint() comment directives", () => {
     it("should respect solium-disable-previous-line", done => {
         let config = {
             "rules": {
+                // @ts-expect-error ts-migrate(2322) FIXME: Type '{ indentation: string[]; "security/no-throw"... Remove this comment to see the full error message
                 "no-empty-blocks": "error"
             }
         };
@@ -2210,7 +2293,9 @@ describe("Solium.lint() comment directives", () => {
         errors.should.be.empty();
 
         config.rules = {
+            // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
             "indentation": ["error", "tab"],
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
             "security/no-throw": "error"
         };
         code = `

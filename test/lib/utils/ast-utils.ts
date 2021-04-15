@@ -5,10 +5,12 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'astUtils'.
 const astUtils = require("../../../lib/utils/ast-utils");
 
 /* eslint-disable no-mixed-spaces-and-tabs */
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("Testing astUtils Object", function() {
 
     let sourceCode = "contract Visual {\n\n\tfunction foo () {\n\t\tvar x = 100;\n\t}\n\n}",
@@ -73,6 +75,7 @@ describe("Testing astUtils Object", function() {
         };
 
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should expose a set of functions for use", function(done) {
         astUtils.should.have.ownProperty("init");
         astUtils.init.should.be.type("function");
@@ -104,6 +107,7 @@ describe("Testing astUtils Object", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should correctly classify argument as AST Node or non-AST Node upon calling isASTNode ()", function(done) {
         let ian = astUtils.isASTNode;
 
@@ -117,6 +121,7 @@ describe("Testing astUtils Object", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should return node.parent when a valid node is passed to getParent ()", function(done) {
         let node = {
             type: "TestNode",
@@ -133,6 +138,7 @@ describe("Testing astUtils Object", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should handle invalid argument(s) passed to utility functions", function(done) {
         astUtils.isIfStatement.bind(astUtils).should.throw();
         astUtils.isIfStatement.bind(astUtils, null).should.throw();
@@ -143,6 +149,7 @@ describe("Testing astUtils Object", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should handle invalid argument(s) passed to getParent ()", function(done) {
         astUtils.getParent.bind(astUtils).should.throw();
         astUtils.getParent.bind(astUtils, null).should.throw();
@@ -153,6 +160,7 @@ describe("Testing astUtils Object", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should return correct line no. upon getLine() with valid AST node & sourceCode init()ed", function(done) {
         astUtils.init(sourceCode);
         astUtils.getLine(varDeclarator).should.equal(4);
@@ -162,6 +170,7 @@ describe("Testing astUtils Object", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should handle invalid argument(s) passed to getLine ()", function(done) {
         astUtils.getLine.bind(astUtils).should.throw();
         astUtils.getLine.bind(astUtils, null).should.throw();
@@ -172,6 +181,7 @@ describe("Testing astUtils Object", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should return correct column no. upon getColumn() with valid AST node & sourceCode init()ed", function(done) {
         astUtils.init("[1,2,386267,-19028.87];");
         let literals = [
@@ -196,8 +206,11 @@ describe("Testing astUtils Object", function() {
         astUtils.init("\n[\"foo\",\n\"bar\",\t\t\"baz\"];");
         literals = [
             { type: "Literal", value: "foo", start: 2, end: 7 },
+  // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
   			{ type: "Literal", value: "bar", start: 9, end: 14 },
+  // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
   			{ type: "Literal", value: "baz", start: 17, end: 22 }
+  // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
   		];
 
         astUtils.getColumn(literals [0]).should.equal(1);
@@ -221,6 +234,7 @@ describe("Testing astUtils Object", function() {
         literals = [
             { type: "Literal", value: 10, start: 3, end: 5 },
      		{ type: "Literal", value: "foo", start: 9, end: 14 },
+     // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
      		{ type: "Literal", value: 189.2786, start: 18, end: 26 }
      	];
 
@@ -233,7 +247,9 @@ describe("Testing astUtils Object", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should handle invalid argument(s) passed to getColumn ()", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         astUtils.getColumn.bind(astUtils).should.throw();
         astUtils.getColumn.bind(astUtils, null).should.throw();
         astUtils.getColumn.bind(astUtils, 100).should.throw();
@@ -243,7 +259,9 @@ describe("Testing astUtils Object", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should return correct ending column upon getEndingColumn () with valid AST node & sourceCode init()ed", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         astUtils.init("[1,2,386267,-19028.87];");
         let literals = [
             { type: "Literal", value: 1, start: 1, end: 2 },
@@ -267,8 +285,11 @@ describe("Testing astUtils Object", function() {
         astUtils.init("\n[\"foo\",\n\"bar\",\t\t\"baz\"];");
         literals = [
             { type: "Literal", value: "foo", start: 2, end: 7 },
+  // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
   			{ type: "Literal", value: "bar", start: 9, end: 14 },
+  // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
   			{ type: "Literal", value: "baz", start: 17, end: 22 }
+  // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
   		];
 
         astUtils.getEndingColumn(literals [0]).should.equal(5);
@@ -292,6 +313,7 @@ describe("Testing astUtils Object", function() {
         literals = [
             { type: "Literal", value: 10, start: 3, end: 5 },
      		{ type: "Literal", value: "foo", start: 9, end: 14 },
+     // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
      		{ type: "Literal", value: 189.2786, start: 18, end: 26 }
      	];
 
@@ -304,7 +326,9 @@ describe("Testing astUtils Object", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should handle invalid argument(s) passed to getEndingColumn ()", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         astUtils.getEndingLine.bind(astUtils).should.throw();
         astUtils.getEndingLine.bind(astUtils, null).should.throw();
         astUtils.getEndingLine.bind(astUtils, 100).should.throw();
@@ -314,7 +338,9 @@ describe("Testing astUtils Object", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should return correct line no. on getEndingLine() with valid AST node & sourceCode init()ed", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         astUtils.init(sourceCode);
         astUtils.getEndingLine(varDeclarator).should.equal(4);
         astUtils.getEndingLine(functionDeclaration).should.equal(5);
@@ -323,7 +349,9 @@ describe("Testing astUtils Object", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should handle invalid argument(s) passed to getLine ()", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         astUtils.getEndingLine.bind(astUtils).should.throw();
         astUtils.getEndingLine.bind(astUtils, null).should.throw();
         astUtils.getEndingLine.bind(astUtils, 100).should.throw();
@@ -333,7 +361,9 @@ describe("Testing astUtils Object", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should behave correctly when calling isAChildOf()", done => {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         const child = { type: "Blah", start: 10, end: 20 },
             parent = { type: "Blah", start: 0, end: 30 }, notChild = { type: "Blah", start: 45, end: 80 };
 
@@ -346,7 +376,9 @@ describe("Testing astUtils Object", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject invalid nodes when calling isAChildOf()", done => {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         const validNode = { type: "Blah", start: 10, end: 20 },
             invalidNode = { start: 10, end: 20 };
 

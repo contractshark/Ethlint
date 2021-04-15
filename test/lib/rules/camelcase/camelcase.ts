@@ -5,11 +5,16 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 let Solium = require("../../../../lib/solium");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'wrappers'.
 let wrappers = require("../../../utils/wrappers");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toContract... Remove this comment to see the full error message
 let toContract = wrappers.toContract;
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'addPragma'... Remove this comment to see the full error message
 let addPragma = wrappers.addPragma;
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 let userConfig = {
     "custom-rules-filename": null,
     "rules": {
@@ -17,8 +22,10 @@ let userConfig = {
     }
 };
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] camelcase: Acceptances", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("accepts valid contract names", function(done) {
         let code = [
             "contract Hello {}",
@@ -70,6 +77,7 @@ describe("[RULE] camelcase: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("accepts valid library names", function(done) {
         let code = [
             "library Hello {}",
@@ -121,6 +129,7 @@ describe("[RULE] camelcase: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("accepts valid event names", function(done) {
         let code = [
             "event Hello();",
@@ -172,6 +181,7 @@ describe("[RULE] camelcase: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("accepts valid struct names", function(done) {
         let code = [
             "struct Hello {}",
@@ -226,8 +236,10 @@ describe("[RULE] camelcase: Acceptances", function() {
 });
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] camelcase: Rejections", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("rejects invalid contract names", function(done) {
         let code = [
             "contract hello {}",
@@ -264,6 +276,7 @@ describe("[RULE] camelcase: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("rejects invalid library names", function(done) {
         let code = [
             "library hello {}",
@@ -300,6 +313,7 @@ describe("[RULE] camelcase: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("rejects invalid event names", function(done) {
         let code = [
             "event hello();",
@@ -336,6 +350,7 @@ describe("[RULE] camelcase: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("rejects invalid struct names", function(done) {
         let code = [
             "struct hello {}",

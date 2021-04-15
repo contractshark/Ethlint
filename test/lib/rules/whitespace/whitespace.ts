@@ -5,10 +5,14 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'EOL'.
 const { EOL } = require("os");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 const Solium = require("../../../../lib/solium"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'wrappers'.
     wrappers = require("../../../utils/wrappers"), { toContract, toFunction, addPragma } = wrappers;
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 let userConfig = {
     "custom-rules-filename": null,
     "rules": {
@@ -21,8 +25,10 @@ let userConfig = {
     }
 };
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] whitespace: Acceptances", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow function / event calls with 0 args only if the name is followed by \"()\"", function(done) {
         let code = "func ();",
             errors = Solium.lint(toFunction(code), userConfig);
@@ -40,6 +46,7 @@ describe("[RULE] whitespace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow function / event calls with no extraneous whitespace", function(done) {
         let code = "spam(ham[1], Coin({name: \"ham\"}));",
             errors = Solium.lint(toFunction(code), userConfig);
@@ -81,6 +88,7 @@ describe("[RULE] whitespace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow single-line function body to have 1 extraneous space on either side", function(done) {
         let code = "function singleLine() { spam(); }",
             errors = Solium.lint(toContract(code), userConfig);
@@ -111,6 +119,7 @@ describe("[RULE] whitespace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow informal params in function declaration which don't have whitespace immediately before a comma or semicolon", function(done) {
         let code = "function spam(uint i, Coin coin);",
             errors = Solium.lint(toContract(code), userConfig);
@@ -158,6 +167,7 @@ describe("[RULE] whitespace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow informal params in modifier declaration which don't have whitespace immediately before a comma or semicolon", function(done) {
         let code = "modifier spam(uint i, Coin coin) {_;}",
             errors = Solium.lint(toContract(code), userConfig);
@@ -175,6 +185,7 @@ describe("[RULE] whitespace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow exactly 1 space on either side of an assignment operator", function(done) {
         let code = "x = 100; y = \"hello world\"; string exa = \"bytes\";",
             errors = Solium.lint(toFunction(code), userConfig);
@@ -222,6 +233,7 @@ describe("[RULE] whitespace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow the code that provides nothing to check, i.e., no arguments in CallExpression", function(done) {
         let code = "call ();",
             errors = Solium.lint(toFunction(code), userConfig);
@@ -251,6 +263,7 @@ describe("[RULE] whitespace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow Name-Value assignments following either of the spacing patterns: \":\", \" : \", \": \"", function(done) {
         let code = "myStruct ({a: 100, b : \"hello\", c : -1908});",
             errors = Solium.lint(toFunction(code), userConfig);
@@ -262,6 +275,7 @@ describe("[RULE] whitespace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow acceptable comma whitespace between Name-Value declarations", function(done) {
         let code = `myStruct ({a:100, b:9028,${EOL}c: 19082,d:\"hello world\",${EOL}\t\te:\"this passes YOLO\"});`,
             errors = Solium.lint(toFunction(code), userConfig);
@@ -273,6 +287,7 @@ describe("[RULE] whitespace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow a valid mix of CallExpression & MemberExpression", function(done) {
         let errors, statements = [
             "d(wall.dir()[9]);",
@@ -292,6 +307,7 @@ describe("[RULE] whitespace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept SequenceExpression & tuple nodes with no extraneous whitespace", function(done) {
         const code = [
             "var (a, b) = (10, foo(90, \"hello\"));",
@@ -359,7 +375,9 @@ describe("[RULE] whitespace: Acceptances", function() {
 
 
 describe("[RULE] whitespace: Rejections", function() {
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject function / event calls with 0 args if the name is followed by brackets with whitespace between them", function(done) {
         let code = "func ( );",
             errors = Solium.lint(toFunction(code), userConfig);
@@ -401,6 +419,7 @@ describe("[RULE] whitespace: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject function / event calls having extraneous whitespace", function(done) {
         let code = "spam( ham[ 1 ], Coin( { name: \"ham\" } ) );",
             errors = Solium.lint(toFunction(code), userConfig);
@@ -424,6 +443,7 @@ describe("[RULE] whitespace: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject code which has whitespace immediately before a comma or semicolon", function(done) {
         ////////////////////////////////////////////////////////////////////////////
         // SEMICOLON
@@ -581,9 +601,11 @@ describe("[RULE] whitespace: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject assignment operators that do not have exactly 1 space on either side of them", function(done) {
         let code = [
             "x             = 1;",
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
             "y =             1;",
             "string exa\t=\t\"bytes\";",
             "uint a = \t20;",
@@ -639,36 +661,42 @@ describe("[RULE] whitespace: Rejections", function() {
         errors.length.should.equal(2);
 
         code = "var x\n=\n\"hello world\";";
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'string[]'... Remove this comment to see the full error message
         errors = Solium.lint(toFunction(code), userConfig);
 
         errors.constructor.name.should.equal("Array");
         errors.length.should.equal(2);
 
         code = "var x\t=\t\"hello world\";";
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'string[]'... Remove this comment to see the full error message
         errors = Solium.lint(toFunction(code), userConfig);
 
         errors.constructor.name.should.equal("Array");
         errors.length.should.equal(2);
 
         code = "var x = /*abc*/\"hello world\";";
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'string[]'... Remove this comment to see the full error message
         errors = Solium.lint(toFunction(code), userConfig);
 
         errors.constructor.name.should.equal("Array");
         errors.length.should.equal(1);
 
         code = "var x =/*abc*/ \"hello world\";";
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'string[]'... Remove this comment to see the full error message
         errors = Solium.lint(toFunction(code), userConfig);
 
         errors.constructor.name.should.equal("Array");
         errors.length.should.equal(1);
 
         code = "var x/*abc*/ = \"hello world\";";
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'string[]'... Remove this comment to see the full error message
         errors = Solium.lint(toFunction(code), userConfig);
 
         errors.constructor.name.should.equal("Array");
         errors.length.should.equal(1);
 
         code = "var x /*abc*/= \"hello world\";";
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'string[]'... Remove this comment to see the full error message
         errors = Solium.lint(toFunction(code), userConfig);
 
         errors.constructor.name.should.equal("Array");
@@ -678,8 +706,10 @@ describe("[RULE] whitespace: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject control structures 'if', 'while', and 'for' if there is no space between them and the parenthetic block representing their conditional.", function(done) {
         let code = "if(true) {}\nelse if(true) {}",
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
             errors = Solium.lint(toFunction(code), userConfig);
 
         errors.constructor.name.should.equal("Array");
@@ -701,7 +731,9 @@ describe("[RULE] whitespace: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject the Name-Value assignments NOT following either of the spacing patterns: \":\", \" : \", \": \"", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let code = "myStruct ({a: 100, b : \"hello\", c : -1908, d:  10, e :190, f  :  19098, g   : 100, h        :       19028, i\n:100, j\n:\n81972, k : \t\"hola\"});",
             errors = Solium.lint(toFunction(code), userConfig);
 
@@ -719,7 +751,9 @@ describe("[RULE] whitespace: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject unacceptable comma whitespace between Name-Value declarations", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let code = "myStruct ({a:100 , b:9028 ,c: 19082,  d:\"hello world\",\n\ne:\"this passes YOLO\"  ,e: 100\t,\tf: 18972, \ng: \"cola\"});",
             errors = Solium.lint(toFunction(code), userConfig);
 

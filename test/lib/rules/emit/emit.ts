@@ -5,7 +5,9 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 const Solium = require("../../../../lib/solium");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 const userConfig = {
     "rules": {
         "emit": "error"
@@ -13,8 +15,10 @@ const userConfig = {
 };
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] emit: Acceptances", () => {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept code without any event declarations", done => {
         let code = `contract Foo {
             function bar() {
@@ -29,6 +33,7 @@ describe("[RULE] emit: Acceptances", () => {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept code in which emit is used when events are declared", done => {
         let code = `contract Foo {
             event Blast(uint radius);
@@ -57,6 +62,7 @@ describe("[RULE] emit: Acceptances", () => {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept code in which CallExpression is a function call, not event trigger", done => {
         let code = `contract Foo {
             event Blast(uint radius);
@@ -83,6 +89,7 @@ describe("[RULE] emit: Acceptances", () => {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept when CallExpression & event declaration have same name but are in different scopes", done => {
         let code = `contract UnrelatedContract {
             event Blast(uint radius);
@@ -118,8 +125,10 @@ describe("[RULE] emit: Acceptances", () => {
 });
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] emit: Rejections", () => {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject if event declared in the same contract is triggered without emit", done => {
         let code = `contract Foo {
             event Blast(uint radius);
@@ -162,8 +171,10 @@ describe("[RULE] emit: Rejections", () => {
 });
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] emit: Fixes", () => {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should add emit keyword before non-emit event trigger statements when declaration & usage are in same contract", done => {
         let code = `contract Foo {
             event Blast(uint radius);
@@ -224,6 +235,7 @@ describe("[RULE] emit: Fixes", () => {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should shouldn't attempt to fix statements which already use emit keyword", done => {
         let code = `contract Foo {
             event Blast(uint radius);

@@ -5,7 +5,9 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'solidityPa... Remove this comment to see the full error message
 const solidityParser = require("solparse"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     CommentDirectiveParser = require("../../lib/comment-directive-parser");
 
 const code = `
@@ -14,11 +16,13 @@ contract foo {
     /* hello world */
 }
 `;
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 const AST = solidityParser.parse(code, { comment: true });
 
 
 describe("comment-directive-parser", () => {
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'f' implicitly has an 'any' type.
     function shouldThrow(f, msg) {
         try {
             f();
@@ -27,18 +31,25 @@ describe("comment-directive-parser", () => {
         }
     }
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should expose a class to create CDP objects", done => {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'typeof C... Remove this comment to see the full error message
         CommentDirectiveParser.should.be.type("function");
 
         const minimalAST = { type: "Program", start: 0, end: 1 };
         const myCdp = new CommentDirectiveParser([], minimalAST);
         const invalidArgError = "First argument should be an array of comment tokens.";
 
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'boolean'... Remove this comment to see the full error message
         (myCdp instanceof CommentDirectiveParser).should.be.true();
         myCdp.should.have.size(4);  // changes when properties are added/removed
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'CommentD... Remove this comment to see the full error message
         myCdp.should.have.ownProperty("lastLine");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'CommentD... Remove this comment to see the full error message
         myCdp.should.have.ownProperty("commentTokens");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'CommentD... Remove this comment to see the full error message
         myCdp.should.have.ownProperty("lineConfigurations");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'CommentD... Remove this comment to see the full error message
         myCdp.should.have.ownProperty("ALL_RULES");
 
 
@@ -54,39 +65,53 @@ describe("comment-directive-parser", () => {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should expose a set of methods via the CDP object", done => {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         const cdp = new CommentDirectiveParser(AST.comments, AST);
 
         cdp.isRuleEnabledOnLine.should.be.type("function");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '(ruleNam... Remove this comment to see the full error message
         cdp._constructLineConfigurations.should.be.type("function");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '() => vo... Remove this comment to see the full error message
         cdp._addRulesToLineConfig.should.be.type("function");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '(line: a... Remove this comment to see the full error message
         cdp._removeRulesFromLineConfig.should.type("function");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '(line: a... Remove this comment to see the full error message
         cdp._constructLineConfigurationFromComment.should.be.type("function");
         cdp._cleanCommentText.should.be.type("function");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '(text: a... Remove this comment to see the full error message
         cdp._parseRuleNames.should.be.type("function");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '(text: a... Remove this comment to see the full error message
         cdp._toEndOfFile.should.be.type("function");
 
         done();
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '(from: a... Remove this comment to see the full error message
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should throw when calling isRuleEnabledOnLine() with invalid args", done => {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         const cdp = new CommentDirectiveParser(AST.comments, AST);
         const badRuleNames = [, undefined, null, {}, [], 1, 90, "", 1.83, 0, -1892, true, false, ()=>{}],
             badLineNumbers = [, undefined, null, {}, [], "h", "", 1.83, 0, -1892, true, false, ()=>{}];
 
         badRuleNames.forEach(r => {
             cdp.isRuleEnabledOnLine.bind(
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '() => bo... Remove this comment to see the full error message
                 cdp, r, 1).should.throw("Rule name should be a non-empty string.");
         });
 
         badLineNumbers.forEach(l => {
             cdp.isRuleEnabledOnLine.bind(
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type '() => bo... Remove this comment to see the full error message
                 cdp, "rule", l).should.throw("Line number should be a positive integer.");
         });
 
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should throw when disable-previous-line is used on the first line", done => {
         const code = `// solium-disable-previous-line
         contract Foo {}
@@ -96,11 +121,13 @@ describe("comment-directive-parser", () => {
         shouldThrow(
             () => { new CommentDirectiveParser(ast.comments, ast); },
             "Comment directive \"solium-disable-previous-line\" refers to an invalid line number."
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         );
 
         done();
     });
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
     it("should work as expected when calling private utility functions", done => {
         const cdp = new CommentDirectiveParser(AST.comments, AST);
         const texts = [
@@ -172,10 +199,12 @@ describe("comment-directive-parser", () => {
             }
 
             rules.should.equal(expectedOutput);
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'lastLine' does not exist on type 'Commen... Remove this comment to see the full error message
         });
 
 
         let counter = 7;
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'currentLine' implicitly has an 'any' ty... Remove this comment to see the full error message
         cdp.lastLine = 96;
 
         cdp._toEndOfFile(counter, currentLine => {

@@ -5,13 +5,17 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
 let coreRuleSchema = require("../../config/schemas/core-rule"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     coreRuleResponseSchema = require("../../config/schemas/core-rule-response");
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'SchemaVali... Remove this comment to see the full error message
 let SchemaValidator = coreRuleSchema.SchemaValidator,
     validateCoreRule = SchemaValidator.compile(coreRuleSchema.Schema),
     validateCoreRuleResponse = SchemaValidator.compile(coreRuleResponseSchema.Schema);
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
 
     /**
@@ -35,6 +39,7 @@ module.exports = {
 	 * @param {Array} listItemsSchema A list of schema objects defining schema for every item in the options list.
 	 * @returns {Boolean} isValid True if options list is valid, false otherwise.
 	 */
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'options' implicitly has an 'any' type.
     areValidOptionsPassed: function(options, listItemsSchema) {
         let validateOptionsList = SchemaValidator.compile({
             type: "array",

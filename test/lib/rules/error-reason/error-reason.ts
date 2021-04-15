@@ -5,7 +5,9 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 const Solium = require("../../../../lib/solium"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toFunction... Remove this comment to see the full error message
     { toFunction } = require("../../../utils/wrappers");
 
 const userConfigDefault = {
@@ -14,8 +16,10 @@ const userConfigDefault = {
     }
 };
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] error-reason: Acceptances", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept revert calls with an error message", function(done) {
         const code = toFunction("revert(\"Error message\");"),
             errors = Solium.lint(code, userConfigDefault);
@@ -27,6 +31,7 @@ describe("[RULE] error-reason: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept revert calls without an error message when it is disabled", function(done) {
         const userConfig = {
             "rules": {
@@ -44,6 +49,7 @@ describe("[RULE] error-reason: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept require calls with an error message", function(done) {
         const code = toFunction("require(1 == 1, \"Error message\");"),
             errors = Solium.lint(code, userConfigDefault);
@@ -55,6 +61,7 @@ describe("[RULE] error-reason: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept require calls without an error message when it is disabled", function(done) {
         const userConfig = {
             "rules": {
@@ -72,6 +79,7 @@ describe("[RULE] error-reason: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept error messages that don't breach max character limit", done => {
         const userConfig = {
             "rules": {
@@ -98,6 +106,7 @@ describe("[RULE] error-reason: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept error messages that breach max character limit when function is disabled", done => {
         const userConfig = {
             "rules": {
@@ -122,8 +131,10 @@ describe("[RULE] error-reason: Acceptances", function() {
 
 });
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] error-reason: Rejections", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject revert calls without an error message", function(done) {
         let code = "revert();",
             errors = Solium.lint(toFunction(code), userConfigDefault);
@@ -146,6 +157,7 @@ describe("[RULE] error-reason: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject require calls without an error message", function(done) {
         let code = "require(1 == 1);",
             errors = Solium.lint(toFunction(code), userConfigDefault);
@@ -168,6 +180,7 @@ describe("[RULE] error-reason: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject error messages that breach max character limit", done => {
         const userConfig = {
             "rules": {

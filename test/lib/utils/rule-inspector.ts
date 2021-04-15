@@ -5,12 +5,15 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'ruleInspec... Remove this comment to see the full error message
 let ruleInspector = require("../../../lib/utils/rule-inspector");
 
 /* eslint-disable no-unused-vars */
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("Test rule-inspector functions", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should expose a set of functions", function(done) {
         ruleInspector.should.have.size(3);
 
@@ -26,6 +29,7 @@ describe("Test rule-inspector functions", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should correctly classify all valid rule objects", function(done) {
         let configObjects = [];
 
@@ -127,7 +131,9 @@ describe("Test rule-inspector functions", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should correctly classify all invalid rule objects", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let invalidConfigObjects = [, null,
             undefined, 0, "", "harry potter", -190, 8927, 88.2891, [], [{}], [0], {}, function() {}];
 
@@ -159,6 +165,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // Invalid value for create
         invalidConfigObjects.push({
             "meta": {
@@ -179,6 +186,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // No meta.docs
         invalidConfigObjects.push({
             "meta": {
@@ -187,6 +195,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // No meta.schema
         invalidConfigObjects.push({
             "meta": {
@@ -199,6 +208,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // Invalid meta.docs
         invalidConfigObjects.push({
             "meta": {
@@ -209,6 +219,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // Invalid meta.schema
         invalidConfigObjects.push({
             "meta": {
@@ -223,6 +234,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // Invalid meta.fixable
         invalidConfigObjects.push({
             "meta": {
@@ -237,6 +249,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // No meta.docs.recommended
         invalidConfigObjects.push({
             "meta": {
@@ -250,6 +263,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // No meta.docs.type
         invalidConfigObjects.push({
             "meta": {
@@ -263,6 +277,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // No meta.docs.description
         invalidConfigObjects.push({
             "meta": {
@@ -276,6 +291,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // Invalid meta.docs.recommended
         invalidConfigObjects.push({
             "meta": {
@@ -290,6 +306,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // Invalid meta.docs.type
         invalidConfigObjects.push({
             "meta": {
@@ -304,6 +321,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // Invalid meta.docs.description
         invalidConfigObjects.push({
             "meta": {
@@ -318,6 +336,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // Empty meta.docs.description
         invalidConfigObjects.push({
             "meta": {
@@ -332,6 +351,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // Invalid value for "deprecated"
         invalidConfigObjects.push({
             "meta": {
@@ -348,6 +368,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // Invalid value for "replacedBy"
         invalidConfigObjects.push({
             "meta": {
@@ -364,6 +385,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // Invalid value for "replacedBy"
         invalidConfigObjects.push({
             "meta": {
@@ -380,6 +402,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // Invalid value for "replacedBy"
         invalidConfigObjects.push({
             "meta": {
@@ -396,6 +419,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         // Invalid value for "replacedBy"
         invalidConfigObjects.push({
             "meta": {
@@ -412,6 +436,7 @@ describe("Test rule-inspector functions", function() {
             "create": function(context) {}
         });
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         invalidConfigObjects.forEach(function(c, i) {
             ruleInspector.isAValidRuleObject(c).should.equal(false);
             // Because rule-inspector directly exposes an AJV object compiled with the schema as
@@ -427,13 +452,16 @@ describe("Test rule-inspector functions", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should correctly classify all valid rule response objects", function(done) {
         let response = {};
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         ruleInspector.isAValidRuleResponseObject(response).should.equal(true);
 
         response = {
             Literal: function(context) {}
         };
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         ruleInspector.isAValidRuleResponseObject(response).should.equal(true);
 
         // Keys that aren't actually node names are still valid. The emitter would simply never emit anything for this node,
@@ -441,19 +469,25 @@ describe("Test rule-inspector functions", function() {
         response = {
             NotAnActualNodeName: function(context) {}
         };
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         ruleInspector.isAValidRuleResponseObject(response).should.equal(true);
 
         response = {
             Program: function(context) {},
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
             ContractStatement: function(context) {},
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
             ArrayExpression: function(context) {}
         };
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
         ruleInspector.isAValidRuleResponseObject(response).should.equal(true);
 
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should correctly classify all invalid rule response objects", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let invalidResponses = [, null,
             undefined, 0, "", "harry potter", -190, 8927, 88.2891, [], [{}], [0], function() {}];
 
@@ -461,22 +495,28 @@ describe("Test rule-inspector functions", function() {
             "": function(ctx) {}
         });
 
+        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ "": (ctx: any) => void; }' is ... Remove this comment to see the full error message
         invalidResponses.push({
             Literal: "Hello world"
         });
 
+        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ Literal: string; }' is not ass... Remove this comment to see the full error message
         invalidResponses.push({
             Literal: undefined
         });
 
+        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ Literal: undefined; }' is not ... Remove this comment to see the full error message
         invalidResponses.push({
             Literal: null
         });
 
+        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ Literal: null; }' is not assig... Remove this comment to see the full error message
         invalidResponses.push({
             NodaA: function(c) {},
+            // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ NodaA: (c: any) => void; NodaB... Remove this comment to see the full error message
             NodaB: function(c) {},
             Literal: null
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'c' implicitly has an 'any' type.
         });
 
         invalidResponses.forEach(function(res) {
@@ -494,12 +534,16 @@ describe("Test rule-inspector functions", function() {
         { type: "object", properties: { name: { type: "string", minLength: 1 } }, additionalProperties: false }
     ];
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should correctly classify when a rule is provided a valid set of options", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         ruleInspector.areValidOptionsPassed(["hello", 5, { name: "chuck norris" }], listItemsSchema).should.equal(true);
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should correctly classify when a rule is provided an invalid set of options", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let invalidOptionLists = [
             null, undefined, "", {}, 100, -9, 89.23, 0, function() {}, NaN,
             ["", 5, { name: "chuck norris" }],

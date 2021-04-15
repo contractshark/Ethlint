@@ -5,8 +5,10 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'SourceCode... Remove this comment to see the full error message
 const SourceCode = require("../../../lib/utils/source-code-utils");
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("Testing SourceCode instance for exposed functionality", function() {
     // Linter should account for both windows & unix linebreak styles,
     // so use a mix of them.
@@ -19,6 +21,7 @@ describe("Testing SourceCode instance for exposed functionality", function() {
             end: 53
         };
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should create instance of SourceCode & expose set of functions (its own & those of astUtils)", function(done) {
         let sourceCodeObject = new SourceCode(sourceCodeText, []);
 
@@ -106,6 +109,7 @@ describe("Testing SourceCode instance for exposed functionality", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should behave as expected upon calling getText ()", function(done) {
         let sourceCodeObject = new SourceCode(sourceCodeText, []);
         let functionCallText = "fooBar ();",
@@ -136,6 +140,7 @@ describe("Testing SourceCode instance for exposed functionality", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should behave as expected upon calling getNextChar ()", function(done) {
         let sourceCodeObject = new SourceCode(sourceCodeText, []);
 
@@ -145,16 +150,19 @@ describe("Testing SourceCode instance for exposed functionality", function() {
         //Imitate the last node (with no chars after its code), the function should return null
         (sourceCodeObject.getNextChar(
             { type: "LastNode", end: sourceCodeText.length, start: 2 }
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'boolean'... Remove this comment to see the full error message
         ) === null).should.equal(true);
 
         //extreme
         (sourceCodeObject.getNextChar(
             { type: "LastNode", end: 100000, start: 90 }
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'boolean'... Remove this comment to see the full error message
         ) === null).should.equal(true);
 
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should behave as expected upon calling getPrevChar ()", function(done) {
         let sourceCodeObject = new SourceCode(sourceCodeText, []);
 
@@ -165,10 +173,12 @@ describe("Testing SourceCode instance for exposed functionality", function() {
         (sourceCodeObject.getPrevChar(
             { type: "FirstNode", start: 0, end: 90 }
         ) === null).should.equal(true);
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'should' does not exist on type 'boolean'... Remove this comment to see the full error message
 
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should behave as expected upon calling getNextChars ()", function(done) {
         let sourceCodeObject = new SourceCode(sourceCodeText, []);
 
@@ -182,6 +192,7 @@ describe("Testing SourceCode instance for exposed functionality", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should behave as expected upon calling getPrevChars ()", function(done) {
         let sourceCodeObject = new SourceCode(sourceCodeText, []);
 
@@ -197,6 +208,7 @@ describe("Testing SourceCode instance for exposed functionality", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should behave as expected upon calling getStringBetweenNodes ()", function(done) {
         let sourceCodeText = "var x = 100;\n\tvar (y) = 200;\n\n\tvar z = 300;",
             sourceCodeObject = new SourceCode(sourceCodeText, []);
@@ -282,6 +294,7 @@ describe("Testing SourceCode instance for exposed functionality", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should return source code split into lines when calling getLines()", done => {
         const sourceCodeObject = new SourceCode(sourceCodeText, []),
             sourceCodeTextLines = sourceCodeText.split(/\r?\n/),
@@ -294,6 +307,7 @@ describe("Testing SourceCode instance for exposed functionality", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should behave as expected upon calling getTextOnLine()", function(done) {
         let sourceCodeObject = new SourceCode(sourceCodeText, []),
             sourceCodeTextLines = sourceCodeText.split(/\r?\n/);
@@ -315,6 +329,7 @@ describe("Testing SourceCode instance for exposed functionality", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should return comment objects list upon calling getComments()", done => {
         const dummyCommentObjects = [
             {

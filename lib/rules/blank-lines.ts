@@ -6,6 +6,7 @@
 "use strict";
 
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'eol'.
 const eol = require("os").EOL;
 
 
@@ -27,6 +28,7 @@ function getCorrectionString(string, n) {
 
 module.exports = {
 
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
     meta: {
 
         docs: {
@@ -119,6 +121,7 @@ module.exports = {
                 const currNode = programBody [i], prevNode = programBody [i-1];
 
                 if (!topLevelDeclarations.includes(currNode.type)) {
+                    // @ts-expect-error ts-migrate(2550) FIXME: Property 'includes' does not exist on type 'string... Remove this comment to see the full error message
                     continue;
                 }
 
@@ -160,6 +163,7 @@ module.exports = {
 
                 if (
                     ["FunctionDeclaration", "ConstructorDeclaration"].includes(body [i].type) &&
+                    // @ts-expect-error ts-migrate(2550) FIXME: Property 'includes' does not exist on type 'string... Remove this comment to see the full error message
                     sourceCode.getLine(body [i]) !== endingLineNumber &&
                     !isCommentRegExp.test(c) &&
                     ((!noCodeRegExp.test(a)) || noCodeRegExp.test(b) || endingLineNumber === sourceCode.getLine(body [i+1]))
@@ -179,6 +183,7 @@ module.exports = {
             listeners [node] = inspectChild;
         });
 
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         return listeners;
 
     }

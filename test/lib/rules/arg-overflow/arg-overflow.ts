@@ -5,10 +5,14 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 let Solium = require("../../../../lib/solium"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'wrappers'.
     wrappers = require("../../../utils/wrappers");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toContract... Remove this comment to see the full error message
 let toContract = wrappers.toContract, toFunction = wrappers.toFunction;
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 let userConfig = {
     "custom-rules-filename": null,
     "rules": {
@@ -16,8 +20,10 @@ let userConfig = {
     }
 };
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] arg-overflow: Rejections", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should enforce the rule that excess element lists must go on individual lines", function(done) {
         let code = toContract("function ArgumentOverflow(int one, int two, int three, int four) {}"),
             errors = Solium.lint(code, userConfig);
@@ -65,8 +71,10 @@ describe("[RULE] arg-overflow: Rejections", function() {
 
 });
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] arg-overflow: Acceptances", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept <= 3 arguments on single line", function(done) {
         let code = toContract("function ArgumentOverflow(int one, int two, int three) {}"),
             errors = Solium.lint(code, userConfig);
@@ -96,6 +104,7 @@ describe("[RULE] arg-overflow: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept > 3 arguments only when they are on their own lines", function(done) {
         let code = toContract("function ArgumentOverflow(\nint one,\nint two,\nint three,\nint four) {}"),
             errors = Solium.lint(code, userConfig);
@@ -127,8 +136,10 @@ describe("[RULE] arg-overflow: Acceptances", function() {
 
 });
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] arg-overflow: Handling options", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept <= N arguments in same line, N supplied through config", function(done) {
         let userConfig = {
             "rules": {
@@ -183,6 +194,7 @@ describe("[RULE] arg-overflow: Handling options", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject > N arguments in same line, N supplied through config", function(done) {
         let userConfig = {
             "rules": {
@@ -218,6 +230,7 @@ describe("[RULE] arg-overflow: Handling options", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject invalid option values", function(done) {
         let config = {
             "rules": {
@@ -229,14 +242,17 @@ describe("[RULE] arg-overflow: Handling options", function() {
         Solium.lint.bind(
             Solium, code, config).should.throw("Invalid options were passed to rule \"arg-overflow\".");
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'null' is not assignable to type 'number'.
         config.rules ["arg-overflow"] [1] = null;
         Solium.lint.bind(
             Solium, code, config).should.throw("Invalid options were passed to rule \"arg-overflow\".");
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'never[]' is not assignable to type 'number'.
         config.rules ["arg-overflow"] [1] = [];
         Solium.lint.bind(
             Solium, code, config).should.throw("Invalid options were passed to rule \"arg-overflow\".");
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{}' is not assignable to type 'number'.
         config.rules ["arg-overflow"] [1] = {};
         Solium.lint.bind(
             Solium, code, config).should.throw("Invalid options were passed to rule \"arg-overflow\".");
@@ -249,6 +265,7 @@ describe("[RULE] arg-overflow: Handling options", function() {
         Solium.lint.bind(
             Solium, code, config).should.throw("Invalid options were passed to rule \"arg-overflow\".");
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'number[]' is not assignable to type 'number'... Remove this comment to see the full error message
         config.rules ["arg-overflow"] [1] = [2];
         Solium.lint.bind(
             Solium, code, config).should.throw("Invalid options were passed to rule \"arg-overflow\".");
@@ -257,6 +274,7 @@ describe("[RULE] arg-overflow: Handling options", function() {
         Solium.lint.bind(
             Solium, code, config).should.throw("Invalid options were passed to rule \"arg-overflow\".");
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number'.
         config.rules ["arg-overflow"] [1] = "winniethepooh";
         Solium.lint.bind(
             Solium, code, config).should.throw("Invalid options were passed to rule \"arg-overflow\".");

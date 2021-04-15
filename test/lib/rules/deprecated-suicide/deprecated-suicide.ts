@@ -5,10 +5,14 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 let Solium = require("../../../../lib/solium");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'wrappers'.
 let wrappers = require("../../../utils/wrappers"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toContract... Remove this comment to see the full error message
     toContract = wrappers.toContract, toFunction = wrappers.toFunction;
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 let userConfig = {
     "custom-rules-filename": null,
     "rules": {
@@ -16,8 +20,10 @@ let userConfig = {
     }
 };
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] deprecated-suicide", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject contracts using suicide", function(done) {
         let code = toContract("function foo () { suicide(0x0); }"),
             errors = Solium.lint(code, userConfig);
@@ -29,6 +35,7 @@ describe("[RULE] deprecated-suicide", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should replace suicide by selfdestruct when fix is applied", function(done) {
         let unfixedCode = toFunction("suicide(0x0);"),
             fixedCode = toFunction("selfdestruct(0x0);");

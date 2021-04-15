@@ -5,9 +5,12 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'EOL'.
 const { EOL } = require("os");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 const Solium = require("../../../../lib/solium");
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 let userConfig = {
     "custom-rules-filename": null,
     "rules": {
@@ -16,8 +19,10 @@ let userConfig = {
 };
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] pragma-on-top: Acceptances", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept if program has only 1 pragma statement at the top of the file", function(done) {
         let code = "pragma solidity ^4.4.0;\nimport {foo} from \"bar\";",
             errors = Solium.lint(code, userConfig);
@@ -60,8 +65,10 @@ describe("[RULE] pragma-on-top: Acceptances", function() {
 });
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] pragma-on-top: Rejections", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject a non-empty program that doesn't have a pragma statement on top", function(done) {
         let code = "\/*Hello world*\/\nimport {foo} from \"bar\";",
             errors = Solium.lint(code, userConfig);
@@ -115,6 +122,7 @@ describe("[RULE] pragma-on-top: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject program that has more than 1 pragma statement", function(done) {
         let code = "pragma solidity ^4.4.0;\npragma solidity ^4.4.0;",
             errors = Solium.lint(code, userConfig);
@@ -138,6 +146,7 @@ describe("[RULE] pragma-on-top: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject pragma experimental statement(s) having anything except pragma above them", done => {
         let code = `
 			pragma solidity ^0.4.0;
@@ -160,8 +169,10 @@ describe("[RULE] pragma-on-top: Rejections", function() {
 });
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] pragma-on-top: Fixes", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should move an existing pragma statement to top of file (above all code) when fix is enabled", function(done) {
         let config = {
             "rules": {
@@ -189,6 +200,7 @@ describe("[RULE] pragma-on-top: Fixes", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should move an existing experimental pragma statement to top of file (above all code) when fix is enabled", done => {
         const config = {
             "rules": {

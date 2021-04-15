@@ -5,14 +5,22 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'fs'.
 const fs = require("fs"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'path'.
     path = require("path"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
     Solium = require("../../../../lib/solium");
+// @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
 const acceptDir = path.join(__dirname, "accept"),
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
     rejectDir = path.join(__dirname, "reject"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'EOL'.
     { EOL } = require("os");
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] indentation: Acceptances", function() {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept a valid file under the default options", function(done) {
         let userConfig = {
             "rules": {
@@ -32,6 +40,7 @@ describe("[RULE] indentation: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept a valid file with tabs", function(done) {
         let userConfig = {
             "rules": {
@@ -51,6 +60,7 @@ describe("[RULE] indentation: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept a valid file with two spaces", function(done) {
         let userConfig = {
             "rules": {
@@ -70,6 +80,7 @@ describe("[RULE] indentation: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept a file with a multiline array", function(done) {
         let userConfig = {
             "rules": {
@@ -89,6 +100,7 @@ describe("[RULE] indentation: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept a file with a multiline call declaration", function(done) {
         let userConfig = {
             "rules": {
@@ -108,6 +120,7 @@ describe("[RULE] indentation: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept a file with a multiline call expression", function(done) {
         let userConfig = {
             "rules": {
@@ -127,6 +140,7 @@ describe("[RULE] indentation: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept a file with a struct", function(done) {
         let userConfig = {
             "rules": {
@@ -146,6 +160,7 @@ describe("[RULE] indentation: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept a file with a struct in one line", function(done) {
         let userConfig = {
             "rules": {
@@ -165,6 +180,7 @@ describe("[RULE] indentation: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept a file with an array in one line", function(done) {
         let userConfig = {
             "rules": {
@@ -184,6 +200,7 @@ describe("[RULE] indentation: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept a file with a function call in one line", function(done) {
         let userConfig = {
             "rules": {
@@ -204,7 +221,9 @@ describe("[RULE] indentation: Acceptances", function() {
     });
 });
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] indentation: Rejections", function() {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject an invalid file under the default options", function(done) {
         let userConfig = {
             "rules": {
@@ -224,6 +243,7 @@ describe("[RULE] indentation: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject an invalid file with tabs", function(done) {
         let userConfig = {
             "rules": {
@@ -243,6 +263,7 @@ describe("[RULE] indentation: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject an invalid file with two spaces", function(done) {
         let userConfig = {
             "rules": {
@@ -262,6 +283,7 @@ describe("[RULE] indentation: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject files with mixed tabs and spaces", function(done) {
         let userConfig = {
             "rules": {
@@ -281,6 +303,7 @@ describe("[RULE] indentation: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject an invalid file with a multiline array", function(done) {
         let userConfig = {
             "rules": {
@@ -300,6 +323,7 @@ describe("[RULE] indentation: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject an invalid file with a multiline call declaration", function(done) {
         let userConfig = {
             "rules": {
@@ -319,6 +343,7 @@ describe("[RULE] indentation: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject an invalid file with a multiline call expression", function(done) {
         let userConfig = {
             "rules": {
@@ -339,6 +364,7 @@ describe("[RULE] indentation: Rejections", function() {
     });
 
     it("should reject an invalid file with a struct", function(done) {
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         let userConfig = {
             "rules": {
                 "indentation": "error"
@@ -359,6 +385,7 @@ describe("[RULE] indentation: Rejections", function() {
 
     it("should reject top level indentation", function(done) {
         let userConfig = {
+            // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
             "rules": {
                 "indentation": "error"
             }
@@ -377,6 +404,7 @@ describe("[RULE] indentation: Rejections", function() {
     });
 
     it("should reject chars before top level declaration", function(done) {
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         let userConfig = {
             "rules": {
                 "indentation": "error"
@@ -397,6 +425,7 @@ describe("[RULE] indentation: Rejections", function() {
 
     it("should reject chars before top level declaration", function(done) {
         let userConfig = {
+            // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
             "rules": {
                 "indentation": "error"
             }
@@ -416,6 +445,7 @@ describe("[RULE] indentation: Rejections", function() {
 
     it("should reject any kind of indent when indent is set to 0", done => {
         const config = {
+            // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
             "rules": {
                 "indentation": ["error", 0]
             }

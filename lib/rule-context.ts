@@ -5,10 +5,14 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'util'.
 let util = require("util"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'EOL'.
     { EOL } = require("os"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'isErrObjec... Remove this comment to see the full error message
     isErrObjectValid = require("../config/schemas/error-reported-by-rule").validationFunc;
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'INHERITABL... Remove this comment to see the full error message
 let INHERITABLE_METHODS = [
     "getSourceCode"
 ];
@@ -20,10 +24,12 @@ let INHERITABLE_METHODS = [
  * @param {Object} ruleMeta meta object defined inside the rule file by rule developer
  * @param {Object} Solium Main Solium object from which to inherit functionality to provide to the rules
  */
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'RuleContex... Remove this comment to see the full error message
 function RuleContext(ruleName, ruleDesc, ruleMeta, Solium) {
     let contextObject = this;
 
     // Set contect attribute 'options' iff options were provided.
+    // @ts-expect-error ts-migrate(2550) FIXME: Property 'assign' does not exist on type 'ObjectCo... Remove this comment to see the full error message
     ruleDesc.options && Object.assign(contextObject, { options: ruleDesc.options });
 
     //set read-only properties of the context object
@@ -60,6 +66,7 @@ function RuleContext(ruleName, ruleDesc, ruleMeta, Solium) {
             );
         }
 
+        // @ts-expect-error ts-migrate(2550) FIXME: Property 'assign' does not exist on type 'ObjectCo... Remove this comment to see the full error message
         Object.assign(error, { ruleName: ruleName, ruleMeta: ruleMeta, type: contextObject.meta.type });
         Solium.report(error);
 
@@ -69,3 +76,4 @@ function RuleContext(ruleName, ruleDesc, ruleMeta, Solium) {
 
 RuleContext.prototype = { constructor: RuleContext };
 module.exports = RuleContext;
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message

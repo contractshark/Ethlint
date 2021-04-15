@@ -5,11 +5,15 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'EventGener... Remove this comment to see the full error message
 let EventGenerator = require("../../../lib/utils/node-event-generator"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
     Solium = require("../../../lib/solium");
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("Testing EventGenerator instance for exposed functionality", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should create a new instance of EventGenerator and expose a set of functions", function(done) {
         let generator = new EventGenerator(Solium);
 
@@ -28,6 +32,7 @@ describe("Testing EventGenerator instance for exposed functionality", function()
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should behave as expected upon calling enterNode ()", function(done) {
         let successCountDown = 2;
         let generator = new EventGenerator(Solium);

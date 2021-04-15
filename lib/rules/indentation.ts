@@ -31,6 +31,7 @@ function getIndentString(indentStyle, level) {
 
 module.exports = {
 
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
     meta: {
 
         docs: {
@@ -52,6 +53,7 @@ module.exports = {
 
         // default configurations
         let BASE_INDENTATION_STYLE = " ".repeat(4),
+            // @ts-expect-error ts-migrate(2550) FIXME: Property 'repeat' does not exist on type '" "'. Do... Remove this comment to see the full error message
             BASE_INDENTATION_STYLE_DESC = "4 spaces";
 
         if (context.options) {
@@ -62,6 +64,7 @@ module.exports = {
                 let spCount = context.options [0];
 
                 BASE_INDENTATION_STYLE = " ".repeat(spCount);
+                // @ts-expect-error ts-migrate(2550) FIXME: Property 'repeat' does not exist on type '" "'. Do... Remove this comment to see the full error message
                 BASE_INDENTATION_STYLE_DESC = spCount + " space" + (spCount === 1 ? "" : "s");
             }
         }
@@ -494,3 +497,4 @@ module.exports = {
     }
 
 };
+// @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message

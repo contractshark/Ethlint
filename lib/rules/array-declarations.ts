@@ -5,6 +5,7 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
 
     meta: {
@@ -36,6 +37,7 @@ module.exports = {
 
             // First the regex must detect whitespace between literal and opening bracket
             let scanned = whitespaceDetector.exec(code),
+                // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
                 whitespaceString = scanned [0], index = scanned.index;
 
             whitespaceString !== "" && context.report({
@@ -46,6 +48,7 @@ module.exports = {
 					+ code.slice(0, index) + "\" and the opening square bracket."
                 ),
                 fix: function(fixer) {
+                    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'fixer' implicitly has an 'any' type.
                     return [fixer.removeRange(
                         [node.start + index, node.start + index + whitespaceString.length])];
                 }
@@ -59,6 +62,7 @@ module.exports = {
 
                 whitespaceDetector = /\[(\s*)\]/;
                 scanned = whitespaceDetector.exec(code);
+                // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
                 bracketString = scanned [0], whitespaceString = scanned [1], index = scanned.index, indexWs = index + 1;
 
                 (whitespaceString !== "") && context.report({
@@ -67,6 +71,7 @@ module.exports = {
                     location: { column: indexWs + 1 },
 
                     fix: function(fixer) {
+                        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'fixer' implicitly has an 'any' type.
                         return [fixer.replaceTextRange(
                             [node.start + index, node.start + index + bracketString.length], "[]")];
                     },

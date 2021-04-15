@@ -5,6 +5,7 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
 const jsStringEscape = require("js-string-escape");
 
 /**
@@ -23,6 +24,7 @@ function isHex(literal) {
     return reg.test(literal.slice(2));
 }
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
 
     meta: {

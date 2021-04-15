@@ -5,11 +5,16 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 let Solium = require("../../../../lib/solium");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'wrappers'.
 let wrappers = require("../../../utils/wrappers");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toContract... Remove this comment to see the full error message
 let toContract = wrappers.toContract;
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toFunction... Remove this comment to see the full error message
 let toFunction = wrappers.toFunction;
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 let userConfig = {
     "custom-rules-filename": null,
     "rules": {
@@ -17,8 +22,10 @@ let userConfig = {
     }
 };
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] mixedcase: Acceptances", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept all valid function declarations", function(done) {
         let code = [
             "function helloWorld () {}",
@@ -85,6 +92,7 @@ describe("[RULE] mixedcase: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept all valid modifier declarations", function(done) {
         let code = [
             "modifier helloWorld () {}",
@@ -151,6 +159,7 @@ describe("[RULE] mixedcase: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept all valid variable declarations", function(done) {
         let code = [
             "var helloWorld;",
@@ -207,6 +216,7 @@ describe("[RULE] mixedcase: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept all valid declarative expressions", function(done) {
         let code = [
             "uint helloWorld;",
@@ -263,6 +273,7 @@ describe("[RULE] mixedcase: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept all valid function parameter names", function(done) {
         let code = "function foo (helloWorld, h, he, hE, _h, _hE, hello123World, _h123, hello_) {}",
             errors = Solium.lint(toContract(code), userConfig);
@@ -277,8 +288,10 @@ describe("[RULE] mixedcase: Acceptances", function() {
 });
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] mixedcase: Rejections", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject all invalid function declarations", function(done) {
         let code = [
             "function _ () {}",
@@ -345,6 +358,7 @@ describe("[RULE] mixedcase: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject all invalid modifier declarations", function(done) {
         let code = [
             "modifier _ () {}",
@@ -411,6 +425,7 @@ describe("[RULE] mixedcase: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject all invalid variable declarations", function(done) {
         let code = [
             "var _;",
@@ -467,6 +482,7 @@ describe("[RULE] mixedcase: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject all invalid declarative expressions", function(done) {
         let code = [
             "uint _;",
@@ -523,6 +539,7 @@ describe("[RULE] mixedcase: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject all invalid function parameter names", function(done) {
         let code = "function foo (uint _, uint _H, uint Hello, uint HELLOWORLD, uint hello_world, uint __h, uint hello$world, uint $helloWorld) {}",
             errors = Solium.lint(toContract(code), userConfig);

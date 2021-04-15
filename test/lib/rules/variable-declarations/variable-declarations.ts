@@ -5,10 +5,14 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 let Solium = require("../../../../lib/solium"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'wrappers'.
     wrappers = require("../../../utils/wrappers");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toFunction... Remove this comment to see the full error message
 let toFunction = wrappers.toFunction, toContract = wrappers.toContract;
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 let userConfig = {
     "custom-rules-filename": null,
     "rules": {
@@ -16,8 +20,10 @@ let userConfig = {
     }
 };
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] variable-declarations: Rejections", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject all variables having names \"l\", \"o\" or \"I\"", function(done) {
         let declarations = [
             "var l; var O; var I;",
@@ -74,6 +80,7 @@ describe("[RULE] variable-declarations: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject variables whose names are provided via config instead of the default names", function(done) {
         let configWithCustomVarNames = {
             "rules": {
@@ -179,6 +186,7 @@ describe("[RULE] variable-declarations: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should not accept invalid values for its option", function(done) {
         let configWithCustomVarNames = {
             "rules": {
@@ -190,9 +198,11 @@ describe("[RULE] variable-declarations: Rejections", function() {
 
         Solium.lint.bind(Solium, code, configWithCustomVarNames).should.throw(exceptionMessage);
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{}' is not assignable to type 'string'.
         configWithCustomVarNames.rules ["variable-declarations"] [1] = {};
         Solium.lint.bind(Solium, code, configWithCustomVarNames).should.throw(exceptionMessage);
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '0' is not assignable to type 'string | null'... Remove this comment to see the full error message
         configWithCustomVarNames.rules ["variable-declarations"] [1] = 0;
         Solium.lint.bind(Solium, code, configWithCustomVarNames).should.throw(exceptionMessage);
 
@@ -203,24 +213,31 @@ describe("[RULE] variable-declarations: Rejections", function() {
         Solium.lint.bind(Solium, code, configWithCustomVarNames).should.throw(exceptionMessage);
 
         configWithCustomVarNames.rules ["variable-declarations"] [1] = ["d", 10];
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'string'.
         Solium.lint.bind(Solium, code, configWithCustomVarNames).should.throw(exceptionMessage);
 
         configWithCustomVarNames.rules ["variable-declarations"] [1] = [{}];
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{}' is not assignable to type 'string'.
         Solium.lint.bind(Solium, code, configWithCustomVarNames).should.throw(exceptionMessage);
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'null' is not assignable to type 'string'.
         configWithCustomVarNames.rules ["variable-declarations"] [1] = [null];
         Solium.lint.bind(Solium, code, configWithCustomVarNames).should.throw(exceptionMessage);
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '190.2897' is not assignable to type 'string ... Remove this comment to see the full error message
         configWithCustomVarNames.rules ["variable-declarations"] [1] = 190.2897;
         Solium.lint.bind(Solium, code, configWithCustomVarNames).should.throw(exceptionMessage);
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'string'.
         configWithCustomVarNames.rules ["variable-declarations"] [1] = [-1982];
         Solium.lint.bind(Solium, code, configWithCustomVarNames).should.throw(exceptionMessage);
 
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '-1982' is not assignable to type 'string | n... Remove this comment to see the full error message
         configWithCustomVarNames.rules ["variable-declarations"] [1] = -1982;
         Solium.lint.bind(Solium, code, configWithCustomVarNames).should.throw(exceptionMessage);
 
         // Empty array is a invalid option. If you need to allow all names, simply disable the rule.
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'never[]' is not assignable to type 'string'.
         configWithCustomVarNames.rules ["variable-declarations"] [1] = [];
         Solium.lint.bind(Solium, code, configWithCustomVarNames).should.throw(exceptionMessage);
 

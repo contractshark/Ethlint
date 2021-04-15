@@ -9,7 +9,9 @@
  * EventGenerator object constructor
  * @param {Object} emitter EventEmitter object
  */
+// @ts-expect-error ts-migrate(2300) FIXME: Duplicate identifier 'this'.
 function EventGenerator(emitter) {
+    // @ts-expect-error ts-migrate(2300) FIXME: Duplicate identifier 'this'.
     this.emitter = emitter;
 
     // Increase limit on number of listeners to allow more rules to subscribe peacefully
@@ -26,6 +28,7 @@ EventGenerator.prototype = {
 	 * @param {Object} node The AST node being entered
 	 */
     enterNode(node) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
         this.emitter.emit(node.type, {
             node,
             exit: false
@@ -37,6 +40,7 @@ EventGenerator.prototype = {
 	 * @param {Object} node The AST node being left
 	 */
     leaveNode(node) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
         this.emitter.emit(node.type, {
             node,
             exit: true
@@ -46,4 +50,5 @@ EventGenerator.prototype = {
 };
 
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = EventGenerator;

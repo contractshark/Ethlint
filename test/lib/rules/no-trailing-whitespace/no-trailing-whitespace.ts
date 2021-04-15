@@ -6,8 +6,10 @@
 "use strict";
 
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 const Solium = require("../../../../lib/solium");
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'config'.
 const config = {
     "rules": {
         "no-trailing-whitespace": "error"
@@ -15,8 +17,10 @@ const config = {
 };
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] no-trailing-whitespace: Acceptances", () => {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept lines having no trailing whitespaces", done => {
         const code = `
 
@@ -42,6 +46,7 @@ describe("[RULE] no-trailing-whitespace: Acceptances", () => {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept comments & blank lines with trailing whitespaces if they're ignored", done => {
         const configLocal = {
             "rules": {
@@ -85,8 +90,10 @@ describe("[RULE] no-trailing-whitespace: Acceptances", () => {
 });
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] no-trailing-whitespace: Rejections", () => {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject code, comment & blank lines with trailing whitespaces", done => {
         const code = `
                 \t\t        \t

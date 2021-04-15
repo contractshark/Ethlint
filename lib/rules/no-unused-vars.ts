@@ -5,6 +5,7 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
 
     meta: {
@@ -28,6 +29,7 @@ module.exports = {
             let node = emitted.node;
 
             if (!emitted.exit) {
+                // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 allVariableDeclarations [node.id.name] = node;
             }
         }
@@ -37,6 +39,7 @@ module.exports = {
 
             //do not examine if the declaration is part of a Struct definition
             if (!emitted.exit && node.parent.type !== "StructDeclaration") {
+                // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 allVariableDeclarations [node.name] = node;
             }
         }
@@ -47,6 +50,7 @@ module.exports = {
             if (emitted.exit) {
                 Object.keys(allVariableDeclarations).forEach(function(name) {
                     context.report({
+                        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                         node: allVariableDeclarations [name],
                         message: "Variable '" + name + "' is declared but never used."
                     });
@@ -62,9 +66,11 @@ module.exports = {
                     sourceCode = context.getSourceCode();
 
                 if (
+                    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                     allVariableDeclarations [node.name] &&
 					sourceCode.getParent(node).type !== "VariableDeclarator"
                 ) {
+                    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                     delete allVariableDeclarations [node.name];
                 }
             }

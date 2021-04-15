@@ -6,9 +6,11 @@
 "use strict";
 
 // Get platform specific newline character for applying fixes
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'eol'.
 const eol = require("os").EOL;
 
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
 
     meta: {
@@ -54,6 +56,7 @@ module.exports = {
                 //   - Remove import from current position
                 //   - Place it right before childNode.start
                 //   - The fix will place it right after the last valid import node
+                // @ts-expect-error ts-migrate(2550) FIXME: Property 'includes' does not exist on type 'string... Remove this comment to see the full error message
                 if (!nodesAllowedAbove.includes(childNode.type)) {
                     return context.report({
                         node,
@@ -67,6 +70,7 @@ module.exports = {
                             // If its a pragma directive (whether solidity or experimental), add current import after 3 EOLs
                             if (lastValidNode.type === "ImportStatement") {
                                 suffix = eol;
+                            // @ts-expect-error ts-migrate(2550) FIXME: Property 'includes' does not exist on type 'string... Remove this comment to see the full error message
                             } else if (nodesAllowedAbove.includes(lastValidNode.type)) {
                                 // Because we've already explicitly checks for import st. above, this one basically
                                 // checks for the remaining, ie, pragma directives

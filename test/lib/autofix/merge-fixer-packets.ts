@@ -6,17 +6,22 @@
 "use strict";
 
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
 let mfp = require("../../../lib/autofix/merge-fixer-packets"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     ruleFixer = require("../../../lib/autofix/rule-fixer");
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("check exposed API", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should expose a single function", function(done) {
         mfp.should.be.type("function");
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should handle all valid inputs", function(done) {
         let sourceCode = "abcdefghijklmnopqrstuvwxyz?<>,.!~",
             codeModification = "123d@@@efgh+++lop===qr$$$stuvwz*###";	// 'abc' in start & '!~' in end are left out as-it-is
@@ -73,6 +78,7 @@ describe("check exposed API", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should handle all logically invalid inputs", function(done) {
         // Since merge-fixer-packets is a module called internally, it is guaranteed to receive a
         // valid fixer packet or array of packets. Therefore we need not test it for all the fuzzy values.

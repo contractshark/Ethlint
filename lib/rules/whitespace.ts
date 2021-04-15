@@ -5,9 +5,12 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'EOL'.
 const { EOL } = require("os"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     jse = require("js-string-escape");
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
 
     meta: {
@@ -74,6 +77,7 @@ module.exports = {
         }
 
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectMemberExpression(emitted) {
             let node = emitted.node,
                 property = node.property;
@@ -111,6 +115,7 @@ module.exports = {
         }
 
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectBlockStatement(emitted) {
             let node = emitted.node, blockBody = node.body,
                 lastBlockItem = blockBody.slice(-1) [0];	//if block is empty, this becomes undefined
@@ -118,6 +123,7 @@ module.exports = {
             //if block spans over multiple lines or is child of a function declaration, below rules don't apply
             if (emitted.exit ||
 				(lastBlockItem && sourceCode.getLine(node) !== sourceCode.getEndingLine(lastBlockItem)) ||
+// @ts-expect-error ts-migrate(2550) FIXME: Property 'includes' does not exist on type 'string... Remove this comment to see the full error message
 				["FunctionDeclaration", "ConstructorDeclaration"].includes(node.parent.type)
             ) {
                 return;

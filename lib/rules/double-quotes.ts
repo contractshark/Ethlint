@@ -10,6 +10,7 @@
  * @param {String} literal The literal to test for Hex Notation
  * @returns {Boolean}
  */
+// @ts-expect-error ts-migrate(2393) FIXME: Duplicate function implementation.
 function isHex(literal) {
     let reg = /^[0-9a-f]+$/i;
 
@@ -21,6 +22,7 @@ function isHex(literal) {
     return reg.test(literal.slice(2));
 }
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
 
     meta: {

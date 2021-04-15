@@ -5,17 +5,23 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'wrappers'.
 const wrappers = require("../../utils/wrappers"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
     Solium = require("../../../lib/solium"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'EOL'.
     { EOL } = require("os");
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 let userConfig = {
     "custom-rules-filename": null,
     rules: {}
 };
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("Test wrappers", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should have a set of functions exposed as API", function(done) {
         
         wrappers.should.have.ownProperty("toContract");
@@ -30,6 +36,7 @@ describe("Test wrappers", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("toContract: should correctly wrap a solidity statement in contract code", function(done) {
         let toContract = wrappers.toContract;
         let statement = "uint x = 1;";
@@ -48,6 +55,7 @@ describe("Test wrappers", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("toFunction: should correctly wrap a solidity statement in contract/function code", function(done) {
         let toFunction = wrappers.toFunction;
         let statement = "uint x = 1;";
@@ -68,6 +76,7 @@ describe("Test wrappers", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("addPragma: should correctly pre-pend a pragma statement to a solidity contract or library", function(done) {
         let addPragma = wrappers.addPragma;
         let contract = "contract Abc { }";

@@ -6,15 +6,18 @@
 "use strict";
 
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'astUtils'.
 const astUtils = require("./utils/ast-utils");
 
 /**
  * NOTE: Constructor & Public functions of this class should have argument validations
  */
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'CommentDir... Remove this comment to see the full error message
 class CommentDirectiveParser {
 
     constructor(commentTokens, AST) {
         if (!Array.isArray(commentTokens)) {
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'commentTokens' implicitly has an 'any' ... Remove this comment to see the full error message
             throw new Error("First argument should be an array of comment tokens.");
         }
 
@@ -30,6 +33,7 @@ class CommentDirectiveParser {
     // Check if, for a given line, there is any rule disabling configuration present
     // and if yes, determine whether a specific rule is enabled on the line or not.
     isRuleEnabledOnLine(ruleName, line) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'ruleName' implicitly has an 'any' type.
         // Need not ensure that line > this.lastLine. This func's purpose is only to determine whether
         // given rule is disabled on given line, regardless of whether line is within bounds or not.
         if (typeof ruleName !== "string" || ruleName.length < 1) {
@@ -37,6 +41,7 @@ class CommentDirectiveParser {
         }
 
         if (!Number.isInteger(line) || line < 1) {
+            // @ts-expect-error ts-migrate(2550) FIXME: Property 'isInteger' does not exist on type 'Numbe... Remove this comment to see the full error message
             throw new Error("Line number should be a positive integer.");
         }
 
@@ -49,10 +54,13 @@ class CommentDirectiveParser {
         this.commentTokens.forEach(token => {
             this._constructLineConfigurationFromComment(token);
         });
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'token' implicitly has an 'any' type.
     }
 
     _addRulesToLineConfig(line, rules) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'line' implicitly has an 'any' type.
         // If line configuration is "all", then we've already covered all rules.
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'rules' implicitly has an 'any' type.
         // No need to add any more to list.
         if (this.lineConfigurations[line] === this.ALL_RULES) {
             return;
@@ -72,6 +80,7 @@ class CommentDirectiveParser {
 
     _removeRulesFromLineConfig(line, rules) {
         if (rules === this.ALL_RULES) {
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'line' implicitly has an 'any' type.
             // delete disabled-rule configuration for this line, since all rules
             // are to be enabled.
             delete this.lineConfigurations[line];
@@ -105,8 +114,10 @@ class CommentDirectiveParser {
         this.lineConfigurations[line] = this.lineConfigurations[line].filter(lc => { return !rules.includes(lc); });
     }
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'lc' implicitly has an 'any' type.
     _constructLineConfigurationFromComment(token) {
         const text = this._cleanCommentText(token.text);
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'token' implicitly has an 'any' type.
         const S = "solium", SD = `${S}-disable`, SDL = `${SD}-line`,
             SDNL = `${SD}-next-line`, SDPL = `${SD}-previous-line`, SE = `${S}-enable`;
 
@@ -142,6 +153,7 @@ class CommentDirectiveParser {
                 currLine + 1,
                 lineNum => { objContext._addRulesToLineConfig(lineNum, rulesToDisable); }
             );
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'lineNum' implicitly has an 'any' type.
         }
 
         if (text.includes(SE)) {
@@ -152,6 +164,7 @@ class CommentDirectiveParser {
             this._toEndOfFile(
                 currLine + 1,
                 lineNum => { objContext._removeRulesFromLineConfig(lineNum, rulesToEnable); }
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'lineNum' implicitly has an 'any' type.
             );
         }
 
@@ -163,22 +176,27 @@ class CommentDirectiveParser {
         return text.replace("//", "").replace("/*", "").replace("*/", "");
     }
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'text' implicitly has an 'any' type.
     // If the directive is followed by a list of rule names, extract them into Array.
     // If not, it means all rules must be disabled for the line(s) covered by that directive.
     _parseRuleNames(text, prefixToRemove) {
         text = text.replace(prefixToRemove, "");
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'text' implicitly has an 'any' type.
         const rulesToDisable = text
             .split(",")
             .map(r => r.trim())
             .filter(r => r.length > 0);
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'r' implicitly has an 'any' type.
         return rulesToDisable.length > 0 ? rulesToDisable : this.ALL_RULES;
     }
 
     // Performs the given action (callback) from the given line no. to last line of source code.
     _toEndOfFile(from, action) {
         for (let i = from; i <= this.lastLine; i++) {
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'from' implicitly has an 'any' type.
             action(i);
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'action' implicitly has an 'any' type.
         }
     }
 
@@ -186,3 +204,4 @@ class CommentDirectiveParser {
 
 
 module.exports = CommentDirectiveParser;
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message

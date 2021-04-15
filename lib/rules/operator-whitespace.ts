@@ -5,6 +5,7 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
 
     meta: {
@@ -48,6 +49,7 @@ module.exports = {
         }
 
         //statement like `var x = 10` doesn't come under AssignmentExpression, so needs to be checked separately
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectVariableDeclaration(emitted) {
             let node = emitted.node, code = sourceCode.getText(node);
 
@@ -71,6 +73,7 @@ module.exports = {
             }
         }
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectBinaryExpression(emitted) {
             let leftNode,
                 node = emitted.node;

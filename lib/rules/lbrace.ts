@@ -5,6 +5,7 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
 
     meta: {
@@ -170,6 +171,7 @@ module.exports = {
         }
 
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectForStatement(emitted) {
             let node = emitted.node,
                 lastNodeOnStartingLine = node.update || node.test || node.init;
@@ -214,6 +216,7 @@ module.exports = {
         }
 
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectWhileStatement(emitted) {
             let node = emitted.node,
                 startingLine = sourceCode.getLine(node);
@@ -252,6 +255,7 @@ module.exports = {
         }
 
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectDoWhileStatement(emitted) {
             let node = emitted.node;
 
@@ -279,6 +283,7 @@ module.exports = {
         }
 
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectStructDeclaration(emitted) {
             let node = emitted.node,
                 code = sourceCode.getText(node).replace("struct " + node.name, "");
@@ -294,6 +299,7 @@ module.exports = {
         }
 
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectContractStatement(emitted) {
             let node = emitted.node,
                 code = sourceCode.getTextOnLine(sourceCode.getLine(node));
@@ -309,6 +315,7 @@ module.exports = {
         }
 
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectLibraryStatement(emitted) {
             let node = emitted.node,
                 code = sourceCode.getTextOnLine(sourceCode.getLine(node));
@@ -324,6 +331,7 @@ module.exports = {
         }
 
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectFunctionDeclaration(emitted) {
             let node = emitted.node;
 

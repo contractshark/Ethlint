@@ -6,9 +6,13 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Ajv'.
 let Ajv = require("ajv"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'astNode'.
     astNode = require("./ast-node"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'coreRule'.
     coreRule = require("./core-rule").Schema,
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'SchemaVali... Remove this comment to see the full error message
     SchemaValidator = new Ajv({ allErrors: true });
 
 
@@ -18,6 +22,7 @@ SchemaValidator.addKeyword("shouldBeOfTypeFunction", {
     }
 });
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Schema'.
 let Schema = {
 
     type: "object",
@@ -47,6 +52,7 @@ let Schema = {
 };
 
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
     schema: Schema, validationFunc: SchemaValidator.compile(Schema)
 };

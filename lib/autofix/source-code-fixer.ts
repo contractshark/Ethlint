@@ -6,6 +6,7 @@
 "use strict";
 
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
 let mergeFixes = require("./merge-fixer-packets");
 
 
@@ -20,6 +21,7 @@ function compareMessagesByFixRange(a, b) {
 
 module.exports = {
 
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
     /**
      * Apply fixes to source code depending on whichever errors can be fixed.
      * @param {String} sourceCode Code to fix
@@ -68,6 +70,7 @@ module.exports = {
         // then the next one is simply skipped. Hence, it is NOT guranteed that all fixes will be applied.
         fixes.sort(compareMessagesByFixRange).forEach(function(msg) {
             if (attemptFix(msg.fix)) {
+                // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'msg' implicitly has an 'any' type.
                 return fixesApplied.push(msg);
             }
 

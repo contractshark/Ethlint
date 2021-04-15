@@ -5,7 +5,9 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 const Solium = require("../../../../lib/solium");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 const userConfig = {
     "rules": {
         "no-constant": "error"
@@ -13,8 +15,10 @@ const userConfig = {
 };
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] emit: Acceptances", () => {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept function declarations that don't have constant modifier", done => {
         const declarations = [
             "function foo() view pure returns(bool);",
@@ -38,8 +42,10 @@ describe("[RULE] emit: Acceptances", () => {
 });
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] emit: Rejections", () => {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject function declarations that have constant modifier", done => {
         const declarations = [
             "function foo() view pure constant returns(bool);",
@@ -63,8 +69,10 @@ describe("[RULE] emit: Rejections", () => {
 });
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] emit: fixes", () => {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should replace constant with view", done => {
         const declarations = [
             { bad: "function foo() view pure constant returns(bool);", good: "function foo() view pure view returns(bool);" },

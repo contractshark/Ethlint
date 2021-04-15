@@ -15,6 +15,7 @@
  * TODO: Enhance this rule to also detect event declarations inherited from other contracts
  * and whether they're being triggered using "emit".
  */
+// @ts-expect-error ts-migrate(2393) FIXME: Duplicate function implementation.
 function create(context) {
     const events = [], callExpressions = [], sourceCode = context.getSourceCode();
 
@@ -49,6 +50,7 @@ function create(context) {
         }
 
         callExpressions.forEach(node => {
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
             isEvent(node, events) && context.report({
                 node,
                 fix(fixer) {
@@ -71,6 +73,7 @@ function create(context) {
 module.exports = {
 
     meta: {
+        // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
         docs: {
             recommended: true,
             type: "warning",

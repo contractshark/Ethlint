@@ -6,6 +6,7 @@
 "use strict";
 
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
 
     meta: {
@@ -49,6 +50,7 @@ module.exports = {
             }
         }
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectStructDeclaration(emitted) {
             let node = emitted.node,
                 body = node.body || [],
@@ -71,6 +73,7 @@ module.exports = {
         }
 
         //function params (if on multiple lines)
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectFunctionDeclaration(emitted) {
             let node = emitted.node, params = node.params || [];
 
@@ -92,6 +95,7 @@ module.exports = {
             }
         }
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'emitted' implicitly has an 'any' type.
         function inspectCallExpression(emitted) {
 
             let node = emitted.node;

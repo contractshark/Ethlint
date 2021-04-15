@@ -5,14 +5,21 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 const Solium = require("../../../../lib/solium"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'wrappers'.
     wrappers = require("../../../utils/wrappers");
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toContract... Remove this comment to see the full error message
 const toContract = wrappers.toContract,
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toFunction... Remove this comment to see the full error message
     toFunction = wrappers.toFunction,
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'addPragma'... Remove this comment to see the full error message
     addPragma = wrappers.addPragma,
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'EOL'.
     { EOL } = require("os");
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 let userConfig = {
     "custom-rules-filename": null,
     "rules": {
@@ -20,8 +27,10 @@ let userConfig = {
     }
 };
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] lbrace: Acceptances", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow abstract functions", function(done) {
         let code = "function abstractFunc (uint x, string y) public returns (boolean);",
             errors = Solium.lint(toContract(code), userConfig);
@@ -33,6 +42,7 @@ describe("[RULE] lbrace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow lbrace 1 line after returns declaration", done => {
         let code = `contract Foo {
     function calcUnclaimedRewards(uint gav)
@@ -74,6 +84,7 @@ describe("[RULE] lbrace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow (short-declaration) bodies with opening brace on same line after a single space", function(done) {
         let code = "contract Visual {}",
             errors = Solium.lint(addPragma(code), userConfig);
@@ -121,6 +132,7 @@ describe("[RULE] lbrace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow when closing brace is on its own line unless the body is declared on a single line like if (..) {...}", function(done) {
         let code = "if (true) { hello (); }",
             errors = Solium.lint(toFunction(code), userConfig);
@@ -150,6 +162,7 @@ describe("[RULE] lbrace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow single-item, single-line bodies without braces", function(done) {
         let code, errors;
 
@@ -177,6 +190,7 @@ describe("[RULE] lbrace: Acceptances", function() {
 
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow functions with arguments spanning over multiple lines to NOT have opening brace on same line", function(done) {
         let code = `function lotsOfArgs (${EOL}\tuint x,${EOL}\tstring y,${EOL}\taddress z${EOL}) {${EOL}\tfoobar ();${EOL}}`,
             errors = Solium.lint(toContract(code), userConfig);
@@ -188,6 +202,7 @@ describe("[RULE] lbrace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow opening brace to be on its own line in case a function has modifiers", function(done) {
         let code = `function modifs ()${EOL}public${EOL}owner${EOL}priced${EOL}returns (uint)${EOL}{${EOL}\tfoobar ();${EOL}}`,
             errors = Solium.lint(toContract(code), userConfig);
@@ -257,7 +272,9 @@ describe("[RULE] lbrace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow opening brace to be on its own line in case a function has modifiers (without brackets)", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let code = `function modifs ()${EOL}public${EOL}owner${EOL}priced(0)${EOL}payable${EOL}{${EOL}\tfoobar ();${EOL}}`,
             errors = Solium.lint(toContract(code), userConfig);
 
@@ -268,7 +285,9 @@ describe("[RULE] lbrace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow opening brace to be on its own line in case a function has base constructor arguments", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let code = `function baseArgs ()${EOL}\tA (10)${EOL}\tB (\"hello\")${EOL}\tC (0x0)${EOL}\tD (frodo)${EOL}{${EOL}\tfoobar ();${EOL}}`,
             errors = Solium.lint(toContract(code), userConfig);
 
@@ -279,7 +298,9 @@ describe("[RULE] lbrace: Acceptances", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should allow else clauses beginning on the same line as closing brace of if consequent", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let code = "if (true) {h();} else if (true) {h();} else {h();}",
             errors = Solium.lint(toFunction(code), userConfig);
 
@@ -317,9 +338,12 @@ describe("[RULE] lbrace: Acceptances", function() {
 });
 
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] lbrace: Rejections", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject any opening brace which is not preceded by EXACTLY single space (exception: functions with modifiers)", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let code = "contract FooBar{}",
             errors = Solium.lint(addPragma(code), userConfig);
 
@@ -617,7 +641,9 @@ describe("[RULE] lbrace: Rejections", function() {
     });
 
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject all function declarations having multiple modifiers over multiple lines whose brace does not open on the line after the last modifier", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let code = `function lotsOfArgs ()${EOL}\tpublic${EOL}\treturns (address){${EOL}\tfoobar ();${EOL}}`,
             errors = Solium.lint(toContract(code), userConfig);
 
@@ -647,7 +673,9 @@ describe("[RULE] lbrace: Rejections", function() {
     });
 
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject all short declarations whose opening brace is not on the same line as theirs", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let code = `contract Foo is Bar, Baz${EOL}{}`,
             errors = Solium.lint(addPragma(code), userConfig);
 
@@ -689,7 +717,9 @@ describe("[RULE] lbrace: Rejections", function() {
     });
 
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject clauses with empty statements", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let code = "if (true);",
             errors = Solium.lint(toFunction(code), userConfig);
 
@@ -719,7 +749,9 @@ describe("[RULE] lbrace: Rejections", function() {
     });
 
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject statements which are neither inside blocks nor completely reside on a single line", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let code = `if (true)${EOL}Pacman ({${EOL}\tname: \"Shannon\"${EOL}});`,
             errors = Solium.lint(toFunction(code), userConfig);
 
@@ -749,7 +781,9 @@ describe("[RULE] lbrace: Rejections", function() {
     });
 
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject statements which exist on the same line as clause and are not brace-enclosed", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let code = "if (true) sayHello ();",
             errors = Solium.lint(toFunction(code), userConfig);
 
@@ -786,7 +820,9 @@ describe("[RULE] lbrace: Rejections", function() {
     });
 
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject else clauses which are not on the same line as closing brace of if consequent", function(done) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let code = `if (true) {h();}${EOL}else if (true) {h();}${EOL}else {h();}`,
             errors = Solium.lint(toFunction(code), userConfig);
 
@@ -837,7 +873,9 @@ describe("[RULE] lbrace: Rejections", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject lbrace that's NOT 1 line after returns declaration", done => {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
         let code = `contract Foo {
     function calcUnclaimedRewards(uint gav)
         view
@@ -877,8 +915,10 @@ describe("[RULE] lbrace: Rejections", function() {
     });
 
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject lbrace that's NOT 1 line after last modifier", done => {
         let code = `
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'done' implicitly has an 'any' type.
             function requestSubscription(
                 uint giveQuantity,
                 uint shareQuantity,

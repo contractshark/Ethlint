@@ -5,35 +5,58 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'solidityPa... Remove this comment to see the full error message
 const solidityParser = require("solparse"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     solExplore = require("sol-explore"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'path'.
     fs = require("fs"), path = require("path"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'EventEmitt... Remove this comment to see the full error message
     util = require("util"),
 
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     EventEmitter = require("events").EventEmitter,
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'RuleContex... Remove this comment to see the full error message
     EventGenerator = require("./utils/node-event-generator"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'CommentDir... Remove this comment to see the full error message
     RuleContext = require("./rule-context"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'SourceCode... Remove this comment to see the full error message
     CommentDirectiveParser = require("./comment-directive-parser"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'RuleFixer'... Remove this comment to see the full error message
     SourceCode = require("./utils/source-code-utils"),
 
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     RuleFixer = require("./autofix/rule-fixer"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'rules'.
     SourceCodeFixer = require("./autofix/source-code-fixer"),
 
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'jsUtils'.
     rules = require("./rules"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     astUtils = require("./utils/ast-utils"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     jsUtils = require("./utils/js-utils"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     configInspector = require("./utils/config-inspector"),
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     ruleInspector = require("./utils/rule-inspector"),
 
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     isErrObjectValid = require("../config/schemas/error-supplied-to-solium").validationFunc,
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     isValidFixerPacket = require("../config/schemas/fixer-packet").validationFunc,
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
 
+    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
     soliumVersion = require("../package.json").version,
     defaultSoliumrcJSON = require("./cli-utils/.default-soliumrc.json");
 
+// @ts-expect-error ts-migrate(7034) FIXME: Variable 'commentObjects' implicitly has type 'any... Remove this comment to see the full error message
 
+// @ts-expect-error ts-migrate(7034) FIXME: Variable 'messages' implicitly has type 'any[]' in... Remove this comment to see the full error message
 module.exports = (function() {
 
+    // @ts-expect-error ts-migrate(7034) FIXME: Variable 'currentConfig' implicitly has type 'any'... Remove this comment to see the full error message
     let Solium = Object.create(new EventEmitter()),
         commentObjects = [], messages = [],
         sourceCodeText = "", currentConfig = null, commentDirectiveParser;
@@ -56,6 +79,7 @@ module.exports = (function() {
      * @param {(String|Buffer)} sourceCode The Source Code to lint
      * @param {Object} config An object that specifies the rules to use and path of file containing custom rule definitions
      * @param {boolean} noReset Specifies whether Solium.reset() should be called or not
+     // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'sourceCode' implicitly has an 'any' typ... Remove this comment to see the full error message
      * @returns {Array} errorObjects Array of objects, each containing lint error messages and supporting info, empty if no errors
      */
     Solium.lint = function lint(sourceCode, config, noReset) {
@@ -99,14 +123,18 @@ module.exports = (function() {
                 type: "warning",
                 message: "[Deprecated] Attribute \"custom-rules-filename\" is now deprecated. " +
                     "Rules from " + crf + " were not loaded. Plugins are supported v1 onward. Please see " +
+                    // @ts-expect-error ts-migrate(2339) FIXME: Property 'loadUsingDeprecatedConfigFormat' does no... Remove this comment to see the full error message
                     "http://solium.readthedocs.io/en/latest/user-guide.html#custom-rule-injection-is-now-deprecated"
             });
 
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'load' does not exist on type '{}'.
             currentConfig.rules = rules.loadUsingDeprecatedConfigFormat(currentConfig.rules, crf);
         } else {
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'name' implicitly has an 'any' type.
             currentConfig.rules = rules.load(currentConfig);
         }
 
+        // @ts-expect-error ts-migrate(7005) FIXME: Variable 'currentConfig' implicitly has an 'any' t... Remove this comment to see the full error message
         Object.keys(currentConfig.rules).forEach(function(name) {
             let rule = rules.get(name), currentRuleConfig = currentConfig.rules [name];
 
@@ -126,6 +154,7 @@ module.exports = (function() {
             if (rule.meta.deprecated) {
                 let message = `[Deprecated] Rule "${name}" is deprecated.`;
 
+                // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'rn' implicitly has an 'any' type.
                 if (rule.meta.docs.replacedBy) {
                     message += " Use " + rule.meta.docs.replacedBy.map(function(rn) {
                         return "\"" + rn + "\"";
@@ -135,6 +164,7 @@ module.exports = (function() {
                 Solium.reportInternal({ type: "warning", message });
             }
 
+            // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
             // Call rule implementation's create() to retrieve the node names to listen for & their handlers
             // and subscribe them to the event emitter.
             let ruleNodeListeners = rule.create(new RuleContext(name, currentRuleConfig, rule.meta, Solium));
@@ -157,6 +187,7 @@ module.exports = (function() {
             // In case of a parse error, catch the exception & re-throw with a modified message.
             AST = solidityParser.parse(sourceCode, { comment: true });
         } catch (e) {
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'comments' does not exist on type '{}'.
             e.message = `An error occured while parsing the source code: ${e.message}`;
             throw(e);
         }
@@ -166,11 +197,13 @@ module.exports = (function() {
 
         /**
          * Perform depth-first traversal of the AST and notify rules upon entering & leaving nodes
+         // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
          * Each node has a type property which serves as the Event's name.
          * This allows rules to listen to the type of node they wish to test.
          */
         solExplore.traverse(AST, {
             enter(node, parent) {
+                // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
                 node.parent = parent;	//allow the rules to access immediate parent of current node
                 nodeEventGenerator.enterNode(node);
                 delete node.parent;
@@ -179,16 +212,19 @@ module.exports = (function() {
             leave(node) {
                 nodeEventGenerator.leaveNode(node);
             }
+        // @ts-expect-error ts-migrate(7005) FIXME: Variable 'messages' implicitly has an 'any[]' type... Remove this comment to see the full error message
         });
 
         // Remove all internal issues if user didn't ask for them.
         if (!currentConfig.options.returnInternalIssues) {
+            // @ts-expect-error ts-migrate(7005) FIXME: Variable 'messages' implicitly has an 'any[]' type... Remove this comment to see the full error message
             messages = messages.filter(function(msg) {
                 return !msg.internal;
             });
         }
 
         //sort errors by line (column if line is same)
+        // @ts-expect-error ts-migrate(7005) FIXME: Variable 'messages' implicitly has an 'any[]' type... Remove this comment to see the full error message
         messages.sort(function(a, b) {
             let lineDiff = a.line - b.line;
             return (
@@ -207,6 +243,7 @@ module.exports = (function() {
      * Lints, then applies fixes specified by rules and returns fixed code.
      * @param {(String|Buffer)} sourceCode The Source Code to lint.
      * @param {Object} config An object that specifies the rules to use and path of file containing custom rule definitions.
+     // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'sourceCode' implicitly has an 'any' typ... Remove this comment to see the full error message
      * @param {boolean} noReset Specifies whether Solium.reset() should be called or not
      * @returns {Object} result Returns lint errors, errors that were fixed and final fixed code.
      */
@@ -227,6 +264,7 @@ module.exports = (function() {
     };
 
     /**
+     // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'error' implicitly has an 'any' type.
      * Function called by any rule that wishes to send error message upon violation in source code
      * @param {Object} error An object that contains sufficient information to describe the lint error
      */
@@ -245,10 +283,12 @@ module.exports = (function() {
             node: error.node,
             message: error.message,
             line: error.location.line || astUtils.getLine(error.node),
+            // @ts-expect-error ts-migrate(7005) FIXME: Variable 'commentDirectiveParser' implicitly has a... Remove this comment to see the full error message
             column: (error.location.column === 0) ? 0 : (error.location.column || astUtils.getColumn(error.node))
 
         };
 
+        // @ts-expect-error ts-migrate(7005) FIXME: Variable 'commentDirectiveParser' implicitly has a... Remove this comment to see the full error message
         // First ensure that commentDirectiveParser is not null
         // It will be undefined if Solium.report() is directly called without Solium.lint() and null after Solium.reset().
         if (commentDirectiveParser &&
@@ -266,13 +306,17 @@ module.exports = (function() {
                 });
             } else {
                 if (typeof error.fix !== "function") {
+                    // @ts-expect-error ts-migrate(2339) FIXME: Property 'fix' does not exist on type '{ ruleName:... Remove this comment to see the full error message
                     throw new Error(`Rule "${error.ruleName}": `
+                        // @ts-expect-error ts-migrate(2339) FIXME: Property 'fix' does not exist on type '{ ruleName:... Remove this comment to see the full error message
                         + `Attribute "fix" (reported as part of the error "${error.message}") must be a function.`);
                 }
 
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'fix' does not exist on type '{ ruleName:... Remove this comment to see the full error message
                 message.fix = error.fix(new RuleFixer(error.ruleMeta.fixable));
 
                 if (message.fix === null) {
+                    // @ts-expect-error ts-migrate(2339) FIXME: Property 'fix' does not exist on type '{ ruleName:... Remove this comment to see the full error message
                     // The rule's fix() was called but doesn't want to apply any fixes in this instance
                     delete message.fix;
                 } else if (!isValidFixerPacket(message.fix)) {
@@ -287,10 +331,12 @@ module.exports = (function() {
     };
 
     /**
+     // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'issue' implicitly has an 'any' type.
      * Convenience wrapper for Solium modules to report internal issues. It adds the "internal: true" attr to error.
      * @param {Object} issue Internal issue
      */
     Solium.reportInternal = function reportInternal(issue) {
+        // @ts-expect-error ts-migrate(2550) FIXME: Property 'assign' does not exist on type 'ObjectCo... Remove this comment to see the full error message
         if (!jsUtils.isStrictlyObject(issue)) {
             throw new Error("Invalid error object");
         }
@@ -301,6 +347,7 @@ module.exports = (function() {
 
     /**
      * Provides the user with program source code wrapped inside a utility object that also provides functions to operate on the code
+     // @ts-expect-error ts-migrate(7005) FIXME: Variable 'commentObjects' implicitly has an 'any[]... Remove this comment to see the full error message
      * @returns {Object} sourceCodeObject The SourceCode Object that provides source text & functionality
      */
     Solium.getSourceCode = function getSourceCode() {
@@ -311,6 +358,7 @@ module.exports = (function() {
      * Get the default configuration dotfiles supplied by Solium
      * @returns {Object} defaultConfig Object containing default .soliumrc.json & .soliumignore
      */
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
     Solium.getDefaultConfig = function getDefaultConfig() {
         let sig = "node_modules";
 

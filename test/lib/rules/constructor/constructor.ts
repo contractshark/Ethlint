@@ -5,15 +5,19 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 let Solium = require("../../../../lib/solium");
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'config'.
 let config = {
     "rules": {
         "constructor": "warning"
     }
 };
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] constructor: Rejections", function() {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject constructor names that are the same as contract names", function(done) {
         let codes = [`
             contract Foo {
@@ -40,7 +44,9 @@ describe("[RULE] constructor: Rejections", function() {
     });
 });
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] constructor: Acceptances", function() {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept contracts that don't use deprecated constructors", function(done) {
         let codes = [`
             contract Foo {
@@ -71,8 +77,10 @@ describe("[RULE] constructor: Acceptances", function() {
     });
 });
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] constructor: fixes", () => {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should replace deprecated style of constructor declaration with new one", done => {
         const declarations = [
             {

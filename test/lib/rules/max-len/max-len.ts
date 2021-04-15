@@ -10,13 +10,13 @@ const Solium = require("../../../../lib/solium"),
     { addPragma } = wrappers;
 const DEFAULT_MAX_ACCEPTABLE_LEN = 145;
 
-function makeString(length, character) {
+function makeString(length: any, character: any) {
     return new Array(length + 1).join(character);
 }
 
 describe("[RULE] max-len: default len", function() {
 
-    before(function(done) {
+    before(function(this: any, done: any) {
         this.userConfig = {
             "rules": {
                 "max-len": true
@@ -27,7 +27,7 @@ describe("[RULE] max-len: default len", function() {
 
     describe("Acceptances", function() {
 
-        it("should allow line length <= default acceptable", function(done) {
+        it("should allow line length <= default acceptable", function(this: any, this: any, done: any) {
             let name = makeString(DEFAULT_MAX_ACCEPTABLE_LEN - "contract  {}".length, "a"),
                 code = `contract ${name} {}`,
                 errors = Solium.lint(addPragma(code), this.userConfig);
@@ -50,7 +50,7 @@ describe("[RULE] max-len: default len", function() {
 
     describe("Rejections", function() {
 
-        it("should reject line length > default acceptable on top level node", function(done) {
+        it("should reject line length > default acceptable on top level node", function(this: any, done: any) {
             let name = makeString(DEFAULT_MAX_ACCEPTABLE_LEN + 1 - "contract  {}".length, "a"),
                 code = `contract ${name} {}`,
                 errors = Solium.lint(addPragma(code), this.userConfig);
@@ -64,7 +64,7 @@ describe("[RULE] max-len: default len", function() {
             done();
         });
 
-        it("should reject line length > default acceptable on child node", function(done) {
+        it("should reject line length > default acceptable on child node", function(this: any, done: any) {
             let name = makeString(DEFAULT_MAX_ACCEPTABLE_LEN + 1 - "        uint ;".length, "a"),
                 code = (
                     "contract dummy {\n" +
@@ -83,7 +83,7 @@ describe("[RULE] max-len: default len", function() {
             done();
         });
 
-        it("should reject line length > default acceptable only once", function(done) {
+        it("should reject line length > default acceptable only once", function(this: any, done: any) {
             let name = makeString(DEFAULT_MAX_ACCEPTABLE_LEN + 1 - "        uint short;uint ;".length, "a"),
                 code = (
                     "contract dummy {\n" +
@@ -106,7 +106,7 @@ describe("[RULE] max-len: default len", function() {
 
 describe("[RULE] max-len: custom len", function() {
 
-    before(function(done) {
+    before(function(this: any, this: any, this: any, done: any) {
         this.CUSTOM_MAX_ACCEPTABLE_LEN = 200;
         this.userConfig = {
             "rules": {
@@ -118,7 +118,7 @@ describe("[RULE] max-len: custom len", function() {
 
     describe("Acceptances", function() {
 
-        it("should allow line length <= custom acceptable", function(done) {
+        it("should allow line length <= custom acceptable", function(this: any, this: any, this: any, this: any, done: any) {
             let name = makeString(this.CUSTOM_MAX_ACCEPTABLE_LEN - "contract  {}".length, "a"),
                 code = `contract ${name} {}`,
                 errors = Solium.lint(addPragma(code), this.userConfig);
@@ -141,7 +141,7 @@ describe("[RULE] max-len: custom len", function() {
 
     describe("Rejections", function() {
 
-        it("should reject line length > custom acceptable on top level node", function(done) {
+        it("should reject line length > custom acceptable on top level node", function(this: any, this: any, this: any, done: any) {
             let name = makeString(this.CUSTOM_MAX_ACCEPTABLE_LEN + 1 - "contract  {}".length, "a"),
                 code = `contract ${name} {}`,
                 errors = Solium.lint(addPragma(code), this.userConfig);
@@ -155,7 +155,7 @@ describe("[RULE] max-len: custom len", function() {
             done();
         });
 
-        it("should reject line length > custom acceptable on child node", function(done) {
+        it("should reject line length > custom acceptable on child node", function(this: any, this: any, this: any, done: any) {
             let name = makeString(this.CUSTOM_MAX_ACCEPTABLE_LEN + 1 - "        uint ;".length, "a"),
                 code = (
                     "contract dummy {\n" +
@@ -174,7 +174,7 @@ describe("[RULE] max-len: custom len", function() {
             done();
         });
 
-        it("should reject line length > custom acceptable only once", function(done) {
+        it("should reject line length > custom acceptable only once", function(this: any, this: any, this: any, done: any) {
             let name = makeString(this.CUSTOM_MAX_ACCEPTABLE_LEN + 1 - "        uint short;uint ;".length, "a"),
                 code = (
                     "contract dummy {\n" +

@@ -5,8 +5,11 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
 let Solium = require("../../../../lib/solium"),
+    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'path'.
     path = require("path"), fs = require("fs");
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toContract... Remove this comment to see the full error message
 let toContract = require("../../../utils/wrappers").toContract;
 
 let userConfigSingle = {
@@ -15,8 +18,10 @@ let userConfigSingle = {
     }
 };
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] quotes: Acceptances general", () => {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should not take action against any non-string Literals", done => {
         const literals = ["19028", "0x00", "0x908d819", "90182.1892"];
 
@@ -34,9 +39,12 @@ describe("[RULE] quotes: Acceptances general", () => {
 
 });
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] quotes: Acceptances for single quote", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept when receiving single quote strings", function(done) {
+        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
         let code = fs.readFileSync(path.join(__dirname, "./single-quoted.sol"), "utf8"),
             errors = Solium.lint(toContract(code), userConfigSingle);
 
@@ -49,9 +57,12 @@ describe("[RULE] quotes: Acceptances for single quote", function() {
 
 });
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] quotes: Rejections for single quote", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject when receiving double quote strings", function(done) {
+        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
         let code = fs.readFileSync(path.join(__dirname, "./double-quoted.sol"), "utf8"),
             errors = Solium.lint(toContract(code), userConfigSingle);
 
@@ -70,9 +81,12 @@ let userConfigDouble = {
     }
 };
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] quotes: Acceptances for double quote", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should accept when receiving double quote strings", function(done) {
+        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
         let code = fs.readFileSync(path.join(__dirname, "./double-quoted.sol"), "utf8"),
             errors = Solium.lint(toContract(code), userConfigDouble);
 
@@ -85,9 +99,12 @@ describe("[RULE] quotes: Acceptances for double quote", function() {
 
 });
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] quotes: Rejections for double quote", function() {
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should reject when receiving single quote strings", function(done) {
+        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
         let code = fs.readFileSync(path.join(__dirname, "./single-quoted.sol"), "utf8"),
             errors = Solium.lint(toContract(code), userConfigDouble);
 
@@ -100,6 +117,7 @@ describe("[RULE] quotes: Rejections for double quote", function() {
 
 });
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] quotes: Fix when double quotes are mandatory", function() {
     let config = {
         "rules": {
@@ -107,8 +125,11 @@ describe("[RULE] quotes: Fix when double quotes are mandatory", function() {
         }
     };
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should fix single to double", function(done) {
+        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
         let unfixedCode = fs.readFileSync(path.join(__dirname, "single-full.sol"), "utf8"),
+            // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
             fixedCode =  fs.readFileSync(path.join(__dirname, "double-full.sol"), "utf8");
 
         let fixed = Solium.lintAndFix(unfixedCode, config);
@@ -128,6 +149,7 @@ describe("[RULE] quotes: Fix when double quotes are mandatory", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should escape any unescaped double quotes in the text", function(done) {
         let unfixedCode = toContract("string x = 'he\\'\"\\\"llo w\\\\\"or\\\\\\\"l\"d';"),
             fixedCode = toContract("string x = \"he\\'\\\"\\\"llo w\\\\\\\"or\\\\\\\"l\\\"d\";");
@@ -167,6 +189,7 @@ describe("[RULE] quotes: Fix when double quotes are mandatory", function() {
 
 });
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("[RULE] quotes: Fix when single quotes are mandatory", function() {
     let config = {
         "rules": {
@@ -174,10 +197,13 @@ describe("[RULE] quotes: Fix when single quotes are mandatory", function() {
         }
     };
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should fix double to single", function(done) {
         let unfixedCode = fs.readFileSync(path.join(__dirname, "double-full.sol"), "utf8"),
+            // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
             fixedCode =  fs.readFileSync(path.join(__dirname, "single-full.sol"), "utf8");
 
+        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
         let fixed = Solium.lintAndFix(unfixedCode, config);
 
         fixed.should.be.type("object");
@@ -195,6 +221,7 @@ describe("[RULE] quotes: Fix when single quotes are mandatory", function() {
         done();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should escape any unescaped single quotes in the text", function(done) {
         let unfixedCode = toContract("string y = \"he\\\"'\\'llo w\\\\'or\\\\\\'l'd\";"),
             fixedCode = toContract("string y = 'he\\\"\\'\\'llo w\\\\\\'or\\\\\\'l\\'d';");

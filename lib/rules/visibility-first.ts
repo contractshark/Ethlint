@@ -5,6 +5,7 @@
 
 "use strict";
 
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
     meta: {
         docs: {
@@ -24,6 +25,7 @@ module.exports = {
             const { node } = emitted,
                 visibilityModifiers = ["public", "external", "internal", "private"];
             const modifiers = (node.modifiers || []),
+                // @ts-expect-error ts-migrate(2550) FIXME: Property 'includes' does not exist on type 'string... Remove this comment to see the full error message
                 firstVisibilityModifierIndex = modifiers.findIndex(m => visibilityModifiers.includes(m.name));
 
             // If no visibility modifiers exist in function declaration, exit now
@@ -33,6 +35,7 @@ module.exports = {
 
             const firstNonVisModifBeforeFirstVisModif = modifiers.slice(0, firstVisibilityModifierIndex).find(m => !visibilityModifiers.includes(m.name));
 
+            // @ts-expect-error ts-migrate(2550) FIXME: Property 'includes' does not exist on type 'string... Remove this comment to see the full error message
             // TODO: Add fix() for this rule
             if (firstNonVisModifBeforeFirstVisModif) {
                 const issue = {
