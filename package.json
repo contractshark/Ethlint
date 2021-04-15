@@ -47,7 +47,8 @@
     "sol-explore": "1.6.1",
     "solium-plugin-security": "0.1.1",
     "solparse": "2.2.8",
-    "text-table": "^0.2.0"
+    "text-table": "^0.2.0",
+    "ts-migrate": "^0.1.16"
   },
   "devDependencies": {
     "chai": "^3.5.0",
