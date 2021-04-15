@@ -3,10 +3,10 @@
  * @author Raghav Dua <duaraghav8@gmail.com>
  */
 
-"use strict";
+'use strict';
 
 // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-let optionsSchema = require("../config").properties.options;
+let optionsSchema = require('../config').properties.options;
 
 // A fully qualified object for this Schema is:
 /*
@@ -22,32 +22,28 @@ let optionsSchema = require("../config").properties.options;
 
 // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Schema'.
 let Schema = {
-    type: "object",
+  type: 'object',
 
-    properties: {
-        "custom-rules-filename": {
-            oneOf: [
-                { type: "string", minLength: 1 },
-                { type: "null" }
-            ]
-        },
-
-        rules: {
-            type: "object",
-            patternProperties: {
-                "^.+$": { type: "boolean" }
-            },
-            additionalProperties: false
-        },
-
-        options: optionsSchema
+  properties: {
+    'custom-rules-filename': {
+      oneOf: [{ type: 'string', minLength: 1 }, { type: 'null' }],
     },
 
-    required: ["rules"],
+    rules: {
+      type: 'object',
+      patternProperties: {
+        '^.+$': { type: 'boolean' },
+      },
+      additionalProperties: false,
+    },
 
-    additionalProperties: false
+    options: optionsSchema,
+  },
+
+  required: ['rules'],
+
+  additionalProperties: false,
 };
-
 
 // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = Schema;

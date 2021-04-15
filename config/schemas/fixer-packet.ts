@@ -5,7 +5,7 @@
  * @author Raghav Dua <duaraghav8@gmail.com>
  */
 
-"use strict";
+'use strict';
 
 // A fully qualified object for this Schema is:
 /*
@@ -16,48 +16,47 @@
 */
 
 // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Ajv'.
-let Ajv = require("ajv"), validator = new Ajv({ allErrors: true });
+let Ajv = require('ajv'),
+  validator = new Ajv({ allErrors: true });
 
 let singleFixerPacket = {
-    type: "object",
+  type: 'object',
 
-    properties: {
-
-        range: {
-            type: "array",
-            minItems: 2,
-            maxItems: 2,
-            items: {
-                type: "integer", minimum: 0
-            }
-        },
-
-        text: {
-            type: "string"
-        }
-
+  properties: {
+    range: {
+      type: 'array',
+      minItems: 2,
+      maxItems: 2,
+      items: {
+        type: 'integer',
+        minimum: 0,
+      },
     },
 
-    required: ["range", "text"],
-    additionalProperties: false
+    text: {
+      type: 'string',
+    },
+  },
+
+  required: ['range', 'text'],
+  additionalProperties: false,
 };
 
 // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Schema'.
 let Schema = {
-    oneOf: [
-        {
-            type: "array",
-            minItems: 1,
-            items: singleFixerPacket
-        },
+  oneOf: [
+    {
+      type: 'array',
+      minItems: 1,
+      items: singleFixerPacket,
+    },
 
-        singleFixerPacket
-    ]
+    singleFixerPacket,
+  ],
 };
-
 
 // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
-    Schema: Schema,
-    validationFunc: validator.compile(Schema)
+  Schema: Schema,
+  validationFunc: validator.compile(Schema),
 };

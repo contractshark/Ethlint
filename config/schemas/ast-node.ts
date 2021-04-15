@@ -6,7 +6,7 @@
  * @author Raghav Dua <duaraghav8@gmail.com>
  */
 
-"use strict";
+'use strict';
 
 // A fully qualified, minimal object for this Schema is:
 /*
@@ -17,31 +17,32 @@
 }
 */
 
-let array = { type: "array" }, number = { type: "number" }, bool = { type: "boolean" },
-    string = { type: "string" }, object = { type: "object" }, attrNull = { type: "null" };
+let array = { type: 'array' },
+  number = { type: 'number' },
+  bool = { type: 'boolean' },
+  string = { type: 'string' },
+  object = { type: 'object' },
+  attrNull = { type: 'null' };
 
 // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Schema'.
 let Schema = {
+  type: 'object',
 
-    type: "object",
+  properties: {
+    type: { type: 'string', minLength: 1 },
+    start: { type: 'integer', minimum: 0 },
+    end: { type: 'integer', minimum: 0 },
+  },
 
-    properties: {
-        type: { type: "string", minLength: 1 },
-        start: { type: "integer", minimum: 0 },
-        end: { type: "integer", minimum: 0 }
+  patternProperties: {
+    '^.+$': {
+      oneOf: [array, string, object, number, attrNull, bool],
     },
+  },
 
-    patternProperties: {
-        "^.+$": {
-            oneOf: [array, string, object, number, attrNull, bool]
-        }
-    },
-
-    required: ["type", "start", "end"],
-    additionalProperties: false
-
+  required: ['type', 'start', 'end'],
+  additionalProperties: false,
 };
-
 
 // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = Schema;

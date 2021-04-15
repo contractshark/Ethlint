@@ -3,54 +3,52 @@
  * @author Federico Bond <federicobond@gmail.com>
  */
 
-"use strict";
-
+'use strict';
 
 function isSuicide(node) {
-    return node.type === "Identifier" && node.name === "suicide";
+  return node.type === 'Identifier' && node.name === 'suicide';
 }
 
 // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
-
-    meta: {
-
-        docs: {
-            recommended: true,
-            type: "warning",
-            description: "Suggest replacing deprecated 'suicide' for 'selfdestruct'"
-        },
-
-        schema: [],
-
-        fixable: "code"
-
+  meta: {
+    docs: {
+      recommended: true,
+      type: 'warning',
+      description: "Suggest replacing deprecated 'suicide' for 'selfdestruct'",
     },
 
-    create: function(context) {
-        function inspectCallExpression(emittedObject) {
-            if (!emittedObject.exit) {
-                return;
-            }
+    schema: [],
 
-            let callee = emittedObject.node.callee;
+    fixable: 'code',
+  },
 
-            if (isSuicide(callee)) {
+  create: function (context) {
+    function inspectCallExpression(emittedObject) {
+      if (!emittedObject.exit) {
+        return;
+      }
 
-                context.report({
-                    node: emittedObject.node,
-                    fix: function(fixer) {
-                        return [fixer.replaceTextRange([callee.start, callee.end], "selfdestruct")];
-                    },
-                    message: "'suicide' is deprecated. Use 'selfdestruct' instead."
-                });
+      let callee = emittedObject.node.callee;
 
-            }
-        }
-
-        return {
-            CallExpression: inspectCallExpression
-        };
+      if (isSuicide(callee)) {
+        context.report({
+          node: emittedObject.node,
+          fix: function (fixer) {
+            return [
+              fixer.replaceTextRange(
+                [callee.start, callee.end],
+                'selfdestruct',
+              ),
+            ];
+          },
+          message: "'suicide' is deprecated. Use 'selfdestruct' instead.",
+        });
+      }
     }
 
+    return {
+      CallExpression: inspectCallExpression,
+    };
+  },
 };

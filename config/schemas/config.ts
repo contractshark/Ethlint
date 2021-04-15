@@ -29,66 +29,64 @@
 }
 */
 
-"use strict";
+'use strict';
 
-let severityString = { type: "string", enum: ["off", "warning", "error"] },
-    severityInt = { type: "integer", minimum: 0, maximum: 2 },
-    severityArray = {
-        type: "array",
-        minItems: 1,
-        items: [{ oneOf: [severityString, severityInt] }]
-    };
+let severityString = { type: 'string', enum: ['off', 'warning', 'error'] },
+  severityInt = { type: 'integer', minimum: 0, maximum: 2 },
+  severityArray = {
+    type: 'array',
+    minItems: 1,
+    items: [{ oneOf: [severityString, severityInt] }],
+  };
 
 // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Schema'.
 let Schema = {
-    type: "object",
+  type: 'object',
 
-    anyOf: [
-        { required: ["extends"] },
-        { required: ["rules"] },
-        { required: ["plugins"] }
-    ],
+  anyOf: [
+    { required: ['extends'] },
+    { required: ['rules'] },
+    { required: ['plugins'] },
+  ],
 
-    properties: {
-
-        plugins: {
-            type: "array",
-            items: {
-                type: "string", minLength: 1
-            }
-        },
-
-        extends: {
-            type: "string",
-            minLength: 1
-        },
-
-        rules: {
-            type: "object",
-            patternProperties: {
-                "^.+$": {
-                    oneOf: [severityString, severityInt, severityArray]
-                }
-            },
-            additionalProperties: false
-        },
-
-        options: {
-            type: "object",
-            properties: {
-                autofix: { type: "boolean" },
-                autofixDryrun: { type: "boolean" },
-                debug: { type: "boolean" },
-                returnInternalIssues: { type: "boolean" }
-            },
-            additionalProperties: false
-        }
-
+  properties: {
+    plugins: {
+      type: 'array',
+      items: {
+        type: 'string',
+        minLength: 1,
+      },
     },
 
-    additionalProperties: false
-};
+    extends: {
+      type: 'string',
+      minLength: 1,
+    },
 
+    rules: {
+      type: 'object',
+      patternProperties: {
+        '^.+$': {
+          oneOf: [severityString, severityInt, severityArray],
+        },
+      },
+      additionalProperties: false,
+    },
+
+    options: {
+      type: 'object',
+      properties: {
+        autofix: { type: 'boolean' },
+        autofixDryrun: { type: 'boolean' },
+        debug: { type: 'boolean' },
+        returnInternalIssues: { type: 'boolean' },
+      },
+      additionalProperties: false,
+    },
+  },
+
+  additionalProperties: false,
+};
 
 // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = Schema;

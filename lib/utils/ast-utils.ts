@@ -3,34 +3,35 @@
  * @author Raghav Dua <duaraghav8@gmail.com>
  */
 
-"use strict";
+'use strict';
 
 // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Ajv'.
-let Ajv = require("ajv"),
-    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'util'.
-    util = require("util"),
-    // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-    astNodeSchema = require("../../config/schemas/ast-node");
+let Ajv = require('ajv'),
+  // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'util'.
+  util = require('util'),
+  // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
+  astNodeSchema = require('../../config/schemas/ast-node');
 
-let nodeSchemaValidator = new Ajv({ allErrors: true }), sourceCodeText = "";
-
+let nodeSchemaValidator = new Ajv({ allErrors: true }),
+  sourceCodeText = '';
 
 // For internal use. Throws if is passed an invalid AST node, else does nothing.
 function throwIfInvalidNode(node, functionName) {
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-    if (!exports.isASTNode(node)) {
-        throw new Error(functionName + "(): " + util.inspect(node) + " is not a valid AST node.");
-    }
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
+  if (!exports.isASTNode(node)) {
+    throw new Error(
+      functionName + '(): ' + util.inspect(node) + ' is not a valid AST node.',
+    );
+  }
 }
-
 
 /**
  * Initialization method - provide all the necessary information astUtils functions could require in order to work
  * @param {String} sourceCode The source code being linted
  */
 // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-exports.init = function(sourceCode) {
-    sourceCodeText = sourceCode;
+exports.init = function (sourceCode) {
+  sourceCodeText = sourceCode;
 };
 
 /**
@@ -47,17 +48,17 @@ exports.isASTNode = nodeSchemaValidator.compile(astNodeSchema);
  * @returns {Boolean} true if the given node is the right type
  */
 function isNodeType(node, name) {
-    throwIfInvalidNode(node, "isNodeType");
-    return node["type"] === name;
+  throwIfInvalidNode(node, 'isNodeType');
+  return node['type'] === name;
 }
 
 /**
-  * @param {Object} node The node to check
-  * @returns {Boolean} true if the given node is an BlockStatement
-  */
+ * @param {Object} node The node to check
+ * @returns {Boolean} true if the given node is an BlockStatement
+ */
 // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-exports.isBlockStatement = function(node) {
-    return isNodeType(node, "BlockStatement");
+exports.isBlockStatement = function (node) {
+  return isNodeType(node, 'BlockStatement');
 };
 
 /**
@@ -65,8 +66,8 @@ exports.isBlockStatement = function(node) {
  * @returns {Boolean} true if the given node is an BreakStatement
  */
 // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-exports.isBreakStatement = function(node) {
-    return isNodeType(node, "BreakStatement");
+exports.isBreakStatement = function (node) {
+  return isNodeType(node, 'BreakStatement');
 };
 
 /**
@@ -74,53 +75,57 @@ exports.isBreakStatement = function(node) {
  * @returns {Boolean} true if the given node is an ExpressionStatement
  */
 // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-exports.isExpression = function(node) {
-    return isNodeType(node, "ExpressionStatement");
+exports.isExpression = function (node) {
+  return isNodeType(node, 'ExpressionStatement');
 };
 
 /**
  * @param {Object} node The node to check
  * @returns {Boolean} true if the given node is an AssignmentStatement
  */
-exports.isAssignment = function(node) {
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-    return isNodeType(node, "AssignmentExpression");
+exports.isAssignment = function (node) {
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
+  return isNodeType(node, 'AssignmentExpression');
 };
 
 /**
  * @param {Object} node The node to check
  * @returns {Boolean} true if the given node is an UpdateExpression
  */
-exports.isUpdate = function(node) {
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-    return isNodeType(node, "UpdateExpression");
+exports.isUpdate = function (node) {
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
+  return isNodeType(node, 'UpdateExpression');
 };
 
 /**
  * @param {Object} node The node to check
  * @returns {Boolean} true if the given node is an MemberExpression
  */
-exports.isMember = function(node) {
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-    return isNodeType(node, "MemberExpression");
+exports.isMember = function (node) {
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
+  return isNodeType(node, 'MemberExpression');
 };
 
 /**
  * @param {Object} node The node to check
  * @returns {Boolean} true if the given node is an IfStatement
  */
-exports.isIfStatement = function(node) {
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-    return isNodeType(node, "IfStatement");
+exports.isIfStatement = function (node) {
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
+  return isNodeType(node, 'IfStatement');
 };
 
 /**
  * @param {Object} node The node to check
  * @returns {Boolean} true if the given node is a type of loop statement
  */
-exports.isLoopStatement = function(node) {
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-    return ["ForStatement", "WhileStatement", "DoWhileStatement"].indexOf(node["type"]) >= 0;
+exports.isLoopStatement = function (node) {
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
+  return (
+    ['ForStatement', 'WhileStatement', 'DoWhileStatement'].indexOf(
+      node['type'],
+    ) >= 0
+  );
 };
 
 /**
@@ -128,10 +133,10 @@ exports.isLoopStatement = function(node) {
  * @param {Object} node The AST Node to retrieve the parent of
  * @returns {Object} nodeParent Parent node of the given node
  */
-exports.getParent = function(node) {
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-    throwIfInvalidNode(node, "getParent");
-    return node.parent;
+exports.getParent = function (node) {
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
+  throwIfInvalidNode(node, 'getParent');
+  return node.parent;
 };
 
 /**
@@ -139,17 +144,13 @@ exports.getParent = function(node) {
  * @param {Object} node The AST Node to retrieve the line number of
  * @returns {Integer} lineNumber Line number of code of the specified node. (LINES BEGIN FROM 1)
  */
-exports.getLine = function(node) {
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-    throwIfInvalidNode(node, "getLine");
+exports.getLine = function (node) {
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
+  throwIfInvalidNode(node, 'getLine');
 
-    let newLineCharsBefore = sourceCodeText
-        .slice(0, node.start)
-        .match(/\n/g);
+  let newLineCharsBefore = sourceCodeText.slice(0, node.start).match(/\n/g);
 
-    return (
-        (newLineCharsBefore ? newLineCharsBefore.length : 0) + 1
-    );
+  return (newLineCharsBefore ? newLineCharsBefore.length : 0) + 1;
 };
 
 /**
@@ -157,18 +158,18 @@ exports.getLine = function(node) {
  * @param {Object} node The AST Node to retrieve the column number of
  * @returns {Integer} columnNumber Column number of code of the specified node (COLUMNS BEGIN FROM 0)
  */
-exports.getColumn = function(node) {
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-    throwIfInvalidNode(node, "getColumn");
+exports.getColumn = function (node) {
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
+  throwIfInvalidNode(node, 'getColumn');
 
-    //start looking from sourceCodeText [node.start] and stop upon encountering the first linebreak character
-    for (let i = node.start; i >= 0; i--) {
-        if (sourceCodeText [i] === "\n") {
-            return node.start - i - 1;
-        }
+  //start looking from sourceCodeText [node.start] and stop upon encountering the first linebreak character
+  for (let i = node.start; i >= 0; i--) {
+    if (sourceCodeText[i] === '\n') {
+      return node.start - i - 1;
     }
+  }
 
-    return node.start;
+  return node.start;
 };
 
 /**
@@ -176,17 +177,13 @@ exports.getColumn = function(node) {
  * @param {Object} node The AST Node to retrieve the line number of
  * @returns {int} lineNumber Line number of code ending of the specified node. (LINES BEGIN FROM 1)
  */
-exports.getEndingLine = function(node) {
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-    throwIfInvalidNode(node, "getEndingLine");
+exports.getEndingLine = function (node) {
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
+  throwIfInvalidNode(node, 'getEndingLine');
 
-    let newLineCharsBefore = sourceCodeText
-        .slice(0, node.end)
-        .match(/\n/g);
+  let newLineCharsBefore = sourceCodeText.slice(0, node.end).match(/\n/g);
 
-    return (
-        (newLineCharsBefore ? newLineCharsBefore.length : 0) + 1
-    );
+  return (newLineCharsBefore ? newLineCharsBefore.length : 0) + 1;
 };
 
 /**
@@ -194,18 +191,18 @@ exports.getEndingLine = function(node) {
  * @param {Object} node The AST Node to retrieve the ending column number of
  * @returns {Integer} columnNumber Column number of last char of the specified node (COLUMNS BEGIN FROM 0)
  */
-exports.getEndingColumn = function(node) {
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-    throwIfInvalidNode(node, "getEndingColumn");
+exports.getEndingColumn = function (node) {
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
+  throwIfInvalidNode(node, 'getEndingColumn');
 
-    //start looking from 1 character before node.start and stop upon encountering the first linebreak character
-    for (let i = node.end - 1; i >= 0; i--) {
-        if (sourceCodeText [i] === "\n") {
-            return node.end - i - 2;
-        }
+  //start looking from 1 character before node.start and stop upon encountering the first linebreak character
+  for (let i = node.end - 1; i >= 0; i--) {
+    if (sourceCodeText[i] === '\n') {
+      return node.end - i - 2;
     }
+  }
 
-    return node.end - 1;
+  return node.end - 1;
 };
 
 /**
@@ -215,11 +212,14 @@ exports.getEndingColumn = function(node) {
  * @returns {Bool} true if potentialChild is indeed a child of potentialParent, false otherwise
  */
 exports.isAChildOf = (potentialChild, potentialParent) => {
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
-    throwIfInvalidNode(potentialChild, "isAChildOf");
-    throwIfInvalidNode(potentialParent, "isAChildOf");
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'exports'.
+  throwIfInvalidNode(potentialChild, 'isAChildOf');
+  throwIfInvalidNode(potentialParent, 'isAChildOf');
 
-    // Note that if the start or end pos of both nodes is same,
-    // then they're considered to be the same node and DON'T have parent-child relationship.
-    return potentialChild.start > potentialParent.start && potentialChild.end < potentialParent.end;
+  // Note that if the start or end pos of both nodes is same,
+  // then they're considered to be the same node and DON'T have parent-child relationship.
+  return (
+    potentialChild.start > potentialParent.start &&
+    potentialChild.end < potentialParent.end
+  );
 };

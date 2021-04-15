@@ -3,47 +3,50 @@
  * @author Raghav Dua <duaraghav8@gmail.com>
  */
 
-"use strict";
+'use strict';
 
 // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
-const Solium = require("../../../../lib/solium"),
-    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'fs'.
-    fs = require("fs"), path = require("path"), { EOL } = require("os");
+const Solium = require('../../../../lib/solium'),
+  // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'fs'.
+  fs = require('fs'),
+  path = require('path'),
+  { EOL } = require('os');
 
 // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 let userConfig = {
-    "custom-rules-filename": null,
-    "rules": {
-        "imports-on-top": true
-    }
+  'custom-rules-filename': null,
+  rules: {
+    'imports-on-top': true,
+  },
 };
 
-
 // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
-describe("[RULE] imports-on-top: Acceptances", function() {
+describe('[RULE] imports-on-top: Acceptances', function () {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should accept if all import statements are on top of the file (but below the pragma directive)', function (done) {
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
+    let code = fs.readFileSync(
+        path.join(__dirname, './accept/on-top.sol'),
+        'utf8',
+      ),
+      errors = Solium.lint(code, userConfig);
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should accept if all import statements are on top of the file (but below the pragma directive)", function(done) {
-        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
-        let code = fs.readFileSync(path.join(__dirname, "./accept/on-top.sol"), "utf8"),
-            errors = Solium.lint(code, userConfig);
+    errors.constructor.name.should.equal('Array');
+    errors.length.should.equal(0);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
-
-        // imports without pragmas
-        code = `
+    // imports without pragmas
+    code = `
 			import "filename";
 			import * as symbolName from "filename";
 			import {symbol1 as alias, symbol2} from "filename";
 			import "filename" as symbolName;
 		`;
-        errors = Solium.lint(code, userConfig);
+    errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+    errors.constructor.name.should.equal('Array');
+    errors.length.should.equal(0);
 
-        code = `
+    code = `
 			pragma solidity ^0.4.0;
 			import "filename";
 			import * as symbolName from "filename";
@@ -51,12 +54,12 @@ describe("[RULE] imports-on-top: Acceptances", function() {
 			import "filename" as symbolName;
 			contract Foo {}
 		`;
-        errors = Solium.lint(code, userConfig);
+    errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+    errors.constructor.name.should.equal('Array');
+    errors.length.should.equal(0);
 
-        code = `
+    code = `
 			pragma experimental blahblah;
 			import "filename";
 			import * as symbolName from "filename";
@@ -65,45 +68,43 @@ describe("[RULE] imports-on-top: Acceptances", function() {
 
 			library Foo {}
 		`;
-        errors = Solium.lint(code, userConfig);
+    errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+    errors.constructor.name.should.equal('Array');
+    errors.length.should.equal(0);
 
-        Solium.reset();
-        done();
-    });
-
-});
-
-
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
-describe("[RULE] imports-on-top: Rejections", function() {
-
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should reject any import statement NOT on top of file", function(done) {
-        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
-        let code = fs.readFileSync(path.join(__dirname, "./reject/intermingled.sol"), "utf8"),
-            errors = Solium.lint(code, userConfig);
-
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(2);
-
-        Solium.reset();
-        done();
-    });
-
+    Solium.reset();
+    done();
+  });
 });
 
 // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
-describe("[RULE] imports-on-top: Fixes", function() {
+describe('[RULE] imports-on-top: Rejections', function () {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should reject any import statement NOT on top of file', function (done) {
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
+    let code = fs.readFileSync(
+        path.join(__dirname, './reject/intermingled.sol'),
+        'utf8',
+      ),
+      errors = Solium.lint(code, userConfig);
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("Should do nothing if source code is empty or has no import-related issues", done => {
-        // Absolutely empty string results in exception from Solium.lintAndFix()
-        let codes = [
-            "// hello world",
-            `
+    errors.constructor.name.should.equal('Array');
+    errors.length.should.equal(2);
+
+    Solium.reset();
+    done();
+  });
+});
+
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
+describe('[RULE] imports-on-top: Fixes', function () {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('Should do nothing if source code is empty or has no import-related issues', (done) => {
+    // Absolutely empty string results in exception from Solium.lintAndFix()
+    let codes = [
+      '// hello world',
+      `
             pragma solidity 0.4.0;
             pragma experimental ABIEncoderV2;
 
@@ -112,44 +113,48 @@ describe("[RULE] imports-on-top: Fixes", function() {
 
             contract Foo {}
             `,
-            `
+      `
             import "foobar";
             library Blah {}
             `,
-            `
+      `
             pragma experimental ABIEncoderV2;
             import "foobar";
             library Blah {}
             `,
-            `
+      `
             contract Drone {}
             library Jenny {}
-            `
-        ];
+            `,
+    ];
 
-        codes.forEach(code => {
-            let { errorMessages: errors, fixedSourceCode, fixesApplied } = Solium.lintAndFix(code, userConfig);
+    codes.forEach((code) => {
+      let {
+        errorMessages: errors,
+        fixedSourceCode,
+        fixesApplied,
+      } = Solium.lintAndFix(code, userConfig);
 
-            errors.should.be.Array();
-            errors.should.be.size(0);
-            fixedSourceCode.should.equal(code);
-            fixesApplied.should.be.Array();
-            fixesApplied.should.be.size(0);
-        });
-
-        Solium.reset();
-        done();
+      errors.should.be.Array();
+      errors.should.be.size(0);
+      fixedSourceCode.should.equal(code);
+      fixesApplied.should.be.Array();
+      fixesApplied.should.be.size(0);
     });
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should place import below pragma solidity", done => {
-        const codes = [
-            `
+    Solium.reset();
+    done();
+  });
+
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should place import below pragma solidity', (done) => {
+    const codes = [
+      `
             pragma solidity ^0.2.3;
             library Foo {}
             import "wow.sol";
             `,
-            `
+      `
             pragma solidity ^0.2.3;
 
 
@@ -157,90 +162,8 @@ describe("[RULE] imports-on-top: Fixes", function() {
             contract WiggleWiggle{}
             import "wow.sol";
             `,
-            `
+      `
             pragma solidity ^0.2.3;
-
-
-            library Foo {}
-            contract WiggleWiggle{}
-            import "wow.sol";
-            import "mickey";
-            import "minnie.sol";
-            `
-        ];
-        const fixedCodes = [
-            `
-            pragma solidity ^0.2.3;
-
-
-import "wow.sol";
-            library Foo {}
-            
-            `,
-            `
-            pragma solidity ^0.2.3;
-
-
-import "wow.sol";
-
-
-            library Foo {}
-            contract WiggleWiggle{}
-            
-            `,
-            `
-            pragma solidity ^0.2.3;
-
-
-import "wow.sol";
-
-
-            library Foo {}
-            contract WiggleWiggle{}
-            
-            import "mickey";
-            import "minnie.sol";
-            `
-        ];
-        
-
-        let result = Solium.lintAndFix(codes[0], userConfig);
-        result.errorMessages.should.be.size(0);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[0]);
-
-        result = Solium.lintAndFix(codes[1], userConfig);
-        result.errorMessages.should.be.size(0);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[1]);
-
-        result = Solium.lintAndFix(codes[2], userConfig);
-        result.errorMessages.should.be.size(2);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[2]);
-
-        Solium.reset();
-        done();
-    });
-
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should place import below pragma experimental", done => {
-        const codes = [
-            `
-            pragma experimental ABIEncoderV2;
-            library Foo {}
-            import "wow.sol";
-            `,
-            `
-            pragma experimental ABIEncoderV2;
-
-
-            library Foo {}
-            contract WiggleWiggle{}
-            import "wow.sol";
-            `,
-            `
-            pragma experimental ABIEncoderV2;
 
 
             library Foo {}
@@ -249,44 +172,18 @@ import "wow.sol";
             import "mickey";
             import "minnie.sol";
             `,
-            `
+    ];
+    const fixedCodes = [
+      `
             pragma solidity ^0.2.3;
-            pragma experimental ABIEncoderV2;
-            library Foo {}
-            import "wow.sol";
-            `,
-            `
-            pragma solidity ^0.2.3;
-            pragma experimental ABIEncoderV2;
-
-
-            library Foo {}
-            contract WiggleWiggle{}
-            import "wow.sol";
-            `,
-            `
-            pragma solidity ^0.2.3;
-            pragma experimental ABIEncoderV2;
-
-
-            library Foo {}
-            contract WiggleWiggle{}
-            import "wow.sol";
-            import "mickey";
-            import "minnie.sol";
-            `
-        ];
-        const fixedCodes = [
-            `
-            pragma experimental ABIEncoderV2;
 
 
 import "wow.sol";
             library Foo {}
             
             `,
-            `
-            pragma experimental ABIEncoderV2;
+      `
+            pragma solidity ^0.2.3;
 
 
 import "wow.sol";
@@ -296,8 +193,8 @@ import "wow.sol";
             contract WiggleWiggle{}
             
             `,
-            `
-            pragma experimental ABIEncoderV2;
+      `
+            pragma solidity ^0.2.3;
 
 
 import "wow.sol";
@@ -309,7 +206,114 @@ import "wow.sol";
             import "mickey";
             import "minnie.sol";
             `,
-            `
+    ];
+
+    let result = Solium.lintAndFix(codes[0], userConfig);
+    result.errorMessages.should.be.size(0);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[0]);
+
+    result = Solium.lintAndFix(codes[1], userConfig);
+    result.errorMessages.should.be.size(0);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[1]);
+
+    result = Solium.lintAndFix(codes[2], userConfig);
+    result.errorMessages.should.be.size(2);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[2]);
+
+    Solium.reset();
+    done();
+  });
+
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should place import below pragma experimental', (done) => {
+    const codes = [
+      `
+            pragma experimental ABIEncoderV2;
+            library Foo {}
+            import "wow.sol";
+            `,
+      `
+            pragma experimental ABIEncoderV2;
+
+
+            library Foo {}
+            contract WiggleWiggle{}
+            import "wow.sol";
+            `,
+      `
+            pragma experimental ABIEncoderV2;
+
+
+            library Foo {}
+            contract WiggleWiggle{}
+            import "wow.sol";
+            import "mickey";
+            import "minnie.sol";
+            `,
+      `
+            pragma solidity ^0.2.3;
+            pragma experimental ABIEncoderV2;
+            library Foo {}
+            import "wow.sol";
+            `,
+      `
+            pragma solidity ^0.2.3;
+            pragma experimental ABIEncoderV2;
+
+
+            library Foo {}
+            contract WiggleWiggle{}
+            import "wow.sol";
+            `,
+      `
+            pragma solidity ^0.2.3;
+            pragma experimental ABIEncoderV2;
+
+
+            library Foo {}
+            contract WiggleWiggle{}
+            import "wow.sol";
+            import "mickey";
+            import "minnie.sol";
+            `,
+    ];
+    const fixedCodes = [
+      `
+            pragma experimental ABIEncoderV2;
+
+
+import "wow.sol";
+            library Foo {}
+            
+            `,
+      `
+            pragma experimental ABIEncoderV2;
+
+
+import "wow.sol";
+
+
+            library Foo {}
+            contract WiggleWiggle{}
+            
+            `,
+      `
+            pragma experimental ABIEncoderV2;
+
+
+import "wow.sol";
+
+
+            library Foo {}
+            contract WiggleWiggle{}
+            
+            import "mickey";
+            import "minnie.sol";
+            `,
+      `
             pragma solidity ^0.2.3;
             pragma experimental ABIEncoderV2;
 
@@ -318,7 +322,7 @@ import "wow.sol";
             library Foo {}
             
             `,
-            `
+      `
             pragma solidity ^0.2.3;
             pragma experimental ABIEncoderV2;
 
@@ -330,7 +334,7 @@ import "wow.sol";
             contract WiggleWiggle{}
             
             `,
-            `
+      `
             pragma solidity ^0.2.3;
             pragma experimental ABIEncoderV2;
 
@@ -343,55 +347,53 @@ import "wow.sol";
             
             import "mickey";
             import "minnie.sol";
-            `
-        ];
-        
+            `,
+    ];
 
-        let result = Solium.lintAndFix(codes[0], userConfig);
-        result.errorMessages.should.be.size(0);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[0]);
+    let result = Solium.lintAndFix(codes[0], userConfig);
+    result.errorMessages.should.be.size(0);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[0]);
 
-        result = Solium.lintAndFix(codes[1], userConfig);
-        result.errorMessages.should.be.size(0);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[1]);
+    result = Solium.lintAndFix(codes[1], userConfig);
+    result.errorMessages.should.be.size(0);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[1]);
 
-        result = Solium.lintAndFix(codes[2], userConfig);
-        result.errorMessages.should.be.size(2);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[2]);
+    result = Solium.lintAndFix(codes[2], userConfig);
+    result.errorMessages.should.be.size(2);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[2]);
 
+    result = Solium.lintAndFix(codes[3], userConfig);
+    result.errorMessages.should.be.size(0);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[3]);
 
-        result = Solium.lintAndFix(codes[3], userConfig);
-        result.errorMessages.should.be.size(0);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[3]);
+    result = Solium.lintAndFix(codes[4], userConfig);
+    result.errorMessages.should.be.size(0);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[4]);
 
-        result = Solium.lintAndFix(codes[4], userConfig);
-        result.errorMessages.should.be.size(0);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[4]);
+    result = Solium.lintAndFix(codes[5], userConfig);
+    result.errorMessages.should.be.size(2);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[5]);
 
-        result = Solium.lintAndFix(codes[5], userConfig);
-        result.errorMessages.should.be.size(2);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[5]);
+    Solium.reset();
+    done();
+  });
 
-        Solium.reset();
-        done();
-    });
-
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should place import below existing import statement", done => {
-        const codes = [
-            `
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should place import below existing import statement', (done) => {
+    const codes = [
+      `
             pragma experimental ABIEncoderV2;
             import "foobar.sol";
             library Foo {}
             import "wow.sol";
             `,
-            `
+      `
             pragma experimental ABIEncoderV2;
             import "foobar.sol";
 
@@ -400,7 +402,7 @@ import "wow.sol";
             contract WiggleWiggle{}
             import "wow.sol";
             `,
-            `
+      `
             pragma experimental ABIEncoderV2;
             import "foobar.sol";
 
@@ -411,14 +413,14 @@ import "wow.sol";
             import "mickey";
             import "minnie.sol";
             `,
-            `
+      `
             pragma solidity ^0.2.3;
             pragma experimental ABIEncoderV2;
             import "foobar.sol";
             library Foo {}
             import "wow.sol";
             `,
-            `
+      `
             pragma solidity ^0.2.3;
             pragma experimental ABIEncoderV2;
             import "foobar.sol";
@@ -428,7 +430,7 @@ import "wow.sol";
             contract WiggleWiggle{}
             import "wow.sol";
             `,
-            `
+      `
             pragma solidity ^0.2.3;
             pragma experimental ABIEncoderV2;
             import "foobar.sol";
@@ -439,17 +441,17 @@ import "wow.sol";
             import "wow.sol";
             import "mickey";
             import "minnie.sol";
-            `
-        ];
-        const fixedCodes = [
-            `
+            `,
+    ];
+    const fixedCodes = [
+      `
             pragma experimental ABIEncoderV2;
             import "foobar.sol";
 import "wow.sol";
             library Foo {}
             
             `,
-            `
+      `
             pragma experimental ABIEncoderV2;
             import "foobar.sol";
 import "wow.sol";
@@ -459,7 +461,39 @@ import "wow.sol";
             contract WiggleWiggle{}
             
             `,
-            `
+      `
+            pragma experimental ABIEncoderV2;
+            import "foobar.sol";
+import "wow.sol";
+
+
+            library Foo {}
+            contract WiggleWiggle{}
+            
+            import "mickey";
+            import "minnie.sol";
+            `,
+      `
+            pragma solidity ^0.2.3;
+            pragma experimental ABIEncoderV2;
+            import "foobar.sol";
+import "wow.sol";
+            library Foo {}
+            
+            `,
+      `
+            pragma solidity ^0.2.3;
+            pragma experimental ABIEncoderV2;
+            import "foobar.sol";
+import "wow.sol";
+
+
+            library Foo {}
+            contract WiggleWiggle{}
+            
+            `,
+      `
+            pragma solidity ^0.2.3;
             pragma experimental ABIEncoderV2;
             import "foobar.sol";
 import "wow.sol";
@@ -471,199 +505,181 @@ import "wow.sol";
             import "mickey";
             import "minnie.sol";
             `,
-            `
-            pragma solidity ^0.2.3;
-            pragma experimental ABIEncoderV2;
-            import "foobar.sol";
-import "wow.sol";
-            library Foo {}
-            
-            `,
-            `
-            pragma solidity ^0.2.3;
-            pragma experimental ABIEncoderV2;
-            import "foobar.sol";
-import "wow.sol";
+    ];
 
+    let result = Solium.lintAndFix(codes[0], userConfig);
+    result.errorMessages.should.be.size(0);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[0]);
 
-            library Foo {}
-            contract WiggleWiggle{}
-            
-            `,
-            `
-            pragma solidity ^0.2.3;
-            pragma experimental ABIEncoderV2;
-            import "foobar.sol";
-import "wow.sol";
+    result = Solium.lintAndFix(codes[1], userConfig);
+    result.errorMessages.should.be.size(0);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[1]);
 
+    result = Solium.lintAndFix(codes[2], userConfig);
+    result.errorMessages.should.be.size(2);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[2]);
 
-            library Foo {}
-            contract WiggleWiggle{}
-            
-            import "mickey";
-            import "minnie.sol";
-            `
-        ];
-        
+    result = Solium.lintAndFix(codes[3], userConfig);
+    result.errorMessages.should.be.size(0);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[3]);
 
-        let result = Solium.lintAndFix(codes[0], userConfig);
-        result.errorMessages.should.be.size(0);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[0]);
+    result = Solium.lintAndFix(codes[4], userConfig);
+    result.errorMessages.should.be.size(0);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[4]);
 
-        result = Solium.lintAndFix(codes[1], userConfig);
-        result.errorMessages.should.be.size(0);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[1]);
+    result = Solium.lintAndFix(codes[5], userConfig);
+    result.errorMessages.should.be.size(2);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[5]);
 
-        result = Solium.lintAndFix(codes[2], userConfig);
-        result.errorMessages.should.be.size(2);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[2]);
+    Solium.reset();
+    done();
+  });
 
-
-        result = Solium.lintAndFix(codes[3], userConfig);
-        result.errorMessages.should.be.size(0);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[3]);
-
-        result = Solium.lintAndFix(codes[4], userConfig);
-        result.errorMessages.should.be.size(0);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[4]);
-
-        result = Solium.lintAndFix(codes[5], userConfig);
-        result.errorMessages.should.be.size(2);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[5]);
-
-        Solium.reset();
-        done();
-    });
-
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should place import on top", done => {
-        const codes = [
-            `
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should place import on top', (done) => {
+    const codes = [
+      `
             contract foo {}
             import "coal.sol";
             `,
-            `
+      `
             contract foo {}
             library bar {}
             import "coal.sol";
             `,
-            `
+      `
             contract foo {}
             library bar {}
             import "coal.sol";
             import "june.sol";
-            `
-        ];
-        const fixedCodes = [
-            `
+            `,
+    ];
+    const fixedCodes = [
+      `
             import "coal.sol";
 contract foo {}
             
             `,
-            `
+      `
             import "coal.sol";
 contract foo {}
             library bar {}
             
             `,
-            `
+      `
             import "coal.sol";
 contract foo {}
             library bar {}
             
             import "june.sol";
-            `
-        ];
+            `,
+    ];
 
+    let result = Solium.lintAndFix(codes[0], userConfig);
+    result.errorMessages.should.be.size(0);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[0]);
 
-        let result = Solium.lintAndFix(codes[0], userConfig);
-        result.errorMessages.should.be.size(0);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[0]);
+    result = Solium.lintAndFix(codes[1], userConfig);
+    result.errorMessages.should.be.size(0);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[1]);
 
-        result = Solium.lintAndFix(codes[1], userConfig);
-        result.errorMessages.should.be.size(0);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[1]);
+    result = Solium.lintAndFix(codes[2], userConfig);
+    result.errorMessages.should.be.size(1);
+    result.fixesApplied.should.be.size(1);
+    result.fixedSourceCode.should.equal(fixedCodes[2]);
 
-        result = Solium.lintAndFix(codes[2], userConfig);
-        result.errorMessages.should.be.size(1);
-        result.fixesApplied.should.be.size(1);
-        result.fixedSourceCode.should.equal(fixedCodes[2]);
+    Solium.reset();
+    done();
+  });
 
-        Solium.reset();
-        done();
-    });
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('Should move the import statements below the last valid import node', function (done) {
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
+    let code = fs.readFileSync(
+      path.join(__dirname, './fixes/only-one-error.sol'),
+      'utf8',
+    );
+    let { errorMessages: errors, fixedSourceCode } = Solium.lintAndFix(
+      code,
+      userConfig,
+    );
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("Should move the import statements below the last valid import node", function(done) {
-        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
-        let code = fs.readFileSync(path.join(__dirname, "./fixes/only-one-error.sol"), "utf8");
-        let { errorMessages: errors, fixedSourceCode } = Solium.lintAndFix(code, userConfig);
+    // All errors should've been corrected
+    errors.constructor.name.should.equal('Array');
+    errors.length.should.equal(0);
 
-        // All errors should've been corrected
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+    // Ensure that the bad import is moved to the right place.
+    const importLine = fixedSourceCode.split(EOL)[4].trim();
+    importLine.should.equal('import "nano.sol";');
 
-        // Ensure that the bad import is moved to the right place.
-        const importLine = fixedSourceCode.split(EOL)[4].trim();
-        importLine.should.equal("import \"nano.sol\";");
+    // If we re-lint the fixedSourceCode with userConfig we should get no errors
+    errors = Solium.lint(fixedSourceCode, userConfig);
 
-        // If we re-lint the fixedSourceCode with userConfig we should get no errors
-        errors = Solium.lint(fixedSourceCode, userConfig);
+    // Code should've been fixed
+    errors.constructor.name.should.equal('Array');
+    errors.length.should.equal(0);
 
-        // Code should've been fixed
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+    Solium.reset();
+    done();
+  });
 
-        Solium.reset();
-        done();
-    });
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('Should move the import statements two lines below the pragma if no valid import exists', function (done) {
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
+    let code = fs.readFileSync(
+      path.join(__dirname, './fixes/before-pragma.sol'),
+      'utf8',
+    );
+    let { errorMessages: errors, fixedSourceCode } = Solium.lintAndFix(
+      code,
+      userConfig,
+    );
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("Should move the import statements two lines below the pragma if no valid import exists", function(done) {
-        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
-        let code = fs.readFileSync(path.join(__dirname, "./fixes/before-pragma.sol"), "utf8");
-        let { errorMessages: errors, fixedSourceCode } = Solium.lintAndFix(code, userConfig);
+    // There should be no errors
+    errors.constructor.name.should.equal('Array');
+    errors.length.should.equal(0);
 
-        // There should be no errors
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+    // The fixed source code should have two new lines after the first pragma solidity then have all the imports
+    let lines = fixedSourceCode.split(EOL);
+    lines[3].should.equal('import "nano.sol";');
 
-        // The fixed source code should have two new lines after the first pragma solidity then have all the imports
-        let lines = fixedSourceCode.split(EOL);
-        lines[3].should.equal("import \"nano.sol\";");
+    errors = Solium.lint(fixedSourceCode, userConfig);
+    errors.constructor.name.should.equal('Array');
+    errors.length.should.equal(0);
 
-        errors = Solium.lint(fixedSourceCode, userConfig);
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+    Solium.reset();
+    done();
+  });
 
-        Solium.reset();
-        done();
-    });
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it("Should still fix the file correctly if there's only one invalid import statement", function (done) {
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
+    let code = fs.readFileSync(
+      path.join(__dirname, './fixes/only-one-error.sol'),
+      'utf8',
+    );
+    let { errorMessages: errors, fixedSourceCode } = Solium.lintAndFix(
+      code,
+      userConfig,
+    );
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("Should still fix the file correctly if there's only one invalid import statement", function(done) {
-        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
-        let code = fs.readFileSync(path.join(__dirname, "./fixes/only-one-error.sol"), "utf8");
-        let { errorMessages: errors, fixedSourceCode } = Solium.lintAndFix(code, userConfig);
+    // There should be no errors
+    errors.constructor.name.should.equal('Array');
+    errors.length.should.equal(0);
 
-        // There should be no errors
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+    errors = Solium.lint(fixedSourceCode, userConfig);
+    errors.constructor.name.should.equal('Array');
+    errors.length.should.equal(0);
 
-        errors = Solium.lint(fixedSourceCode, userConfig);
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
-
-        Solium.reset();
-        done();
-    });
-
+    Solium.reset();
+    done();
+  });
 });

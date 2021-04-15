@@ -3,26 +3,23 @@
  * @author Raghav Dua <duaraghav8@gmail.com>
  */
 
-"use strict";
-
+'use strict';
 
 // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
-const Solium = require("../../../../lib/solium");
+const Solium = require('../../../../lib/solium');
 
 // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'config'.
 const config = {
-    "rules": {
-        "no-trailing-whitespace": "error"
-    }
+  rules: {
+    'no-trailing-whitespace': 'error',
+  },
 };
 
-
 // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
-describe("[RULE] no-trailing-whitespace: Acceptances", () => {
-
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should accept lines having no trailing whitespaces", done => {
-        const code = `
+describe('[RULE] no-trailing-whitespace: Acceptances', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should accept lines having no trailing whitespaces', (done) => {
+    const code = `
 
             contract Foo {
                 // a comment
@@ -42,22 +39,22 @@ describe("[RULE] no-trailing-whitespace: Acceptances", () => {
                 }
             }`;
 
-        Solium.lint(code, config).should.be.empty();
-        done();
-    });
+    Solium.lint(code, config).should.be.empty();
+    done();
+  });
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should accept comments & blank lines with trailing whitespaces if they're ignored", done => {
-        const configLocal = {
-            "rules": {
-                "no-trailing-whitespace": [
-                    "error",
-                    { "skipBlankLines": true, "ignoreComments": true }
-                ]
-            }
-        };
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it("should accept comments & blank lines with trailing whitespaces if they're ignored", (done) => {
+    const configLocal = {
+      rules: {
+        'no-trailing-whitespace': [
+          'error',
+          { skipBlankLines: true, ignoreComments: true },
+        ],
+      },
+    };
 
-        const code = `
+    const code = `
                 \t\t        \t
             contract Foo {
                 // a comment         
@@ -83,19 +80,16 @@ describe("[RULE] no-trailing-whitespace: Acceptances", () => {
                 }
             }`;
 
-        Solium.lint(code, configLocal).should.be.empty();
-        done();
-    });
-
+    Solium.lint(code, configLocal).should.be.empty();
+    done();
+  });
 });
 
-
 // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
-describe("[RULE] no-trailing-whitespace: Rejections", () => {
-
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should reject code, comment & blank lines with trailing whitespaces", done => {
-        const code = `
+describe('[RULE] no-trailing-whitespace: Rejections', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should reject code, comment & blank lines with trailing whitespaces', (done) => {
+    const code = `
                 \t\t        \t
             contract Foo { 
                 // a comment         
@@ -121,8 +115,7 @@ describe("[RULE] no-trailing-whitespace: Rejections", () => {
                 }
             }`;
 
-        Solium.lint(code, config).should.have.size(16);
-        done();
-    });
-
+    Solium.lint(code, config).should.have.size(16);
+    done();
+  });
 });

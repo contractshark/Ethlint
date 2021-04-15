@@ -3,207 +3,205 @@
  * @author Donatas Stundys <donatas.stundys@gmail.com>
  */
 
-"use strict";
+'use strict';
 
 // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
-const Solium = require("../../../../lib/solium"),
-    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toFunction... Remove this comment to see the full error message
-    { toFunction } = require("../../../utils/wrappers");
+const Solium = require('../../../../lib/solium'),
+  // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toFunction... Remove this comment to see the full error message
+  { toFunction } = require('../../../utils/wrappers');
 
 const userConfigDefault = {
-    "rules": {
-        "error-reason": "warning"
-    }
+  rules: {
+    'error-reason': 'warning',
+  },
 };
 
 // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
-describe("[RULE] error-reason: Acceptances", function() {
+describe('[RULE] error-reason: Acceptances', function () {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should accept revert calls with an error message', function (done) {
+    const code = toFunction('revert("Error message");'),
+      errors = Solium.lint(code, userConfigDefault);
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should accept revert calls with an error message", function(done) {
-        const code = toFunction("revert(\"Error message\");"),
-            errors = Solium.lint(code, userConfigDefault);
+    errors.should.be.Array();
+    errors.should.be.empty();
 
-        errors.should.be.Array();
-        errors.should.be.empty();
+    Solium.reset();
+    done();
+  });
 
-        Solium.reset();
-        done();
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should accept revert calls without an error message when it is disabled', function (done) {
+    const userConfig = {
+      rules: {
+        'error-reason': ['error', { revert: false, require: true }],
+      },
+    };
+
+    const code = toFunction('revert();'),
+      errors = Solium.lint(code, userConfig);
+
+    errors.should.be.Array();
+    errors.should.be.empty();
+
+    Solium.reset();
+    done();
+  });
+
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should accept require calls with an error message', function (done) {
+    const code = toFunction('require(1 == 1, "Error message");'),
+      errors = Solium.lint(code, userConfigDefault);
+
+    errors.should.be.Array();
+    errors.should.be.empty();
+
+    Solium.reset();
+    done();
+  });
+
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should accept require calls without an error message when it is disabled', function (done) {
+    const userConfig = {
+      rules: {
+        'error-reason': ['warning', { revert: true, require: false }],
+      },
+    };
+
+    const code = toFunction('require(1 == 1);'),
+      errors = Solium.lint(code, userConfig);
+
+    errors.should.be.Array();
+    errors.should.be.empty();
+
+    Solium.reset();
+    done();
+  });
+
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it("should accept error messages that don't breach max character limit", (done) => {
+    const userConfig = {
+      rules: {
+        'error-reason': ['warning', { errorMessageMaxLength: 10 }],
+      },
+    };
+
+    const snippets = [
+      toFunction('require(1 == 1, "123456789");'),
+      toFunction('revert("123456789");'),
+      toFunction('require(1 == 1, "0123456789");'),
+      toFunction('revert("0123456789");'),
+      toFunction('require(1 == 1, "");'),
+      toFunction('revert("");'),
+    ];
+
+    snippets.forEach((code) => {
+      const errors = Solium.lint(code, userConfig);
+      errors.should.be.Array();
+      errors.should.be.empty();
     });
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should accept revert calls without an error message when it is disabled", function(done) {
-        const userConfig = {
-            "rules": {
-                "error-reason": ["error", { "revert": false, "require": true }]
-            }
-        };
+    Solium.reset();
+    done();
+  });
 
-        const code = toFunction("revert();"),
-            errors = Solium.lint(code, userConfig);
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should accept error messages that breach max character limit when function is disabled', (done) => {
+    const userConfig = {
+      rules: {
+        'error-reason': [
+          'warning',
+          { revert: false, require: false, errorMessageMaxLength: 10 },
+        ],
+      },
+    };
 
-        errors.should.be.Array();
-        errors.should.be.empty();
+    const snippets = [
+      toFunction('require(1 == 1, "12345shdh782728617626789");'),
+      toFunction('revert("12310-2908sjbjsb456789");'),
+    ];
 
-        Solium.reset();
-        done();
+    snippets.forEach((code) => {
+      const errors = Solium.lint(code, userConfig);
+      errors.should.be.Array();
+      errors.should.be.empty();
     });
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should accept require calls with an error message", function(done) {
-        const code = toFunction("require(1 == 1, \"Error message\");"),
-            errors = Solium.lint(code, userConfigDefault);
-
-        errors.should.be.Array();
-        errors.should.be.empty();
-
-        Solium.reset();
-        done();
-    });
-
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should accept require calls without an error message when it is disabled", function(done) {
-        const userConfig = {
-            "rules": {
-                "error-reason": ["warning", { "revert": true, "require": false }]
-            }
-        };
-
-        const code = toFunction("require(1 == 1);"),
-            errors = Solium.lint(code, userConfig);
-
-        errors.should.be.Array();
-        errors.should.be.empty();
-
-        Solium.reset();
-        done();
-    });
-
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should accept error messages that don't breach max character limit", done => {
-        const userConfig = {
-            "rules": {
-                "error-reason": ["warning", { "errorMessageMaxLength": 10 }]
-            }
-        };
-
-        const snippets = [
-            toFunction("require(1 == 1, \"123456789\");"),
-            toFunction("revert(\"123456789\");"),
-            toFunction("require(1 == 1, \"0123456789\");"),
-            toFunction("revert(\"0123456789\");"),
-            toFunction("require(1 == 1, \"\");"),
-            toFunction("revert(\"\");")
-        ];
-
-        snippets.forEach(code => {
-            const errors = Solium.lint(code, userConfig);
-            errors.should.be.Array();
-            errors.should.be.empty();
-        });
-
-        Solium.reset();
-        done();
-    });
-
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should accept error messages that breach max character limit when function is disabled", done => {
-        const userConfig = {
-            "rules": {
-                "error-reason": ["warning", { "revert": false, "require": false, "errorMessageMaxLength": 10 }]
-            }
-        };
-
-        const snippets = [
-            toFunction("require(1 == 1, \"12345shdh782728617626789\");"),
-            toFunction("revert(\"12310-2908sjbjsb456789\");")
-        ];
-
-        snippets.forEach(code => {
-            const errors = Solium.lint(code, userConfig);
-            errors.should.be.Array();
-            errors.should.be.empty();
-        });
-
-        Solium.reset();
-        done();
-    });
-
+    Solium.reset();
+    done();
+  });
 });
 
 // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
-describe("[RULE] error-reason: Rejections", function() {
+describe('[RULE] error-reason: Rejections', function () {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should reject revert calls without an error message', function (done) {
+    let code = 'revert();',
+      errors = Solium.lint(toFunction(code), userConfigDefault);
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should reject revert calls without an error message", function(done) {
-        let code = "revert();",
-            errors = Solium.lint(toFunction(code), userConfigDefault);
+    errors.should.be.Array();
+    errors.should.have.size(1);
 
-        errors.should.be.Array();
-        errors.should.have.size(1);
+    const userConfig = {
+      rules: {
+        'error-reason': ['warning', { revert: true, require: false }],
+      },
+    };
 
-        const userConfig = {
-            "rules": {
-                "error-reason": ["warning", { "revert": true, "require": false }]
-            }
-        };
+    errors = Solium.lint(toFunction(code), userConfig);
 
-        errors = Solium.lint(toFunction(code), userConfig);
+    errors.should.be.Array();
+    errors.should.have.size(1);
 
-        errors.should.be.Array();
-        errors.should.have.size(1);
+    Solium.reset();
+    done();
+  });
 
-        Solium.reset();
-        done();
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should reject require calls without an error message', function (done) {
+    let code = 'require(1 == 1);',
+      errors = Solium.lint(toFunction(code), userConfigDefault);
+
+    errors.should.be.Array();
+    errors.should.have.size(1);
+
+    const userConfig = {
+      rules: {
+        'error-reason': ['warning', { revert: false, require: true }],
+      },
+    };
+
+    errors = Solium.lint(toFunction(code), userConfig);
+
+    errors.should.be.Array();
+    errors.should.have.size(1);
+
+    Solium.reset();
+    done();
+  });
+
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should reject error messages that breach max character limit', (done) => {
+    const userConfig = {
+      rules: {
+        'error-reason': ['warning', { errorMessageMaxLength: 10 }],
+      },
+    };
+
+    const snippets = [
+      toFunction('require(1 == 1, "0123456789-");'),
+      toFunction('revert("0123456789-");'),
+      toFunction('require(1 == 1, "0123456789-----------");'),
+      toFunction('revert("0123456789----------");'),
+    ];
+
+    snippets.forEach((code) => {
+      const errors = Solium.lint(code, userConfig);
+      errors.should.be.Array();
+      errors.should.have.size(1);
     });
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should reject require calls without an error message", function(done) {
-        let code = "require(1 == 1);",
-            errors = Solium.lint(toFunction(code), userConfigDefault);
-
-        errors.should.be.Array();
-        errors.should.have.size(1);
-
-        const userConfig = {
-            "rules": {
-                "error-reason": ["warning", { "revert": false, "require": true }]
-            }
-        };
-
-        errors = Solium.lint(toFunction(code), userConfig);
-
-        errors.should.be.Array();
-        errors.should.have.size(1);
-
-        Solium.reset();
-        done();
-    });
-
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should reject error messages that breach max character limit", done => {
-        const userConfig = {
-            "rules": {
-                "error-reason": ["warning", { "errorMessageMaxLength": 10 }]
-            }
-        };
-
-        const snippets = [
-            toFunction("require(1 == 1, \"0123456789-\");"),
-            toFunction("revert(\"0123456789-\");"),
-            toFunction("require(1 == 1, \"0123456789-----------\");"),
-            toFunction("revert(\"0123456789----------\");")
-        ];
-
-        snippets.forEach(code => {
-            const errors = Solium.lint(code, userConfig);
-            errors.should.be.Array();
-            errors.should.have.size(1);
-        });
-
-        Solium.reset();
-        done();
-    });
-
+    Solium.reset();
+    done();
+  });
 });
-

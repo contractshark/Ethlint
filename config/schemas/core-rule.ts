@@ -6,7 +6,7 @@
  * @author Raghav Dua <duaraghav8@gmail.com>
  */
 
-"use strict";
+'use strict';
 
 // A fully qualified object for this Schema is:
 /*
@@ -31,68 +31,63 @@
 */
 
 // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Ajv'.
-let Ajv = require("ajv"),
-    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'SchemaVali... Remove this comment to see the full error message
-    SchemaValidator = new Ajv({ allErrors: true });
+let Ajv = require('ajv'),
+  // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'SchemaVali... Remove this comment to see the full error message
+  SchemaValidator = new Ajv({ allErrors: true });
 
 // If this constraint is set to true on any attribute, then that attribute MUST be of type function. If set to false, attr MUST NOT be a function.
-SchemaValidator.addKeyword("shouldBeOfTypeFunction", {
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'isSet' implicitly has an 'any' type.
-    validate(isSet, attr) {
-        return isSet === (typeof attr === "function");
-    }
+SchemaValidator.addKeyword('shouldBeOfTypeFunction', {
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'isSet' implicitly has an 'any' type.
+  validate(isSet, attr) {
+    return isSet === (typeof attr === 'function');
+  },
 });
-
 
 // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Schema'.
 let Schema = {
-    type: "object",
+  type: 'object',
 
-    properties: {
+  properties: {
+    meta: {
+      type: 'object',
+      properties: {
+        docs: {
+          type: 'object',
+          properties: {
+            recommended: { type: 'boolean' },
+            type: { type: 'string', enum: ['error', 'warning', 'off'] },
+            description: { type: 'string', minLength: 1 },
 
-        meta: {
-            type: "object",
-            properties: {
-
-                docs: {
-                    type: "object",
-                    properties: {
-                        recommended: { type: "boolean" },
-                        type: { type: "string", enum: ["error", "warning", "off"] },
-                        description: { type: "string", minLength: 1 },
-
-                        replacedBy: {
-                            type: "array",
-                            minItems: 1,
-                            items: { type: "string", minLength: 1 }
-                        }
-                    },
-                    required: ["recommended", "type", "description"]
-                },
-
-                schema: { type: "array", items: { type: "object" } },
-
-                fixable: {
-                    type: "string", enum: ["code", "whitespace"]
-                },
-
-                deprecated: { type: "boolean" }
-
+            replacedBy: {
+              type: 'array',
+              minItems: 1,
+              items: { type: 'string', minLength: 1 },
             },
-            required: ["docs", "schema"]
+          },
+          required: ['recommended', 'type', 'description'],
         },
 
-        create: {
-            shouldBeOfTypeFunction: true
-        }
+        schema: { type: 'array', items: { type: 'object' } },
 
+        fixable: {
+          type: 'string',
+          enum: ['code', 'whitespace'],
+        },
+
+        deprecated: { type: 'boolean' },
+      },
+      required: ['docs', 'schema'],
     },
 
-    required: ["meta", "create"],
+    create: {
+      shouldBeOfTypeFunction: true,
+    },
+  },
 
-    additionalProperties: false
+  required: ['meta', 'create'],
+
+  additionalProperties: false,
 };
-
 
 // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = { Schema, SchemaValidator };

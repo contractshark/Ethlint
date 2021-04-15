@@ -3,27 +3,26 @@
  * @author Raghav Dua <duaraghav8@gmail.com>
  */
 
-"use strict";
+'use strict';
 
 // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Solium'.
-const Solium = require("../../../../lib/solium"),
-    // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toContract... Remove this comment to see the full error message
-    { toContract } = require("../../../utils/wrappers");
+const Solium = require('../../../../lib/solium'),
+  // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'toContract... Remove this comment to see the full error message
+  { toContract } = require('../../../utils/wrappers');
 
 // @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'userConfig... Remove this comment to see the full error message
 const userConfig = {
-    "rules": {
-        "function-order": "error"
-    }
+  rules: {
+    'function-order': 'error',
+  },
 };
 
-
 // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
-describe("[RULE] function-order: Acceptances", function() {
-
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should accept functions ordered correctly inside a contract", done => {
-        let codes = [`
+describe('[RULE] function-order: Acceptances', function () {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should accept functions ordered correctly inside a contract', (done) => {
+    let codes = [
+      `
 			contract Foo {
 				function Foo() {}
 				string myName = "Hello";
@@ -53,9 +52,10 @@ describe("[RULE] function-order: Acceptances", function() {
 				function a() private {}
 				function a(uint x) myModif private returns (uint) {}
 			}
-		`];
+		`,
+    ];
 
-        codes.push(`
+    codes.push(`
 			contract Foo {
 				constructor(string name, address account) {
 
@@ -72,7 +72,7 @@ describe("[RULE] function-order: Acceptances", function() {
 			}
 		`);
 
-        codes.push(`
+    codes.push(`
 			contract Foo {
 				function Foo() {}
 				string myName = "Hello";
@@ -89,11 +89,11 @@ describe("[RULE] function-order: Acceptances", function() {
 			}
 		`);
 
-        codes.push(`
+    codes.push(`
 			contract Foo {}
 		`);
 
-        codes.push(`
+    codes.push(`
 			contract Foo {
 				function a(uint x) myModif internal returns (uint);
 				uint stateV1 = 100;
@@ -104,148 +104,153 @@ describe("[RULE] function-order: Acceptances", function() {
 			}
 		`);
 
-        codes.push(`
+    codes.push(`
 			contract Foo {
 				function Foo() {}
 			}
 		`);
 
-        codes.push(`
+    codes.push(`
 			contract Foo {
 				function() {}
 			}
 		`);
 
-        codes.push(`
+    codes.push(`
 			contract Foo {
 				function a() external {}
 			}
 		`);
 
-        codes.push(`
+    codes.push(`
 			contract Foo {
 				function a() {}
 			}
 		`);
 
-        codes.push(`
+    codes.push(`
 			contract Foo {
 				function a() internal {}
 			}
 		`);
 
-        codes.push(`
+    codes.push(`
 			contract Foo {
 				function a() private {}
 			}
 		`);
 
-        codes.forEach(code => {
-            const errors = Solium.lint(code, userConfig);
-            errors.should.be.Array();
-            errors.should.have.size(0);
-        });
-
-        Solium.reset();
-        done();
+    codes.forEach((code) => {
+      const errors = Solium.lint(code, userConfig);
+      errors.should.be.Array();
+      errors.should.have.size(0);
     });
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should accept valid config options", done => {
-        const config = { rules: {} }, code = "contract Foo {}";
-        const testOptions = [
-            { ignore: { constructorFunc: false } },
-            { ignore: { fallbackFunc: false } },
-            { ignore: { functions: [] } },
-            { ignore: { visibilities: [] } },
-            { ignore: { constructorFunc: false, visibilities: [], functions: [] } },
-            { ignore: { fallbackFunc: false, constructorFunc: false, visibilities: [], functions: [] } },
-            { ignore: { visibilities: [], functions: [] } },
-            { ignore: { constructorFunc: false, visibilities: [] } },
-            { ignore: { constructorFunc: false, functions: [] } }
-        ];
+    Solium.reset();
+    done();
+  });
 
-        testOptions.forEach(opt => {
-            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-            config.rules["function-order"] = ["error", opt];
-            Solium.lint.bind(Solium, code, config).should.not.throw();
-        });
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should accept valid config options', (done) => {
+    const config = { rules: {} },
+      code = 'contract Foo {}';
+    const testOptions = [
+      { ignore: { constructorFunc: false } },
+      { ignore: { fallbackFunc: false } },
+      { ignore: { functions: [] } },
+      { ignore: { visibilities: [] } },
+      { ignore: { constructorFunc: false, visibilities: [], functions: [] } },
+      {
+        ignore: {
+          fallbackFunc: false,
+          constructorFunc: false,
+          visibilities: [],
+          functions: [],
+        },
+      },
+      { ignore: { visibilities: [], functions: [] } },
+      { ignore: { constructorFunc: false, visibilities: [] } },
+      { ignore: { constructorFunc: false, functions: [] } },
+    ];
 
-        done();
+    testOptions.forEach((opt) => {
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+      config.rules['function-order'] = ['error', opt];
+      Solium.lint.bind(Solium, code, config).should.not.throw();
     });
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should ignore functions as specified in configuration", done => {
-        const config = {
-            rules: {
-                "function-order": ["error", { ignore: {} }]
-            }
-        };
+    done();
+  });
 
-        const cases = [
-            [
-                { constructorFunc: true },
-                `
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should ignore functions as specified in configuration', (done) => {
+    const config = {
+      rules: {
+        'function-order': ['error', { ignore: {} }],
+      },
+    };
+
+    const cases = [
+      [
+        { constructorFunc: true },
+        `
 				function() payable {}
 				constructor() public { foobar(); }
-				`
-            ],
-            [
-                { fallbackFunc: true },
-                `
+				`,
+      ],
+      [
+        { fallbackFunc: true },
+        `
 				function myFunc(uint x, string bby) external;
 				function() payable {}
-				`
-            ],
-            [
-                { functions: ["mySecondFunc"] },
-                `
+				`,
+      ],
+      [
+        { functions: ['mySecondFunc'] },
+        `
 				function myFunc(uint x, string bby) internal {}
 				function mySecondFunc(address sherlock) public {}
-				`
-            ],
-            [
-                { visibilities: ["internal", "private"] },
-                `
+				`,
+      ],
+      [
+        { visibilities: ['internal', 'private'] },
+        `
 				function dummy() private;
 				function myFunc(uint x, string bby) internal {}
 				function mySecondFunc(address sherlock) public {}
 				function myThirdFunc(address sherlock) public {}
-				`
-            ]
-        ];
+				`,
+      ],
+    ];
 
-        cases.forEach(tc => {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'ignore' does not exist on type 'string |... Remove this comment to see the full error message
-            config.rules["function-order"][1].ignore = tc[0];
-            const errors = Solium.lint(toContract(tc[1]), config);
-            errors.should.be.Array();
-            errors.should.be.empty();
-        });
-
-        done();
+    cases.forEach((tc) => {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'ignore' does not exist on type 'string |... Remove this comment to see the full error message
+      config.rules['function-order'][1].ignore = tc[0];
+      const errors = Solium.lint(toContract(tc[1]), config);
+      errors.should.be.Array();
+      errors.should.be.empty();
     });
 
+    done();
+  });
 });
 
-
 // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
-describe("[RULE] function-order: Rejections", function() {
-
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should reject functions ordered incorrectly inside a contract", done => {
-        let code = `
+describe('[RULE] function-order: Rejections', function () {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should reject functions ordered incorrectly inside a contract', (done) => {
+    let code = `
 			contract Foo {
 				function bar() {}
 				function Foo(string f) {}
 			}
 		`;
-        let errors = Solium.lint(code, userConfig);
+    let errors = Solium.lint(code, userConfig);
 
-        errors.should.be.Array();
-        errors.should.have.size(1);
+    errors.should.be.Array();
+    errors.should.have.size(1);
 
-        code = `
+    code = `
 			contract Foo {
 				function a(uint x) myModif private returns (uint) {}
 				function a() private {}
@@ -279,36 +284,38 @@ describe("[RULE] function-order: Rejections", function() {
 				}
 			}
 		`;
-        errors = Solium.lint(code, userConfig);
+    errors = Solium.lint(code, userConfig);
 
-        errors.should.be.Array();
-        errors.should.have.size(14);
+    errors.should.be.Array();
+    errors.should.have.size(14);
 
-        Solium.reset();
-        done();
+    Solium.reset();
+    done();
+  });
+
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should reject invalid config options', (done) => {
+    const config = { rules: {} },
+      code = 'contract Foo {}';
+    const testOptions = [
+      {},
+      { ignore: {} },
+      { foobarbaz: { visibilities: [] } },
+      { ignore: { foobar: [] } },
+      { ignore: { constructorFunc: 'hello', visibilities: [], functions: [] } },
+      {
+        ignore: { constructorFunc: false, visibilities: 18926, functions: [] },
+      },
+      { ignore: { constructorFunc: false, visibilities: [], functions: {} } },
+      { ignore: { fallbackFunc: null } },
+    ];
+
+    testOptions.forEach((opt) => {
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+      config.rules['function-order'] = ['error', opt];
+      Solium.lint.bind(Solium, code, config).should.throw();
     });
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-    it("should reject invalid config options", done => {
-        const config = { rules: {} }, code = "contract Foo {}";
-        const testOptions = [
-            {},
-            { ignore: {} },
-            { foobarbaz: { visibilities: [] } },
-            { ignore: { foobar: [] } },
-            { ignore: { constructorFunc: "hello", visibilities: [], functions: [] } },
-            { ignore: { constructorFunc: false, visibilities: 18926, functions: [] } },
-            { ignore: { constructorFunc: false, visibilities: [], functions: {} } },
-            { ignore: { fallbackFunc: null } }
-        ];
-
-        testOptions.forEach(opt => {
-            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-            config.rules["function-order"] = ["error", opt];
-            Solium.lint.bind(Solium, code, config).should.throw();
-        });
-
-        done();
-    });
-
+    done();
+  });
 });
